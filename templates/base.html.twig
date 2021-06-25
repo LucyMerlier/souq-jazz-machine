@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="icon" type="image/png" href="{{ asset('build/images/curved-lizard.png') }}"/>
         <title>
             {% block title %}
                 Souq' Jazz Machine
@@ -19,7 +20,7 @@
         <main>
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="text-{{ label }}">
+                    <div class="alert-{{ label }}">
                         {{ message }}
                     </div>
                 {% endfor %}
