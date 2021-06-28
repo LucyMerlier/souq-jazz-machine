@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Form\ContactRequestType;
 use App\DataClass\ContactRequest;
+use App\Repository\UserRepository;
 
 /**
  * @Route(name="showcase_")
@@ -22,6 +23,16 @@ class ShowcaseController extends AbstractController
     public function index(): Response
     {
         return $this->render('showcase/views/index.html.twig');
+    }
+
+    /**
+     * @Route("/le-big-band", name="about_us")
+     */
+    public function aboutUs(UserRepository $userRepository): Response
+    {
+        return $this->render('showcase/views/about_us.html.twig', [
+            'band_members' => $userRepository->findAll(),
+        ]);
     }
 
     /**
