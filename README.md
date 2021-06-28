@@ -1,6 +1,14 @@
 # SOUQ' JAZZ MACHINE - WEBSITE
 
-## WHAT IS IT?
+## INDEX
+
+* [Description](#description)
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+
+## DESCRIPTION
 
 This project is a website created for the "Souq' Jazz Machine" big band. Its goals are :
 
