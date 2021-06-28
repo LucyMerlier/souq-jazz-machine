@@ -10,7 +10,7 @@
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'showcase_home' ? 'active' }}" href="{{ path('showcase_home') }}">ACCUEIL</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">LE BIG BAND</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'showcase_about_us' ? 'active' }}" href="{{ path('showcase_about_us') }}">LE BIG BAND</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">GALLERIE</a>
