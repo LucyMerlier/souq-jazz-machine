@@ -1,0 +1,37 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Les membres - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1>Les Membres :</h1>
+
+    <div class="accordion accordion-flush" id="membersAccordion">
+        {% for instrument in instruments %}
+            {% for user in instrument.players %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-title-{{ user.id }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
+                            <div class="col-12 d-flex justify-content-around">
+                                <div class="col-3 px-4">{{ user.firstname ~ ' ' ~ user.lastname }}</div>
+                                <div class="col-3 px-4 text-center">{{ instrument.name }}</div>
+                                <div class="col-3 px-4 text-center">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</div>
+                                <div class="col-3 px-4 text-end">{{ user.email }}</div>
+                            </div>
+                        </button>
+                    </h2>
+                    <div id="flush-collapse-{{ user.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ user.id }}" data-bs-parent="#membersAccordion">
+                        <div class="accordion-body">
+                            {% if user.catchphrase %}
+                                <div>Quelques mots sur lui/elle : "{{ user.catchphrase }}"</div>
+                            {% endif %}
+                            <div>Droits admin : {% if 'ROLE_ADMIN' in user.roles %}Oui{% else %}Non{% endif %}</div>
+                            <div>{% include "admin/components/_user_delete_form.html.twig" %}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="accordion-item">Aucun membre trouvé 🙁</div>
+        {% endfor %}
+    </div>
+{% endblock %}

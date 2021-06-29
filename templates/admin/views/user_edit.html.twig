@@ -1,0 +1,14 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Modifier mes informations - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1>Modifier mes informations</h1>
+
+    {% include "admin/components/_user_edit_form.html.twig" with {"button_label": "Modifier"} %}
+    <a href="{{ path('admin_change_password') }}">Modifier mon mot de passe</a>
+
+    <a href="{{ path('admin_user_index') }}">Revenir sur la liste</a>
+
+    {% include "admin/components/_user_delete_form.html.twig" %}
+{% endblock %}

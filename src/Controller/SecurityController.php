@@ -13,10 +13,12 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use LogicException;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
+use App\Form\ChangePasswordType;
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\DataClass\ChangePassword;
 
 class SecurityController extends AbstractController
 {
@@ -52,7 +54,7 @@ class SecurityController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/nouvel-utilisateur", name="app_register")
+     * @Route("/admin/nouvel-utilisateur", name="app_register")
      */
     public function createUser(
         Request $request,
@@ -111,20 +113,55 @@ class SecurityController extends AbstractController
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
 
-            return $this->redirectToRoute('admin_home');
+            return $this->redirectToRoute('admin_change_password');
         }
 
         $this->addFlash(
             'success',
-            'Votre adresse email a bien été vérifiée!
-            Vous pouvez maintenant compléter ou modifier vos informations personnelles'
+            'Ton adresse email a bien été vérifiée!
+            Tu peux maintenant compléter ou modifier tes informations personnelles'
         );
 
         $this->addFlash(
             'danger',
-            'Rappel : veuillez modifier votre mot de passe au plus vite'
+            'Modifie ton mot de passe au plus vite'
         );
 
         return $this->redirectToRoute('admin_home');
+    }
+
+    /**
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * @Route("/admin/modifier-mon-mot-de-passe", name="admin_change_password")
+     */
+    public function changePassword(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $changePassword = new ChangePassword();
+        $form = $this->createForm(ChangePasswordType::class, $changePassword);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // @phpstan-ignore-next-line
+            $this->getUser()->setPassword(
+                $passwordHasher->hashPassword(
+                    // @phpstan-ignore-next-line
+                    $this->getUser(),
+                    $form->get('newPassword')->getData()
+                )
+            );
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Ton mot de passe a bien été modifié!');
+
+            return $this->redirectToRoute('admin_user_edit');
+        }
+
+        return $this->render('security/change_password.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

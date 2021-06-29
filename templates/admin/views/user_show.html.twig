@@ -1,0 +1,47 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Mes informations - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1>Salut {{ user.pseudonym ?? user.firstname }}!</h1>
+
+    <h2>C'est ici que tu peux retrouver et modifier tes informations personnelles :)</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Nom de famille</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ user.pseudonym ?? "Non renseigné" }}</td>
+            </tr>
+            <tr>
+                <th>Instrument</th>
+                <td>{{ user.instrument.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Numéro de téléphone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>Phrase d'accroche</th>
+                <td>{{ user.catchphrase ? "\"" ~ user.catchphrase ~ "\"" : "Non renseignée" }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_user_index') }}">Revenir sur la liste</a>
+
+    <a href="{{ path('admin_user_edit') }}">Modifier mes informations</a>
+    {% include "admin/components/_user_delete_form.html.twig" with {"button_label": "Supprimer mon compte", "confirm_message": "Êtes-vous certain·e de vouloir supprimer votre compte?"} %}
+{% endblock %}

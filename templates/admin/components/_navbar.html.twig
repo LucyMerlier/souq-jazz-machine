@@ -16,7 +16,7 @@
                     <a class="nav-link" href="#">Concerts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Membres</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'admin_user_index' ? 'active' }}" href="{{ path('admin_user_index') }}">Membres</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contacts</a>
@@ -30,11 +30,11 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li class="dropdown-item">
-                            Lu
+                            {{ app.user.pseudonym ?? app.user.firstname }}
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="#">Mes infos</a>
+                            <a class="dropdown-item" href="{{ path('admin_user_show') }}">Mes infos</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Me déconnecter</a>
