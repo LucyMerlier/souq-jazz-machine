@@ -1,0 +1,24 @@
+{% extends "email/layout.html.twig" %}
+
+{% block content %}
+    <h1>Confirmation de votre adresse email</h1>
+
+    <p>
+        Ceci est un mail généré automatiquement, veuillez ne pas y répondre.
+    </p>
+
+    <p>
+        Afin de finaliser votre inscription sur le site du Souq' Jazz Machine, veuillez confirmer votre adresse email en cliquant sur le lien suivant :<br><br>
+        <a href="{{ signedUrl }}">Confirmer mon adresse email</a>.
+        Ce lien va expirer dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    </p>
+
+    <p>
+        Note : votre mot de passe provisoire est "machine". Après vérification, veuillez modifier votre mot de passe au plus vite.
+    </p>
+
+    <p>
+        Musicalement, le Souq'.
+    </p>
+
+{% endblock %}

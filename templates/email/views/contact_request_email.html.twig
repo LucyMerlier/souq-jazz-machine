@@ -1,0 +1,15 @@
+{% extends "email/layout.html.twig" %}
+
+{% block content %}
+    <h1>Nouveau message de
+        {{ contact.firstname|lower|title }}
+        {{ contact.lastname|lower|title }}
+        {% if contact.phoneNumber %}
+            - {{ contact.phoneNumber }}
+        {% endif %}
+    </h1>
+
+    <h2>Objet : {{ contact.subject }}</h2>
+
+    <p>{{ contact.message }}</p>
+{% endblock %}
