@@ -49,7 +49,7 @@ class ShowcaseController extends AbstractController
                 ->from($contact->getEmailAddress() ?? 'souqjazzmachine@bigband.fr')
                 ->to('souqjazzmachine@bigband.fr')
                 ->subject($contact->getSubject() ?? 'Demande d\'informations')
-                ->html($this->renderView('showcase/views/contact_request_email.html.twig', ['contact' => $contact]))
+                ->html($this->renderView('email/views/contact_request_email.html.twig', ['contact' => $contact]))
             ;
 
             $mailer->send($email);
