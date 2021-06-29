@@ -16,8 +16,61 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $this->passwordHasher = $passwordHasher;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     public function load(ObjectManager $manager)
     {
+        // VOICES
+
+        $vero = new User();
+        $vero
+            ->setFirstname('Véronique')
+            ->setLastname('Bono')
+            ->setEmail('vero@bono.jazz')
+            ->setPhone('+33 6 87 65 21 54')
+            ->setInstrument($this->getReference('voice'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $vero,
+                'machine'
+            ))
+        ;
+        $manager->persist($vero);
+
+        $jess = new User();
+        $jess
+            ->setFirstname('Jessica')
+            ->setLastname('Fenton')
+            ->setEmail('jessica@fenton.jazz')
+            ->setPhone('+33 6 87 65 21 54')
+            ->setInstrument($this->getReference('voice'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $jess,
+                'machine'
+            ))
+        ;
+        $manager->persist($jess);
+
+        $marc = new User();
+        $marc
+            ->setFirstname('Marc')
+            ->setLastname('Fillatre')
+            ->setEmail('marc@fil.jazz')
+            ->setPhone('+33 6 87 65 21 54')
+            ->setInstrument($this->getReference('voice'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $marc,
+                'machine'
+            ))
+        ;
+        $manager->persist($marc);
+
+        // SAXOPHONES
+
         $lolo = new User();
         $lolo
             ->setFirstname('Laurent')
@@ -52,6 +105,202 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         ;
         $manager->persist($wiwi);
 
+        $coco = new User();
+        $coco
+            ->setFirstname('Coralie')
+            ->setLastname('Durand')
+            ->setEmail('coralie@durand.jazz')
+            ->setPseudonym('Coco')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('sax'))
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $coco,
+                'machine'
+            ))
+        ;
+        $manager->persist($coco);
+
+        $jc = new User();
+        $jc
+            ->setFirstname('Jean-Christophe')
+            ->setLastname('Le Dantec')
+            ->setEmail('jc@ledantec.jazz')
+            ->setPseudonym('Tonton')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('sax'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $jc,
+                'machine'
+            ))
+        ;
+        $manager->persist($jc);
+
+        $pat = new User();
+        $pat
+            ->setFirstname('Patricia')
+            ->setLastname('Mailhebiau')
+            ->setEmail('pat@mail.jazz')
+            ->setPseudonym('Patoche')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('sax'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $pat,
+                'machine'
+            ))
+        ;
+        $manager->persist($pat);
+
+        // TRUMPETS
+
+        $jp = new User();
+        $jp
+            ->setFirstname('Jean-Pascal')
+            ->setLastname('Edeline')
+            ->setEmail('jp@ed.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('trumpet'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $jp,
+                'machine'
+            ))
+        ;
+        $manager->persist($jp);
+
+        $maelys = new User();
+        $maelys
+            ->setFirstname('Maelys')
+            ->setLastname('Fontaine')
+            ->setEmail('maelys@fontaine.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('trumpet'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $maelys,
+                'machine'
+            ))
+        ;
+        $manager->persist($maelys);
+
+        $micha = new User();
+        $micha
+            ->setFirstname('Michael')
+            ->setLastname('Kuakuvi')
+            ->setEmail('mika@kua.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setPseudonym('Mikaka')
+            ->setInstrument($this->getReference('trumpet'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $micha,
+                'machine'
+            ))
+        ;
+        $manager->persist($micha);
+
+        $fifi = new User();
+        $fifi
+            ->setFirstname('Philippe')
+            ->setLastname('Lecreux')
+            ->setEmail('fifi@fifi.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setPseudonym('Fifi')
+            ->setInstrument($this->getReference('trumpet'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $fifi,
+                'machine'
+            ))
+        ;
+        $manager->persist($fifi);
+
+        $vinz = new User();
+        $vinz
+            ->setFirstname('Vincent')
+            ->setLastname('Roussel')
+            ->setEmail('vinz@roussel.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setPseudonym('Vinz')
+            ->setInstrument($this->getReference('trumpet'))
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $vinz,
+                'machine'
+            ))
+        ;
+        $manager->persist($vinz);
+
+        $nono = new User();
+        $nono
+            ->setFirstname('Arnaud')
+            ->setLastname('Zephirin')
+            ->setEmail('no@no.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setPseudonym('Nono')
+            ->setInstrument($this->getReference('trumpet'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $nono,
+                'machine'
+            ))
+        ;
+        $manager->persist($nono);
+
+        // TROMBONES
+
+        $raph = new User();
+        $raph
+            ->setFirstname('Raphaël')
+            ->setLastname('Boutonnet')
+            ->setEmail('raphael@boutonnet.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('trombone'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $raph,
+                'machine'
+            ))
+        ;
+        $manager->persist($raph);
+
+        $emilien = new User();
+        $emilien
+            ->setFirstname('Émilien')
+            ->setLastname('Regnault')
+            ->setEmail('emilien@regnault.jazz')
+            ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('trombone'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $emilien,
+                'machine'
+            ))
+        ;
+        $manager->persist($emilien);
+
+        // PIANO
+
+        $adrien = new User();
+        $adrien
+            ->setFirstname('Adrien')
+            ->setLastname('Croteau')
+            ->setEmail('adrien@croteau.jazz')
+            ->setCatchphrase('Il jouait du piano debout...')
+            ->setPhone('+33 6 63 52 74 96')
+            ->setInstrument($this->getReference('piano'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $adrien,
+                'machine'
+            ))
+        ;
+        $manager->persist($adrien);
+
+        // GUITAR
+
         $geo = new User();
         $geo
             ->setFirstname('Georges')
@@ -66,6 +315,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ))
         ;
         $manager->persist($geo);
+
+        // BASS
 
         $lucy = new User();
         $lucy
@@ -83,21 +334,38 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         ;
         $manager->persist($lucy);
 
-        $adrien = new User();
-        $adrien
-            ->setFirstname('Adrien')
-            ->setLastname('Croteau')
-            ->setEmail('adrien@croteau.jazz')
-            ->setCatchphrase('Il jouait du piano debout...')
-            ->setPhone('+33 6 63 52 74 96')
-            ->setInstrument($this->getReference('piano'))
+        $marco = new User();
+        $marco
+            ->setFirstname('Marco')
+            ->setLastname('Chaveau')
+            ->setEmail('marco@chaveau.jazz')
+            ->setPhone('+33 6 96 52 74 85')
+            ->setInstrument($this->getReference('bass'))
             ->setRoles(['ROLE_USER'])
             ->setPassword($this->passwordHasher->hashPassword(
-                $adrien,
+                $marco,
                 'machine'
             ))
         ;
-        $manager->persist($adrien);
+        $manager->persist($marco);
+
+        // DRUMS
+
+        $amaury = new User();
+        $amaury
+            ->setFirstname('Amaury')
+            ->setLastname('Le Dantec')
+            ->setEmail('amaury@ledantec.jazz')
+            ->setCatchphrase('poom ts tss ka ts tss poom')
+            ->setPhone('+33 6 63 52 74 96')
+            ->setInstrument($this->getReference('drums'))
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword(
+                $amaury,
+                'machine'
+            ))
+        ;
+        $manager->persist($amaury);
 
         $manager->flush();
     }
