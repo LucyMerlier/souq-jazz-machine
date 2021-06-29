@@ -3,14 +3,14 @@
 {% block title %}Nouvel utilisateur - {{ parent() }}{% endblock %}
 
 {% block content %}
-    {# {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %} #}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
 
-    <h1>Nouvel utilisateur</h1>
+    <h1 class="h1 my-4">Nouvel utilisateur</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_widget(registrationForm) }}
-        <button>Ajouter cet utilisateur</button>
+        <button class="btn btn-primary">Ajouter cet utilisateur</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

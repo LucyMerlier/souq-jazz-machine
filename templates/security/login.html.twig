@@ -3,6 +3,8 @@
 {% block title %}Connexion - {{ parent() }}{% endblock %}
 
 {% block content %}
+
+    <h1 class="h1 my-4">Connexion au site admin</h1>
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -18,7 +20,6 @@
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Connecte-toi</h1>
         <label for="inputEmail">Email</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
         <label for="inputPassword">Mot de passe</label>
@@ -26,7 +27,7 @@
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button class="btn btn-lg btn-primary" type="submit">
+        <button class="btn btn-primary" type="submit">
             Connexion
         </button>
     </form>
