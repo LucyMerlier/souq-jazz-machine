@@ -15,16 +15,21 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            {% for band_member in band_members %}
-                <div class="col-3 m-2">
-                    <div class="card">
-                        <img src="https://placekitten.com/g/400/500?image={{ random(0, 16) }}" class="card-img-top" alt="Une photo de {{ band_member.firstname ~ band_member.lastname }}">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ band_member.firstname }} {{ band_member.pseudonym ? '"' ~ band_member.pseudonym ~ '"' }} {{ band_member.lastname }}</h3>
-                            <p class="card-text">{{ band_member.catchphrase ?? '' }}</p>
+            {% for instrument in instruments %}
+                {% if instrument.players is not empty %}
+                    <h3>{{ instrument.name }}</h3>
+                    {% for player in instrument.players %}
+                        <div class="col-3 m-2">
+                            <div class="card">
+                                <img src="https://placekitten.com/g/400/500?image={{ random(0, 16) }}" class="card-img-top" alt="Une photo de {{ player.firstname ~ player.lastname }}">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ player.firstname }} {{ player.pseudonym ? '"' ~ player.pseudonym ~ '"' }} {{ player.lastname }}</h3>
+                                    <p class="card-text">{{ player.catchphrase ?? '' }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
         </div>
     </div>
