@@ -21,6 +21,28 @@
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'showcase_contact' ? 'active' }}" href="{{ path('showcase_contact') }}">CONTACT</a>
                 </li>
+                {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ADMIN
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li class="dropdown-item">
+                                {{ app.user.pseudonym ?? app.user.firstname }}
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('admin_home') }}">Retour au site admin</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('admin_user_show') }}">Mes infos</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Me déconnecter</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
