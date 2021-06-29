@@ -34,6 +34,11 @@ class Instrument
         $this->players = new ArrayCollection();
     }
 
+    public function __serialize(): array
+    {
+        return [];
+    }
+
     public function getId(): ?int
     {
         return $this->id;

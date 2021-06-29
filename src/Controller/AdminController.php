@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route(name="admin_")
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class AdminController extends AbstractController
 {
