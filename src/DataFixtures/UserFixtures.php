@@ -36,6 +36,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $vero,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($vero);
 
@@ -51,6 +52,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $jess,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($jess);
 
@@ -66,6 +68,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $marc,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($marc);
 
@@ -85,6 +88,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $lolo,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($lolo);
 
@@ -102,6 +106,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $wiwi,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($wiwi);
 
@@ -118,6 +123,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $coco,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($coco);
 
@@ -134,6 +140,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $jc,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($jc);
 
@@ -150,6 +157,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $pat,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($pat);
 
@@ -167,6 +175,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $jp,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($jp);
 
@@ -182,6 +191,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $maelys,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($maelys);
 
@@ -198,6 +208,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $micha,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($micha);
 
@@ -214,6 +225,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $fifi,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($fifi);
 
@@ -230,6 +242,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $vinz,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($vinz);
 
@@ -246,6 +259,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $nono,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($nono);
 
@@ -263,6 +277,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $raph,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($raph);
 
@@ -278,6 +293,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $emilien,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($emilien);
 
@@ -296,6 +312,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $adrien,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($adrien);
 
@@ -313,6 +330,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $geo,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($geo);
 
@@ -331,6 +349,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $lucy,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($lucy);
 
@@ -346,6 +365,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $marco,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($marco);
 
@@ -364,6 +384,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $amaury,
                 'machine'
             ))
+            ->setIsVerified(true)
         ;
         $manager->persist($amaury);
 
