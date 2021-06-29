@@ -8,9 +8,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\InstrumentRepository;
 use App\Form\ContactRequestType;
 use App\DataClass\ContactRequest;
-use App\Repository\UserRepository;
 
 /**
  * @Route(name="showcase_")
@@ -28,10 +28,10 @@ class ShowcaseController extends AbstractController
     /**
      * @Route("/le-big-band", name="about_us")
      */
-    public function aboutUs(UserRepository $userRepository): Response
+    public function aboutUs(InstrumentRepository $instrumentRepository): Response
     {
         return $this->render('showcase/views/about_us.html.twig', [
-            'band_members' => $userRepository->findAll(),
+            'instruments' => $instrumentRepository->findAll(),
         ]);
     }
 

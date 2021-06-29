@@ -2,12 +2,14 @@
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\InstrumentFixtures;
 use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -24,6 +26,7 @@ class UserFixtures extends Fixture
             ->setPseudonym('Lolo')
             ->setCatchphrase('Qui c\'est les meilleurs? Évidemment, c\'est les verts!')
             ->setPhone('+33 6 12 45 78 32')
+            ->setInstrument($this->getReference('sax'))
             ->setRoles(['ROLE_ADMIN', 'ROLE_BAND_LEADER'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $lolo,
@@ -40,6 +43,7 @@ class UserFixtures extends Fixture
             ->setPseudonym('Wiwi')
             ->setCatchphrase('J\'aime quand ça claque')
             ->setPhone('+33 6 23 56 89 21')
+            ->setInstrument($this->getReference('sax'))
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $wiwi,
@@ -54,6 +58,7 @@ class UserFixtures extends Fixture
             ->setLastname('Peltier')
             ->setEmail('georges@peltier.jazz')
             ->setPhone('+33 6 87 65 21 54')
+            ->setInstrument($this->getReference('guitar'))
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $geo,
@@ -69,6 +74,7 @@ class UserFixtures extends Fixture
             ->setEmail('lucy@merlier.jazz')
             ->setPseudonym('Lu')
             ->setPhone('+33 6 96 52 74 85')
+            ->setInstrument($this->getReference('bass'))
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $lucy,
@@ -82,8 +88,9 @@ class UserFixtures extends Fixture
             ->setFirstname('Adrien')
             ->setLastname('Croteau')
             ->setEmail('adrien@croteau.jazz')
-            ->setPhone('+33 6 63 52 74 96')
             ->setCatchphrase('Il jouait du piano debout...')
+            ->setPhone('+33 6 63 52 74 96')
+            ->setInstrument($this->getReference('piano'))
             ->setRoles(['ROLE_USER'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $adrien,
@@ -93,5 +100,10 @@ class UserFixtures extends Fixture
         $manager->persist($adrien);
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [InstrumentFixtures::class];
     }
 }

@@ -17,7 +17,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -59,6 +59,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $catchphrase;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Instrument::class, inversedBy="players")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Instrument $instrument;
 
     public function getId(): ?int
     {
@@ -207,6 +213,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCatchphrase(?string $catchphrase): self
     {
         $this->catchphrase = $catchphrase;
+
+        return $this;
+    }
+
+    public function getInstrument(): ?Instrument
+    {
+        return $this->instrument;
+    }
+
+    public function setInstrument(?Instrument $instrument): self
+    {
+        $this->instrument = $instrument;
 
         return $this;
     }
