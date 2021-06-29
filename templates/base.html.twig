@@ -15,12 +15,14 @@
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
     </head>
-    <body>
-        {% block navbar %}{% endblock %}
+    <body class="container">
+        <header>
+            {% block navbar %}{% endblock %}
+        </header>
         <main>
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert-{{ label }}">
+                    <div class="alert alert-{{ label }}">
                         {{ message }}
                     </div>
                 {% endfor %}

@@ -3,10 +3,10 @@
 {% block title %}Contact - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1>Contactez-nous!</h1>
+    <h1 class="h1 my-4">CONTACTEZ-NOUS!</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button>Envoyer!</button>
+        <button class="btn btn-primary">Envoyer!</button>
     {{ form_end(form) }}
 {% endblock %}

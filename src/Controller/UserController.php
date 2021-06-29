@@ -48,7 +48,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            return $this->redirectToRoute('admin_user_index');
+            return $this->redirectToRoute('admin_user_show');
         }
 
         return $this->render('admin/views/user_edit.html.twig', [
@@ -58,6 +58,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}/supprimer", name="delete", methods={"POST"})
      */
     public function delete(Request $request, EntityManagerInterface $entityManager, User $user): Response
@@ -74,5 +75,25 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_user_index');
+    }
+
+    /**
+     * @Route("/supprimer-mon-compte", name="delete_account", methods={"POST"})
+     */
+    public function deleteAccount(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // @phpstan-ignore-next-line
+        if ($this->isCsrfTokenValid('delete' . $this->getUser()->getId(), $request->request->get('_token'))) {
+            // @phpstan-ignore-next-line
+            $entityManager->remove($this->getUser());
+            $entityManager->flush();
+        }
+
+        $this->addFlash('primary', 'Ton compte a bien été supprimé, désolé·e·s de te voir partir :\'(');
+
+        // @phpstan-ignore-next-line
+        $this->get('security.token_storage')->setToken(null);
+
+        return $this->redirectToRoute('showcase_home');
     }
 }

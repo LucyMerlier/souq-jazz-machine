@@ -91,7 +91,9 @@ class SecurityController extends AbstractController
                     ->htmlTemplate('email/views/confirmation_email.html.twig')
             );
 
-            return $this->redirectToRoute('admin_home');
+            $this->addFlash('success', 'Un email de confirmation a été envoyé au nouveau / à la nouvelle venu·e! :D');
+
+            return $this->redirectToRoute('admin_user_index');
         }
 
         return $this->render('security/register.html.twig', [
@@ -119,15 +121,15 @@ class SecurityController extends AbstractController
         $this->addFlash(
             'success',
             'Ton adresse email a bien été vérifiée!
-            Tu peux maintenant compléter ou modifier tes informations personnelles'
+            Tu peux maintenant compléter ou modifier tes informations personnelles :)'
         );
 
         $this->addFlash(
             'danger',
-            'Modifie ton mot de passe au plus vite'
+            'Modifie ton mot de passe au plus vite!'
         );
 
-        return $this->redirectToRoute('admin_home');
+        return $this->redirectToRoute('admin_change_password');
     }
 
     /**

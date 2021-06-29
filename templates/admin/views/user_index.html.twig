@@ -3,14 +3,20 @@
 {% block title %}Les membres - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1>Les Membres :</h1>
+    <h1 class="h1 my-4">Les Membres :</h1>
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
+    {% endif %}
 
     <div class="accordion accordion-flush" id="membersAccordion">
+        {% set count = 0 %}
         {% for instrument in instruments %}
             {% for user in instrument.players %}
-                <div class="accordion-item">
+                {% set count = count + 1 %}
+                <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
                     <h2 class="accordion-header" id="flush-title-{{ user.id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
+                        <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
                             <div class="col-12 d-flex justify-content-around">
                                 <div class="col-3 px-4">{{ user.firstname ~ ' ' ~ user.lastname }}</div>
                                 <div class="col-3 px-4 text-center">{{ instrument.name }}</div>
@@ -25,7 +31,9 @@
                                 <div>Quelques mots sur lui/elle : "{{ user.catchphrase }}"</div>
                             {% endif %}
                             <div>Droits admin : {% if 'ROLE_ADMIN' in user.roles %}Oui{% else %}Non{% endif %}</div>
-                            <div>{% include "admin/components/_user_delete_form.html.twig" %}</div>
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <div>{% include "admin/components/_user_delete_form.html.twig" %}</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
