@@ -24,7 +24,7 @@ class UserFixtures extends Fixture
             ->setPseudonym('Lolo')
             ->setCatchphrase('Qui c\'est les meilleurs? Évidemment, c\'est les verts!')
             ->setPhone('+33 6 12 45 78 32')
-            ->setRoles(['ROLE_ADMIN'])
+            ->setRoles(['ROLE_ADMIN', 'ROLE_BAND_LEADER'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $lolo,
                 'machine'
