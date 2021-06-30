@@ -1,0 +1,13 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Modifier le tarif - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Modifier le tarif :</h1>
+
+    {% include "admin/components/_rate_form.html.twig" with {"button_label": "Modifier"} %}
+
+    {% include "admin/components/_rate_delete_form.html.twig" %}
+
+    <a href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">Revenir sur le concert</a>
+{% endblock %}
