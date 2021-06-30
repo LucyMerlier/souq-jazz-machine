@@ -16,7 +16,7 @@
                     <a class="nav-link" href="#">GALLERIE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">CALENDRIER</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'showcase_contact' ? 'active' }}" href="{{ path('showcase_agenda') }}">CALENDRIER</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'showcase_contact' ? 'active' }}" href="{{ path('showcase_contact') }}">CONTACT</a>
