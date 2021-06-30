@@ -28,7 +28,7 @@ class ConcertRate
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
-     * @Assert\Positive()
+     * @Assert\PositiveOrZero()
      */
     private ?int $price;
 

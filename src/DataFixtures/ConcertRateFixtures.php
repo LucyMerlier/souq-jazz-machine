@@ -38,7 +38,6 @@ class ConcertRateFixtures extends Fixture implements DependentFixtureInterface
 
         $rate = new ConcertRate();
         $rate->setConcert($this->getReference('concert_3'));
-        $rate->setCategory('');
         $rate->setPrice(0);
         $manager->persist($rate);
 
