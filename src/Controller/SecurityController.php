@@ -2,23 +2,23 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use LogicException;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Security\EmailVerifier;
-use App\Form\RegistrationFormType;
-use App\Form\ChangePasswordType;
-use App\Entity\User;
 use App\DataClass\ChangePassword;
+use App\Entity\User;
+use App\Form\ChangePasswordType;
+use App\Form\RegistrationFormType;
+use App\Security\EmailVerifier;
+use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class SecurityController extends AbstractController
 {
