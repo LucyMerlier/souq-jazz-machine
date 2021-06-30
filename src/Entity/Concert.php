@@ -45,9 +45,15 @@ class Concert
      */
     private bool $isValidated = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Availability::class, mappedBy="concert", orphanRemoval=true)
+     */
+    private Collection $votes;
+
     public function __construct()
     {
         $this->rates = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +135,36 @@ class Concert
     public function setIsValidated(bool $isValidated): self
     {
         $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Availability[]
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Availability $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setConcert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Availability $vote): self
+    {
+        if ($this->votes->removeElement($vote)) {
+            // set the owning side to null (unless already changed)
+            if ($vote->getConcert() === $this) {
+                $vote->setConcert(null);
+            }
+        }
 
         return $this;
     }
