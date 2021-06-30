@@ -35,7 +35,10 @@ class ContactRequestType extends AbstractType
             ])
             ->add('subject', TextType::class, [
                 'label' => 'Sujet',
-                'attr' => ['placeholder' => 'Pourboire'],
+                'attr' => [
+                    'placeholder' => 'Pourboire',
+                    'list' => 'subjects',
+                ],
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Votre message',
