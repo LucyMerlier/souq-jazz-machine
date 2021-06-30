@@ -6,6 +6,17 @@
     <h1 class="h1 my-4">Modifier le concert :</h1>
 
     {% include "admin/components/_concert_form.html.twig" with {"button_label": "Modifier"} %}
+
+    <h2 class="h2 my-4">Les tarifs :</h2>
+
+    <a href="{{ path('admin_concert_rate_add', {'id': concert.id}) }}">Ajouter un tarif</a>
+
+    {% for rate in concert.rates %}
+        <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+        <a class="btn btn-primary" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier ce tarif</a>
+        {% include "admin/components/_rate_delete_form.html.twig" %}
+    {% endfor %}
+
     {% include "admin/components/_concert_delete_form.html.twig" %}
 
     <a href="{{ path('admin_agenda') }}">Revenir sur la liste</a>

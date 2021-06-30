@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Concert;
+use App\Entity\ConcertRate;
+use App\Form\ConcertRateType;
 use App\Form\ConcertType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -63,6 +65,73 @@ class ConcertController extends AbstractController
             'concert' => $concert,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/ajouter-un-tarif/{id}", name="rate_add", methods={"GET", "POST"})
+     */
+    public function addRate(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Concert $concert
+    ): Response {
+        $rate = new ConcertRate();
+        $form = $this->createForm(ConcertRateType::class, $rate);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rate->setConcert($concert);
+            $entityManager->persist($rate);
+            $entityManager->flush();
+            $this->addFlash('success', 'Tarif ajouté!');
+            return $this->redirectToRoute('admin_concert_edit', ['id' => $concert->getId()]);
+        }
+
+        return $this->render('admin/views/rate_add.html.twig', [
+            'rate' => $rate,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/modifier-le-tarif/{id}", name="rate_edit", methods={"GET", "POST"})
+     */
+    public function editRate(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        ConcertRate $rate
+    ): Response {
+        $form = $this->createForm(ConcertRateType::class, $rate);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'Tarif modifié!');
+            // @phpstan-ignore-next-line
+            return $this->redirectToRoute('admin_concert_edit', ['id' => $rate->getConcert()->getId()]);
+        }
+
+        return $this->render('admin/views/rate_edit.html.twig', [
+            'rate' => $rate,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/supprimer-le-tarif/{id}", name="rate_delete", methods={"POST"})
+     */
+    public function deleteRate(Request $request, EntityManagerInterface $entityManager, ConcertRate $rate): Response
+    {
+        // @phpstan-ignore-next-line
+        if ($this->isCsrfTokenValid('delete' . $rate->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($rate);
+            $entityManager->flush();
+            $this->addFlash('warning', 'Tarif supprimé!');
+        }
+        // @phpstan-ignore-next-line
+        return $this->redirectToRoute('admin_concert_edit', ['id' => $rate->getConcert()->getId()]);
     }
 
     /**

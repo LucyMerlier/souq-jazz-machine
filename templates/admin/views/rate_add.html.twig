@@ -1,0 +1,11 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Ajouter un tarif - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Ajouter un tarif :</h1>
+
+    {% include "admin/components/_rate_form.html.twig" %}
+
+    <a href="{{ path('admin_agenda') }}">Revenir sur la liste</a>
+{% endblock %}

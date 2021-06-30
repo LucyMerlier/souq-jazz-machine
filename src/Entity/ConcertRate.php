@@ -20,8 +20,7 @@ class ConcertRate
     private ?int $id;
 
     /**
-     * @ORM\Column(type="string", length=40)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=40, nullable=true)
      * @Assert\Length(max=40)
      */
     private ?string $category;
