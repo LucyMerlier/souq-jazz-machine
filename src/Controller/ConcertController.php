@@ -158,7 +158,7 @@ class ConcertController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $concert->getId(), $request->request->get('_token'))) {
             $entityManager->remove($concert);
             $entityManager->flush();
-            $this->addFlash('warning', 'Date de concert annulée!');
+            $this->addFlash('warning', 'Concert annulé!');
         }
 
         return $this->redirectToRoute('admin_agenda');
