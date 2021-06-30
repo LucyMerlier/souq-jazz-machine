@@ -6,11 +6,14 @@ use App\Entity\Concert;
 use App\Entity\ConcertRate;
 use App\Form\ConcertRateType;
 use App\Form\ConcertType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -24,7 +27,9 @@ class ConcertController extends AbstractController
      */
     public function add(
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        UserRepository $userRepository,
+        MailerInterface $mailer
     ): Response {
         $concert = new Concert();
         $form = $this->createForm(ConcertType::class, $concert);
@@ -33,7 +38,21 @@ class ConcertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($concert);
             $entityManager->flush();
-            $this->addFlash('success', 'Date de concert proposée, plus qu\'à attendre qque tout le monde ai voté!');
+            $email = (new Email())
+                ->from('souqjazzmachine@bigband.fr')
+                ->subject('Nouvelle proposition de date de concert!')
+                ->html($this->renderView('email/views/new_concert_email.html.twig', [
+                    'concert' => $concert,
+                ]))
+            ;
+            foreach ($userRepository->findAll() as $user) {
+                // @phpstan-ignore-next-line
+                $email->addTo($user->getEmail());
+            }
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Date de concert proposée, plus qu\'à attendre qque tout le monde ait voté!');
+
             return $this->redirectToRoute('admin_agenda');
         }
 
@@ -140,10 +159,24 @@ class ConcertController extends AbstractController
      */
     public function validate(
         EntityManagerInterface $entityManager,
-        Concert $concert
+        Concert $concert,
+        UserRepository $userRepository,
+        MailerInterface $mailer
     ): Response {
         $concert->setIsValidated(true);
         $entityManager->flush();
+        $email = (new Email())
+                ->from('souqjazzmachine@bigband.fr')
+                ->subject('Date de concert validée!')
+                ->html($this->renderView('email/views/validate_concert_email.html.twig', [
+                    'concert' => $concert,
+                ]))
+            ;
+        foreach ($userRepository->findAll() as $user) {
+            // @phpstan-ignore-next-line
+            $email->addTo($user->getEmail());
+        }
+            $mailer->send($email);
         $this->addFlash('success', 'Date de concert validée!');
         return $this->redirectToRoute('admin_agenda');
     }

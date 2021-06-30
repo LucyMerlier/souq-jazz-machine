@@ -78,7 +78,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $lolo
             ->setFirstname('Laurent')
             ->setLastname('Souquières')
-            ->setEmail('laurent@souquières.jazz')
+            ->setEmail('laurent@souquieres.jazz')
             ->setPseudonym('Lolo')
             ->setCatchphrase('Qui c\'est les meilleurs? Évidemment, c\'est les verts!')
             ->setPhone('+33 6 12 45 78 32')

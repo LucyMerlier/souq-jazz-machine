@@ -1,0 +1,15 @@
+{% extends "email/layout.html.twig" %}
+
+{% block content %}
+    <h1>Date de concert validée!</h1>
+
+    <p>
+        Le concert du {{ concert.date|date("d/m/Y") }} à {{ concert.city }} vient d'être validé!
+    </p>
+    <p>
+        Fais chauffer tes doigts, tes poumons, tes jambes, tes orteils, ton foie, ou tout ce dont tu as besoin pour jouer au max de tes capacités, ça va être le feu!
+    </p>
+    <p>
+        Musicalement, le Souq'.
+    </p>
+{% endblock %}
