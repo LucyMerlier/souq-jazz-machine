@@ -19,7 +19,7 @@ use App\Repository\ConcertRepository;
 class ShowcaseController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="home", methods={"GET"})
      */
     public function index(): Response
     {
@@ -27,7 +27,7 @@ class ShowcaseController extends AbstractController
     }
 
     /**
-     * @Route("/le-big-band", name="about_us")
+     * @Route("/le-big-band", name="about_us", methods={"GET"})
      */
     public function aboutUs(InstrumentRepository $instrumentRepository): Response
     {
@@ -37,7 +37,7 @@ class ShowcaseController extends AbstractController
     }
 
     /**
-     * @Route("/calendrier", name="agenda")
+     * @Route("/calendrier", name="agenda", methods={"GET"})
      */
     public function agenda(ConcertRepository $concertRepository): Response
     {
@@ -47,7 +47,7 @@ class ShowcaseController extends AbstractController
     }
 
     /**
-     * @Route("/contactez-nous", name="contact")
+     * @Route("/contactez-nous", name="contact", methods={"GET", "POST"})
      */
     public function contact(Request $request, MailerInterface $mailer): Response
     {

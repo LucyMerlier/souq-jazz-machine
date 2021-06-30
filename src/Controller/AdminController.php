@@ -9,13 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin", name="admin_")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
+ * @Route("/admin", name="admin_")
  */
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="home", methods={"GET"})
      */
     public function index(): Response
     {
@@ -23,12 +23,12 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/calendrier", name="agenda")
+     * @Route("/calendrier", name="agenda", methods={"GET"})
      */
     public function agenda(ConcertRepository $concertRepository): Response
     {
         return $this->render('admin/views/agenda.html.twig', [
-            'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'DESC']),
+            'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
             'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'DESC']),
         ]);
     }

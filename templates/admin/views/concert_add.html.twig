@@ -1,0 +1,11 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Proposer un concert - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Proposer une date de concert :</h1>
+
+    {% include "admin/components/_concert_form.html.twig" %}
+
+    <a href="{{ path('admin_agenda') }}">Revenir sur la liste</a>
+{% endblock %}

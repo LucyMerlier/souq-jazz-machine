@@ -59,19 +59,14 @@ class UserController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/{id}/supprimer", name="delete", methods={"POST"})
+     * @Route("/supprimer-utilisateur/{id}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, EntityManagerInterface $entityManager, User $user): Response
     {
         // @phpstan-ignore-next-line
-        if ($user->getId() === $this->getUser()->getId() || in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
-            // @phpstan-ignore-next-line
-            if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-                $entityManager->remove($user);
-                $entityManager->flush();
-            }
-        } else {
-            $this->addFlash('danger', 'Tu n\'as pas les autorisations nécessaires pour supprimer ce compte');
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($user);
+            $entityManager->flush();
         }
 
         return $this->redirectToRoute('admin_user_index');

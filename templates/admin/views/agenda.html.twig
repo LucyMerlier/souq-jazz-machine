@@ -5,6 +5,8 @@
 {% block content %}
     <h1 class="h1 my-4">Les Concerts :</h1>
 
+    <a class="btn btn-success" href="{{ path('admin_concert_add') }}">Proposer une date</a>
+
     {% if not_validated_concerts %}
         <h2 class="h5 my-4">Date(s) proposées :</h2>
         {% for concert in not_validated_concerts %}
@@ -52,6 +54,26 @@
                     </ul>
                 </div>
             </form>
+            {% if is_granted("ROLE_ADMIN") %}
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
+                        <li>
+                            <form action="{{ path('admin_concert_validate', {'id': concert.id}) }}" method="POST">
+                                <button class="btn btn-success">Valider</button>
+                            </form>
+                        </li>
+                        <li>
+                            <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
+                        </li>
+                        <li>
+                            {% include "admin/components/_concert_delete_form.html.twig" %}
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
         {% endfor %}
     {% endif %}
 
@@ -75,6 +97,21 @@
                 </div>
             </div>
         </div>
+        {% if is_granted("ROLE_ADMIN") %}
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
+                        <li>
+                            <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
+                        </li>
+                        <li>
+                            {% include "admin/components/_concert_delete_form.html.twig" %}
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
     {% else %}
         <p>Aucun concert trouvé :(</p>
     {% endfor %}

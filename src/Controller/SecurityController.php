@@ -102,7 +102,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/verification-email", name="app_verify_email")
+     * @Route("/admin/verification-email", name="app_verify_email")
      */
     public function verifyUserEmail(Request $request): Response
     {
