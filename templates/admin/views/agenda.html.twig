@@ -8,7 +8,7 @@
     {% if not_validated_concerts %}
         <h2 class="h5 my-4">Date(s) proposées :</h2>
         {% for concert in not_validated_concerts %}
-            <div class="card mb-3 border-0">
+            <div class="card mb-3 border-0 mt-5">
                 <div class="row g-0">
                     <div class="card-title col-md-4">
                         <p class="h5">{{ concert.city }}</p>
@@ -24,6 +24,34 @@
                     </div>
                 </div>
             </div>
+            <form action="{{ path('admin_vote', {'id': concert.id}) }}" method="POST">
+                <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Voir les votes
+                    </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="accepted-dropdown-{{ concert.id }}">
+                        {% for vote in concert.votes|filter(vote => vote.vote) %}
+                            <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Voir les votes
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="denied-dropdown-{{ concert.id }}">
+                        {% for vote in concert.votes|filter(vote => not vote.vote) %}
+                            <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </form>
         {% endfor %}
     {% endif %}
 
@@ -31,7 +59,7 @@
 
     <h2 class="h5 my-4">Date(s) à venir :</h2>
     {% for concert in validated_concerts %}
-        <div class="card mb-3 border-0">
+        <div class="card mb-3 border-0 mt-5">
             <div class="row g-0">
                 <div class="card-title col-md-4">
                     <p class="h5">{{ concert.city }}</p>

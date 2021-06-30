@@ -58,6 +58,17 @@ class ConcertFixtures extends Fixture
         $manager->persist($concert);
         $this->addReference('concert_4', $concert);
 
+        $concert = new Concert();
+        $concert->setDate((new DateTime('2022-09-15'))->setTime(20, 30));
+        $concert->setIsValidated(false);
+        $concert->setCity('Ballan-Miré');
+        $concert->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+            Suspendisse lectus tortor, dignissim sit amet. Sit ea ab provident, fuga enim impedit ipsa.'
+        );
+        $manager->persist($concert);
+        $this->addReference('concert_5', $concert);
+
         $manager->flush();
     }
 }
