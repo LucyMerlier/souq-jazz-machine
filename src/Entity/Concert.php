@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ConcertRepository::class)
@@ -22,16 +23,22 @@ class Concert
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan("today")
+     * @Assert\NotBlank()
      */
     private ?DateTimeInterface $date;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=400)
      */
     private ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
      */
     private ?string $city;
 

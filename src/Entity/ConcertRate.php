@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Concert;
 use App\Repository\ConcertRateRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ConcertRateRepository::class)
@@ -20,11 +21,15 @@ class ConcertRate
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=40)
      */
     private ?string $category;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Positive()
      */
     private ?int $price;
 

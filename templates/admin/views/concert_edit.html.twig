@@ -1,0 +1,12 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Modifier le concert - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Modifier le concert :</h1>
+
+    {% include "admin/components/_concert_form.html.twig" with {"button_label": "Modifier"} %}
+    {% include "admin/components/_concert_delete_form.html.twig" %}
+
+    <a href="{{ path('admin_agenda') }}">Revenir sur la liste</a>
+{% endblock %}
