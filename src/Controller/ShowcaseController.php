@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\InstrumentRepository;
 use App\Form\ContactRequestType;
 use App\DataClass\ContactRequest;
+use App\Repository\ConcertRepository;
 
 /**
  * @Route(name="showcase_")
@@ -32,6 +33,16 @@ class ShowcaseController extends AbstractController
     {
         return $this->render('showcase/views/about_us.html.twig', [
             'instruments' => $instrumentRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/calendrier", name="agenda")
+     */
+    public function agenda(ConcertRepository $concertRepository): Response
+    {
+        return $this->render('showcase/views/agenda.html.twig', [
+            'concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'DESC']),
         ]);
     }
 

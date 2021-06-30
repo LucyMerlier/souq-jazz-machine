@@ -1,0 +1,54 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Calendrier - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Les Concerts :</h1>
+
+    {% if not_validated_concerts %}
+        <h2 class="h5 my-4">Date(s) proposées :</h2>
+        {% for concert in not_validated_concerts %}
+            <div class="card mb-3 border-0">
+                <div class="row g-0">
+                    <div class="card-title col-md-4">
+                        <p class="h5">{{ concert.city }}</p>
+                        <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
+                        {% for rate in concert.rates %}
+                            <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body p-0">
+                            <p class="card-text">{{ concert.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <hr>
+
+    <h2 class="h5 my-4">Date(s) à venir :</h2>
+    {% for concert in validated_concerts %}
+        <div class="card mb-3 border-0">
+            <div class="row g-0">
+                <div class="card-title col-md-4">
+                    <p class="h5">{{ concert.city }}</p>
+                    <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
+                    {% for rate in concert.rates %}
+                        <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+                    {% endfor %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-0">
+                        <p class="card-text">{{ concert.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Aucun concert trouvé :(</p>
+    {% endfor %}
+
+{% endblock %}
