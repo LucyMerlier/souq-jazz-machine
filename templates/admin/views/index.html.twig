@@ -1,3 +1,114 @@
 {% extends "admin/layout.html.twig" %}
 
 {% block title %}Admin - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Salut {{ app.user.pseudonym ?? app.user.firstname }}!</h1>
+
+    {% if unvoted_concerts %}
+        {% for concert in unvoted_concerts %}
+            <div class="card mb-3 border-0 mt-5">
+                <h2 class="h6">Une nouvelle data a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
+                <div class="row g-0">
+                    <div class="card-title col-md-4">
+                        <p class="h5">{{ concert.city }}</p>
+                        <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
+                        {% for rate in concert.rates %}
+                            <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body p-0">
+                            <p class="card-text">{{ concert.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form action="{{ path('admin_vote', {'id': concert.id}) }}" method="POST">
+                <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Voir les votes
+                    </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="accepted-dropdown-{{ concert.id }}">
+                        {% for vote in concert.votes|filter(vote => vote.vote) %}
+                            <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Voir les votes
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="denied-dropdown-{{ concert.id }}">
+                        {% for vote in concert.votes|filter(vote => not vote.vote) %}
+                            <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </form>
+            {% if is_granted("ROLE_ADMIN") %}
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
+                        <li>
+                            <form action="{{ path('admin_concert_validate', {'id': concert.id}) }}" method="POST">
+                                <button class="btn btn-success">Valider</button>
+                            </form>
+                        </li>
+                        <li>
+                            <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
+                        </li>
+                        <li>
+                            {% include "admin/components/_concert_delete_form.html.twig" %}
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <h2 class="h5 my-4">Prochain concert :</h2>
+    {% if concert %}
+        <div class="card mb-3 border-0 mt-5">
+            <div class="row g-0">
+                <div class="card-title col-md-4">
+                    <p class="h5">{{ concert.city }}</p>
+                    <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
+                    {% for rate in concert.rates %}
+                        <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+                    {% endfor %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-0">
+                        <p class="card-text">{{ concert.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if is_granted("ROLE_ADMIN") %}
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
+                        <li>
+                            <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
+                        </li>
+                        <li>
+                            {% include "admin/components/_concert_delete_form.html.twig" %}
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+    {% else %}
+        <p>Aucun concert trouvé :(</p>
+    {% endif %}
+{% endblock %}

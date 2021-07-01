@@ -3,7 +3,7 @@
 {% block title %}Mes informations - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">Salut {{ user.pseudonym ?? user.firstname }}!</h1>
+    <h1 class="h1 my-4">Salut {{ app.user.pseudonym ?? app.user.firstname }}!</h1>
 
     <h2 class="h5 my-4">C'est ici que tu peux retrouver et modifier tes informations personnelles :)</h2>
 
@@ -11,31 +11,31 @@
         <tbody>
             <tr>
                 <th>Prénom</th>
-                <td>{{ user.firstname }}</td>
+                <td>{{ app.user.firstname }}</td>
             </tr>
             <tr>
                 <th>Nom de famille</th>
-                <td>{{ user.lastname }}</td>
+                <td>{{ app.user.lastname }}</td>
             </tr>
             <tr>
                 <th>Pseudo</th>
-                <td>{{ user.pseudonym ?? "Non renseigné" }}</td>
+                <td>{{ app.user.pseudonym ?? "Non renseigné" }}</td>
             </tr>
             <tr>
                 <th>Instrument</th>
-                <td>{{ user.instrument.name }}</td>
+                <td>{{ app.user.instrument.name }}</td>
             </tr>
             <tr>
                 <th>Email</th>
-                <td>{{ user.email }}</td>
+                <td>{{ app.user.email }}</td>
             </tr>
             <tr>
                 <th>Numéro de téléphone</th>
-                <td>{{ user.phone ?? "Non renseigné" }}</td>
+                <td>{{ app.user.phone ?? "Non renseigné" }}</td>
             </tr>
             <tr>
                 <th>Phrase d'accroche</th>
-                <td>{{ user.catchphrase ? "\"" ~ user.catchphrase ~ "\"" : "Non renseignée" }}</td>
+                <td>{{ app.user.catchphrase ? "\"" ~ app.user.catchphrase ~ "\"" : "Non renseignée" }}</td>
             </tr>
         </tbody>
     </table>

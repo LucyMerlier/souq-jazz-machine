@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -80,9 +82,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Instrument $instrument;
 
     /**
+     * @ORM\OneToMany(targetEntity=Availability::class, mappedBy="voter", orphanRemoval=true)
+     */
+    private Collection $votes;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private bool $isVerified = false;
+
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -247,6 +259,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Availability[]
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Availability $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setVoter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Availability $vote): self
+    {
+        if ($this->votes->removeElement($vote)) {
+            // set the owning side to null (unless already changed)
+            if ($vote->getVoter() === $this) {
+                $vote->setVoter(null);
+            }
+        }
+
+        return $this;
+    }
     public function isVerified(): bool
     {
         return $this->isVerified;

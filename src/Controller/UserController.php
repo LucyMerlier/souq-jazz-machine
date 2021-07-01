@@ -22,9 +22,7 @@ class UserController extends AbstractController
      */
     public function show(): Response
     {
-        return $this->render('admin/views/user_show.html.twig', [
-            'user' => $this->getUser(),
-        ]);
+        return $this->render('admin/views/user_show.html.twig');
     }
 
     /**
@@ -41,7 +39,6 @@ class UserController extends AbstractController
         }
 
         return $this->render('admin/views/user_edit.html.twig', [
-            'user' => $this->getUser(),
             'form' => $form->createView(),
         ]);
     }

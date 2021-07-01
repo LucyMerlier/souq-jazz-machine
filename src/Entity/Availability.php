@@ -20,7 +20,7 @@ class Availability
     private ?int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="votes")
      * @ORM\JoinColumn(nullable=false)
      */
     private ?User $voter;
@@ -35,6 +35,11 @@ class Availability
      * @ORM\Column(type="boolean")
      */
     private ?bool $vote;
+
+    public function __serialize(): array
+    {
+        return [];
+    }
 
     public function getId(): ?int
     {
