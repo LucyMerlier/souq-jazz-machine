@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Availability;
 use App\Entity\Concert;
 use App\Entity\ConcertRate;
 use App\Form\ConcertRateType;
@@ -40,6 +41,14 @@ class ConcertController extends AbstractController
             // @phpstan-ignore-next-line
             $concert->setOwner($this->getUser());
             $entityManager->persist($concert);
+
+            $vote = new Availability();
+            $vote->setConcert($concert);
+            // @phpstan-ignore-next-line
+            $vote->setVoter($this->getUser());
+            $vote->setVote(true);
+            $entityManager->persist($vote);
+
             $entityManager->flush();
             $email = (new Email())
                 ->from('souqjazzmachine@bigband.fr')

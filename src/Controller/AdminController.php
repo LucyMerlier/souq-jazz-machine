@@ -21,6 +21,7 @@ class AdminController extends AbstractController
     public function index(ConcertRepository $concertRepository): Response
     {
         $unvotedConcerts = [];
+
         $notValidatedConcerts = $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']);
 
         foreach ($notValidatedConcerts as $concert) {
@@ -28,11 +29,15 @@ class AdminController extends AbstractController
 
             if ($votes->isEmpty()) {
                 $unvotedConcerts[] = $concert;
-            }
-
-            foreach ($votes as $vote) {
-                // @phpstan-ignore-next-line
-                if (!$this->getUser()->getVotes()->contains($vote)) {
+            } else {
+                $hasVoted = false;
+                foreach ($votes as $vote) {
+                    // @phpstan-ignore-next-line
+                    if ($this->getUser()->getVotes()->contains($vote)) {
+                        $hasVoted = true;
+                    }
+                }
+                if (!$hasVoted) {
                     $unvotedConcerts[] = $concert;
                 }
             }
