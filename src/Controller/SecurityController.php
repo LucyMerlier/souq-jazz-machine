@@ -93,7 +93,7 @@ class SecurityController extends AbstractController
 
             $this->addFlash('success', 'Un email de confirmation a été envoyé au nouveau / à la nouvelle venu·e! :D');
 
-            return $this->redirectToRoute('admin_user_index');
+            return $this->redirectToRoute('admin_members');
         }
 
         return $this->render('security/register.html.twig', [

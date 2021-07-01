@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ConcertRepository;
+use App\Repository\InstrumentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +31,16 @@ class AdminController extends AbstractController
         return $this->render('admin/views/agenda.html.twig', [
             'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
             'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'DESC']),
+        ]);
+    }
+
+    /**
+     * @Route("/tous-les-membres", name="members", methods={"GET"})
+     */
+    public function bandMembers(InstrumentRepository $instrumentRepository): Response
+    {
+        return $this->render('admin/views/user_index.html.twig', [
+            'instruments' => $instrumentRepository->findAll(),
         ]);
     }
 }

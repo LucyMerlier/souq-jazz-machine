@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\InstrumentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,16 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/tous-les-membres", name="index", methods={"GET"})
-     */
-    public function index(InstrumentRepository $instrumentRepository): Response
-    {
-        return $this->render('admin/views/user_index.html.twig', [
-            'instruments' => $instrumentRepository->findAll(),
-        ]);
-    }
-
     /**
      * @Route("/mes-informations", name="show", methods={"GET"})
      */
@@ -69,7 +58,7 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('admin_user_index');
+        return $this->redirectToRoute('admin_members');
     }
 
     /**
