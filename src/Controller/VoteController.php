@@ -49,6 +49,6 @@ class VoteController extends AbstractController
             $this->addFlash('warning', 'Vote invalide');
         }
 
-        return $this->redirectToRoute('admin_agenda');
+        return $this->redirectToRoute('admin_concert_agenda');
     }
 }

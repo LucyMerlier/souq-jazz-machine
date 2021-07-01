@@ -57,6 +57,12 @@ class Concert
      */
     private Collection $votes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?User $owner;
+
     public function __construct()
     {
         $this->rates = new ArrayCollection();
@@ -172,6 +178,18 @@ class Concert
                 $vote->setConcert(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
