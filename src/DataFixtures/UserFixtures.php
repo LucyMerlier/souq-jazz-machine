@@ -91,6 +91,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($lolo);
+        $this->addReference('lolo', $lolo);
 
         $wiwi = new User();
         $wiwi
