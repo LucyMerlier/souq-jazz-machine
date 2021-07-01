@@ -30,7 +30,7 @@ class ConcertController extends AbstractController
     {
         return $this->render('admin/views/agenda.html.twig', [
             'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
-            'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'DESC']),
+            'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'ASC']),
         ]);
     }
 
