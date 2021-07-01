@@ -42,7 +42,7 @@ class ShowcaseController extends AbstractController
     public function agenda(ConcertRepository $concertRepository): Response
     {
         return $this->render('showcase/views/agenda.html.twig', [
-            'concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'DESC']),
+            'concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'ASC']),
         ]);
     }
 
