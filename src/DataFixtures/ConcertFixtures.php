@@ -40,7 +40,7 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
 
         $concert = new Concert();
         $concert->setOwner($this->getReference('lolo'));
-        $concert->setDate((new DateTime('2021-06-18'))->setTime(8, 0));
+        $concert->setDate((new DateTime('2022-06-18'))->setTime(8, 0));
         $concert->setIsValidated(true);
         $concert->setCity('Aix-en-Provence');
         $concert->setDescription(

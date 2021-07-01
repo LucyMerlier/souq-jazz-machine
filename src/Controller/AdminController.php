@@ -18,9 +18,26 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="home", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ConcertRepository $concertRepository): Response
     {
-        return $this->render('admin/views/index.html.twig');
+        $unvotedConcerts = [];
+        $notValidatedConcerts = $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']);
+        foreach ($notValidatedConcerts as $concert) {
+            $votes = $concert->getVotes();
+            if ($votes->isEmpty()) {
+                $unvotedConcerts[] = $concert;
+            }
+            foreach ($votes as $vote) {
+                // @phpstan-ignore-next-line
+                if (!$this->getUser()->getVotes()->contains($vote)) {
+                    $unvotedConcerts[] = $concert;
+                }
+            }
+        }
+        return $this->render('admin/views/index.html.twig', [
+            'unvoted_concerts' => $unvotedConcerts,
+            'concert' => $concertRepository->findOneBy(['isValidated' => true], ['date' => 'ASC']),
+        ]);
     }
 
     /**
@@ -30,7 +47,7 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/views/agenda.html.twig', [
             'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
-            'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'DESC']),
+            'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'ASC']),
         ]);
     }
 
