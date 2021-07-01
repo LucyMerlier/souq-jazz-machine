@@ -45,7 +45,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/calendrier", name="agenda", methods={"GET"})
+     * @Route("/calendrier", name="concert_agenda", methods={"GET"})
      */
     public function agenda(ConcertRepository $concertRepository): Response
     {

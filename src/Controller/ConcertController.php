@@ -24,17 +24,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConcertController extends AbstractController
 {
     /**
-     * @Route("/calendrier", name="agenda", methods={"GET"})
-     */
-    public function agenda(ConcertRepository $concertRepository): Response
-    {
-        return $this->render('admin/views/agenda.html.twig', [
-            'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
-            'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'ASC']),
-        ]);
-    }
-
-    /**
      * @Route("/proposer-une-date-de-concert", name="add", methods={"GET", "POST"})
      */
     public function add(
