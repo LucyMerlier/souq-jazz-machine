@@ -22,11 +22,14 @@ class AdminController extends AbstractController
     {
         $unvotedConcerts = [];
         $notValidatedConcerts = $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']);
+
         foreach ($notValidatedConcerts as $concert) {
             $votes = $concert->getVotes();
+
             if ($votes->isEmpty()) {
                 $unvotedConcerts[] = $concert;
             }
+
             foreach ($votes as $vote) {
                 // @phpstan-ignore-next-line
                 if (!$this->getUser()->getVotes()->contains($vote)) {
@@ -34,6 +37,7 @@ class AdminController extends AbstractController
                 }
             }
         }
+
         return $this->render('admin/views/index.html.twig', [
             'unvoted_concerts' => $unvotedConcerts,
             'concert' => $concertRepository->findOneBy(['isValidated' => true], ['date' => 'ASC']),
