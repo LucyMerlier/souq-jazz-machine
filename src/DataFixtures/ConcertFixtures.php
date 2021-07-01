@@ -2,16 +2,19 @@
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\UserFixtures;
 use App\Entity\Concert;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ConcertFixtures extends Fixture
+class ConcertFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
         $concert = new Concert();
+        $concert->setOwner($this->getReference('lolo'));
         $concert->setDate((new DateTime('2022-04-16'))->setTime(20, 0));
         $concert->setIsValidated(true);
         $concert->setCity('Azay-le-Rideau');
@@ -24,6 +27,7 @@ class ConcertFixtures extends Fixture
         $this->addReference('concert_1', $concert);
 
         $concert = new Concert();
+        $concert->setOwner($this->getReference('lolo'));
         $concert->setDate((new DateTime('2022-06-25'))->setTime(20, 30));
         $concert->setIsValidated(true);
         $concert->setCity('Bréhémont');
@@ -35,6 +39,7 @@ class ConcertFixtures extends Fixture
         $this->addReference('concert_2', $concert);
 
         $concert = new Concert();
+        $concert->setOwner($this->getReference('lolo'));
         $concert->setDate((new DateTime('2021-06-18'))->setTime(8, 0));
         $concert->setIsValidated(true);
         $concert->setCity('Aix-en-Provence');
@@ -48,6 +53,7 @@ class ConcertFixtures extends Fixture
         $this->addReference('concert_3', $concert);
 
         $concert = new Concert();
+        $concert->setOwner($this->getReference('lolo'));
         $concert->setDate((new DateTime('2022-12-07'))->setTime(19, 0));
         $concert->setIsValidated(false);
         $concert->setCity('Cinq-Mars-la-Pile');
@@ -59,6 +65,7 @@ class ConcertFixtures extends Fixture
         $this->addReference('concert_4', $concert);
 
         $concert = new Concert();
+        $concert->setOwner($this->getReference('lolo'));
         $concert->setDate((new DateTime('2022-09-15'))->setTime(20, 30));
         $concert->setIsValidated(false);
         $concert->setCity('Ballan-Miré');
@@ -70,5 +77,10 @@ class ConcertFixtures extends Fixture
         $this->addReference('concert_5', $concert);
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [UserFixtures::class];
     }
 }

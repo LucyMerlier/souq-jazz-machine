@@ -6,6 +6,7 @@ use App\Entity\Concert;
 use App\Entity\ConcertRate;
 use App\Form\ConcertRateType;
 use App\Form\ConcertType;
+use App\Repository\ConcertRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -23,6 +24,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConcertController extends AbstractController
 {
     /**
+     * @Route("/calendrier", name="agenda", methods={"GET"})
+     */
+    public function agenda(ConcertRepository $concertRepository): Response
+    {
+        return $this->render('admin/views/agenda.html.twig', [
+            'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
+            'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'DESC']),
+        ]);
+    }
+
+    /**
      * @Route("/proposer-une-date-de-concert", name="add", methods={"GET", "POST"})
      */
     public function add(
@@ -36,6 +48,8 @@ class ConcertController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // @phpstan-ignore-next-line
+            $concert->setOwner($this->getUser());
             $entityManager->persist($concert);
             $entityManager->flush();
             $email = (new Email())
@@ -53,7 +67,7 @@ class ConcertController extends AbstractController
 
             $this->addFlash('success', 'Date de concert proposée, plus qu\'à attendre qque tout le monde ait voté!');
 
-            return $this->redirectToRoute('admin_agenda');
+            return $this->redirectToRoute('admin_concert_agenda');
         }
 
         return $this->render('admin/views/concert_add.html.twig', [
@@ -77,7 +91,7 @@ class ConcertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'Concert modifié!');
-            return $this->redirectToRoute('admin_agenda');
+            return $this->redirectToRoute('admin_concert_agenda');
         }
 
         return $this->render('admin/views/concert_edit.html.twig', [
@@ -95,11 +109,11 @@ class ConcertController extends AbstractController
         Concert $concert
     ): Response {
         $rate = new ConcertRate();
+        $rate->setConcert($concert);
         $form = $this->createForm(ConcertRateType::class, $rate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $rate->setConcert($concert);
             $entityManager->persist($rate);
             $entityManager->flush();
             $this->addFlash('success', 'Tarif ajouté!');
@@ -178,7 +192,7 @@ class ConcertController extends AbstractController
         }
             $mailer->send($email);
         $this->addFlash('success', 'Date de concert validée!');
-        return $this->redirectToRoute('admin_agenda');
+        return $this->redirectToRoute('admin_concert_agenda');
     }
 
     /**
@@ -194,6 +208,6 @@ class ConcertController extends AbstractController
             $this->addFlash('warning', 'Concert annulé!');
         }
 
-        return $this->redirectToRoute('admin_agenda');
+        return $this->redirectToRoute('admin_concert_agenda');
     }
 }
