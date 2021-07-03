@@ -7,6 +7,8 @@
 
     <h2 class="h5 my-4">C'est ici que tu peux retrouver et modifier tes informations personnelles :)</h2>
 
+    <a href="{{ path('admin_members') }}">Revenir sur la liste des membres</a>
+
     <table class="table">
         <tbody>
             <tr>
@@ -41,5 +43,4 @@
     </table>
 
     <a href="{{ path('admin_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
-    <a href="{{ path('admin_members') }}">Revenir sur la liste des membres</a>
 {% endblock %}

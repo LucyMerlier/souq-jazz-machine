@@ -1,0 +1,15 @@
+{% extends "email/layout.html.twig" %}
+
+{% block content %}
+    <h1>Date de concert annulée!</h1>
+
+    <p>
+        Le concert du {{ concert.date|date("d/m/Y") }} à {{ concert.city }} a été annulé... :(
+    </p>
+    <p>
+        Malheureusement, on ne pourra pas s'y retrouver pour tout déchirer, mais ce n'est que partie remise ;)
+    </p>
+    <p>
+        Musicalement, le Souq'.
+    </p>
+{% endblock %}

@@ -15,12 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @IsGranted("ROLE_ADMIN")
- * @Route("/admin/actus", name="admin_news_")
+ * @Route("/admin", name="admin_news_")
  */
 class NewsArticleController extends AbstractController
 {
     /**
-     * @Route("/", name="index", methods={"GET"})
+     * @Route("/gestion-des-actus", name="index", methods={"GET"})
      */
     public function index(NewsArticleRepository $newsRepository): Response
     {
@@ -30,7 +30,7 @@ class NewsArticleController extends AbstractController
     }
 
     /**
-     * @Route("/ajouter", name="add", methods={"GET","POST"})
+     * @Route("/ajouter-une-actu", name="add", methods={"GET","POST"})
      */
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -54,17 +54,7 @@ class NewsArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
-     */
-    public function show(NewsArticle $newsArticle): Response
-    {
-        return $this->render('admin/views/news_show.html.twig', [
-            'news_article' => $newsArticle,
-        ]);
-    }
-
-    /**
-     * @Route("/modifier/{id}", name="edit", methods={"GET","POST"})
+     * @Route("/modifier-une-actu/{id}", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, NewsArticle $newsArticle, EntityManagerInterface $entityManager): Response
     {
@@ -85,7 +75,7 @@ class NewsArticleController extends AbstractController
     }
 
     /**
-     * @Route("/supprimer/{id}", name="delete", methods={"POST"})
+     * @Route("/supprimer-une-actu/{id}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, NewsArticle $newsArticle, EntityManagerInterface $entityManager): Response
     {

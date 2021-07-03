@@ -5,6 +5,8 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier le concert :</h1>
 
+    <a href="{{ path('admin_concert_agenda') }}">Revenir sur le calendrier</a>
+
     {% include "admin/components/_concert_form.html.twig" with {"button_label": "Modifier"} %}
 
     <h2 class="h2 my-4">Les tarifs :</h2>
@@ -15,9 +17,9 @@
         <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
         <a class="btn btn-primary" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier ce tarif</a>
         {% include "admin/components/_rate_delete_form.html.twig" %}
+    {% else %}
+        <p>Aucun tarif trouvé</p>
     {% endfor %}
 
     {% include "admin/components/_concert_delete_form.html.twig" %}
-
-    <a href="{{ path('admin_concert_agenda') }}">Revenir sur la liste</a>
 {% endblock %}

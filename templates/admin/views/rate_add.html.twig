@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Ajouter un tarif :</h1>
 
-    {% include "admin/components/_rate_form.html.twig" %}
-
     <a href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">Revenir sur le concert</a>
+
+    {% include "admin/components/_rate_form.html.twig" %}
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Availability;
 use App\Entity\Concert;
 use App\Entity\ConcertRate;
+use App\Entity\NewsArticle;
 use App\Entity\User;
 use App\Form\ConcertRateType;
 use App\Form\ConcertType;
@@ -64,7 +65,7 @@ class ConcertController extends AbstractController
             }
             $mailer->send($email);
 
-            $this->addFlash('success', 'Date de concert proposée, plus qu\'à attendre qque tout le monde ait voté!');
+            $this->addFlash('success', 'Date de concert proposée, plus qu\'à attendre que tout le monde ait voté!');
 
             return $this->redirectToRoute('admin_concert_agenda');
         }
@@ -192,7 +193,7 @@ class ConcertController extends AbstractController
             $emailAddress = (string)$user->getEmail();
             $email->addTo($emailAddress);
         }
-            $mailer->send($email);
+        $mailer->send($email);
         $this->addFlash('success', 'Date de concert validée!');
         return $this->redirectToRoute('admin_concert_agenda');
     }
@@ -201,12 +202,38 @@ class ConcertController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/supprimer-le-concert/{id}", name="delete", methods={"POST"})
      */
-    public function delete(Request $request, EntityManagerInterface $entityManager, Concert $concert): Response
-    {
+    public function delete(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Concert $concert,
+        MailerInterface $mailer,
+        UserRepository $userRepository
+    ): Response {
         if ($this->isCsrfTokenValid('delete' . $concert->getId(), (string)$request->request->get('_token'))) {
             $entityManager->remove($concert);
             $entityManager->flush();
-            $this->addFlash('warning', 'Concert annulé!');
+
+            if ($concert->getIsValidated()) {
+                $email = (new Email())
+                    ->from('souqjazzmachine@bigband.fr')
+                    ->subject('Date de concert annulée!')
+                    ->html($this->renderView('email/views/deleted_concert_email.html.twig', [
+                        'concert' => $concert,
+                    ]))
+                ;
+                foreach ($userRepository->findAll() as /** @var User */ $user) {
+                    $emailAddress = (string)$user->getEmail();
+                    $email->addTo($emailAddress);
+                }
+                $mailer->send($email);
+                $this->addFlash(
+                    'warning',
+                    'Concert annulé! Prends le temps de prévenir les visiteurs du site en ajoutant une actu!'
+                );
+                return $this->redirectToRoute('admin_news_add');
+            }
+
+            $this->addFlash('warning', 'Concert supprimé!');
         }
 
         return $this->redirectToRoute('admin_concert_agenda');

@@ -62,9 +62,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
                         <li>
-                            <form action="{{ path('admin_concert_validate', {'id': concert.id}) }}" method="POST">
-                                <button class="btn btn-success">Valider</button>
-                            </form>
+                            {% include "admin/components/_concert_validate_form.html.twig" %}
                         </li>
                         <li>
                             <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
