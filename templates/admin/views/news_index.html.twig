@@ -5,6 +5,8 @@
 {% block content %}
     <h1 class="h1 my-4">Toutes les actus :</h1>
 
+    <a href="{{ path('admin_news_add') }}">Ajouter un article</a>
+
     {% for news_article in news_articles %}
         <div class="card mb-3 border-0 mt-5">
             <div class="row g-0">
@@ -14,7 +16,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body p-0">
-                        <p class="card-text">{{ news_article.content }}</p>
+                        <p class="card-text">{{ news_article.content|markdown }}</p>
                     </div>
                 </div>
             </div>
@@ -26,6 +28,4 @@
     {% else %}
         <p>Aucun article trouvé :(</p>
     {% endfor %}
-
-    <a href="{{ path('admin_news_add') }}">Ajouter un article</a>
 {% endblock %}
