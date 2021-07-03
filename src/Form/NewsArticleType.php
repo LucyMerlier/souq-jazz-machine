@@ -19,7 +19,7 @@ class NewsArticleType extends AbstractType
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',
-                'help' => 'Ce champ supporte le markdown ;)'
+                'help' => 'Ce champ supporte le markdown ;)',
             ])
         ;
     }

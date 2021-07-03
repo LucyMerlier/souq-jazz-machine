@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-0">
-                            <p class="card-text">{{ concert.description }}</p>
+                            <div class="card-text">{{ concert.description|markdown }}</div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body p-0">
-                        <p class="card-text">{{ concert.description }}</p>
+                        <div class="card-text">{{ concert.description|markdown }}</div>
                     </div>
                 </div>
             </div>

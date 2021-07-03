@@ -26,7 +26,8 @@ class ConcertType extends AbstractType
                 'label' => 'Ville',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description'
+                'label' => 'Description',
+                'help' => 'Ce champ supporte le markdown ;)',
             ])
         ;
     }

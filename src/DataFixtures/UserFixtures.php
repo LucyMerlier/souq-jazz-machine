@@ -110,6 +110,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($wiwi);
+        $this->addReference('wiwi', $wiwi);
 
         $coco = new User();
         $coco
@@ -353,6 +354,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($lucy);
+        $this->addReference('lu', $lucy);
 
         $marco = new User();
         $marco
