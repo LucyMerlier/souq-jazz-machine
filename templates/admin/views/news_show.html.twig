@@ -1,0 +1,27 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Article - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Article :</h1>
+
+    <div class="card mb-3 border-0 mt-5">
+        <div class="row g-0">
+            <div class="card-title col-md-4">
+                <h2 class="h5">{{ news_article.title }}</h2>
+                <p class="h5">{{ news_article.createdAt|date('d/m/Y') }}</p>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body p-0">
+                    <p class="card-text">{{ news_article.content }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('admin_news_edit', {'id': news_article.id}) }}">Modifier</a>
+
+    {{ include('admin/components/_news_delete_form.html.twig') }}
+
+    <a href="{{ path('admin_news_index') }}">Revenir à la liste des actus</a>
+{% endblock %}
