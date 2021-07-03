@@ -1,1 +1,43 @@
 {% extends "showcase/layout.html.twig" %}
+
+{% block content %}
+    <h2 class="h2 my-4">ACTUALITÉS</h2>
+
+    {% for news_article in news_articles %}
+        <div class="card mb-3 border-0 mt-5">
+            <div class="row g-0">
+                <div class="card-title col-md-4">
+                    <h2 class="h5">{{ news_article.title }}</h2>
+                    <p class="h5">{{ news_article.createdAt|date('d/m/Y') }}</p>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-0">
+                        <div class="card-text">{{ news_article.content|markdown }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    {% else %}
+        <p>Aucun article trouvé :(</p>
+    {% endfor %}
+
+    <h2 class="h2 my-4">PROCHAIN CONCERT</h2>
+
+    <div class="card mb-3 border-0">
+        <div class="row g-0">
+            <div class="card-title col-md-4">
+                <p class="h5">{{ concert.city }}</p>
+                <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
+                {% for rate in concert.rates %}
+                    <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+                {% endfor %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body p-0">
+                    <p class="card-text">{{ concert.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
