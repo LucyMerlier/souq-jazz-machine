@@ -24,52 +24,7 @@
                     </div>
                 </div>
             </div>
-            <form action="{{ path('admin_vote', {'id': concert.id}) }}" method="POST">
-                <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                        Voir les votes
-                    </button>
-
-                    <ul class="dropdown-menu" aria-labelledby="accepted-dropdown-{{ concert.id }}">
-                        {% for vote in concert.votes|filter(vote => vote.vote) %}
-                            <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                        Voir les votes
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="denied-dropdown-{{ concert.id }}">
-                        {% for vote in concert.votes|filter(vote => not vote.vote) %}
-                            <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </form>
-            {% if is_granted("ROLE_ADMIN") %}
-                <div class="dropdown">
-                    <button class="btn btn-warning dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                        Admin
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
-                        <li>
-                            {% include "admin/components/_concert_validate_form.html.twig" %}
-                        </li>
-                        <li>
-                            <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
-                        </li>
-                        <li>
-                            {% include "admin/components/_concert_delete_form.html.twig" %}
-                        </li>
-                    </ul>
-                </div>
-            {% endif %}
+            {% include "admin/components/_vote.html.twig" %}
         {% endfor %}
     {% endif %}
 
