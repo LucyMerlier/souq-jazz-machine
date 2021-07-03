@@ -34,7 +34,7 @@ class VoteController extends AbstractController
         ) ?? new Availability();
 
         /**
-         * DISCUSS : surely there's a way to do all this vote interaction "properly" by following Symfony best practices
+         * DISCUSS : surely there's a way to do all this vote interaction "properly" and follow Symfony best practices
          * -> refactor later?
          */
         $vote = $request->request->get('vote');
