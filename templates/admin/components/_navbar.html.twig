@@ -25,10 +25,10 @@
                     <a class="nav-link" href="#">Médias</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="my-account-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Mon compte
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="my-account-dropdown">
                         <li class="dropdown-item">
                             {{ app.user.pseudonym ?? app.user.firstname }}
                         </li>
@@ -41,6 +41,24 @@
                         </li>
                     </ul>
                 </li>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="admin-tasks-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Tâches administratives
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="admin-tasks-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">Gestion des actus</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Envoi de mails</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Modification du contenu</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
