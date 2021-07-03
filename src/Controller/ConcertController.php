@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Availability;
 use App\Entity\Concert;
 use App\Entity\ConcertRate;
+use App\Entity\User;
 use App\Form\ConcertRateType;
 use App\Form\ConcertType;
 use App\Repository\ConcertRepository;
@@ -38,14 +39,14 @@ class ConcertController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // @phpstan-ignore-next-line
-            $concert->setOwner($this->getUser());
+            /** @var User */
+            $user = $this->getUser();
+            $concert->setOwner($user);
             $entityManager->persist($concert);
 
             $vote = new Availability();
             $vote->setConcert($concert);
-            // @phpstan-ignore-next-line
-            $vote->setVoter($this->getUser());
+            $vote->setVoter($user);
             $vote->setVote(true);
             $entityManager->persist($vote);
 
@@ -57,9 +58,9 @@ class ConcertController extends AbstractController
                     'concert' => $concert,
                 ]))
             ;
-            foreach ($userRepository->findAll() as $user) {
-                // @phpstan-ignore-next-line
-                $email->addTo($user->getEmail());
+            foreach ($userRepository->findAll() as /** @var User */ $user) {
+                $emailAddress = (string)$user->getEmail();
+                $email->addTo($emailAddress);
             }
             $mailer->send($email);
 
@@ -139,8 +140,10 @@ class ConcertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'Tarif modifié!');
-            // @phpstan-ignore-next-line
-            return $this->redirectToRoute('admin_concert_edit', ['id' => $rate->getConcert()->getId()]);
+
+            /** @var Concert */
+            $concert = $rate->getConcert();
+            return $this->redirectToRoute('admin_concert_edit', ['id' => $concert->getId()]);
         }
 
         return $this->render('admin/views/rate_edit.html.twig', [
@@ -155,14 +158,15 @@ class ConcertController extends AbstractController
      */
     public function deleteRate(Request $request, EntityManagerInterface $entityManager, ConcertRate $rate): Response
     {
-        // @phpstan-ignore-next-line
-        if ($this->isCsrfTokenValid('delete' . $rate->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $rate->getId(), (string)$request->request->get('_token'))) {
             $entityManager->remove($rate);
             $entityManager->flush();
             $this->addFlash('warning', 'Tarif supprimé!');
         }
-        // @phpstan-ignore-next-line
-        return $this->redirectToRoute('admin_concert_edit', ['id' => $rate->getConcert()->getId()]);
+
+        /** @var Concert */
+        $concert = $rate->getConcert();
+        return $this->redirectToRoute('admin_concert_edit', ['id' => $concert->getId()]);
     }
 
     /**
@@ -184,9 +188,9 @@ class ConcertController extends AbstractController
                     'concert' => $concert,
                 ]))
             ;
-        foreach ($userRepository->findAll() as $user) {
-            // @phpstan-ignore-next-line
-            $email->addTo($user->getEmail());
+        foreach ($userRepository->findAll() as /** @var User */ $user) {
+            $emailAddress = (string)$user->getEmail();
+            $email->addTo($emailAddress);
         }
             $mailer->send($email);
         $this->addFlash('success', 'Date de concert validée!');
@@ -199,8 +203,7 @@ class ConcertController extends AbstractController
      */
     public function delete(Request $request, EntityManagerInterface $entityManager, Concert $concert): Response
     {
-        // @phpstan-ignore-next-line
-        if ($this->isCsrfTokenValid('delete' . $concert->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $concert->getId(), (string)$request->request->get('_token'))) {
             $entityManager->remove($concert);
             $entityManager->flush();
             $this->addFlash('warning', 'Concert annulé!');

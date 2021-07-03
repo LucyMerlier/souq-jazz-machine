@@ -110,8 +110,9 @@ class SecurityController extends AbstractController
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            // @phpstan-ignore-next-line
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            /** @var User */
+            $user = $this->getUser();
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
 
@@ -146,11 +147,11 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // @phpstan-ignore-next-line
-            $this->getUser()->setPassword(
+            /** @var User */
+            $user = $this->getUser();
+            $user->setPassword(
                 $passwordHasher->hashPassword(
-                    // @phpstan-ignore-next-line
-                    $this->getUser(),
+                    $user,
                     $form->get('newPassword')->getData()
                 )
             );

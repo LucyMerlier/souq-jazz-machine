@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -32,8 +33,9 @@ class AdminController extends AbstractController
             } else {
                 $hasVoted = false;
                 foreach ($votes as $vote) {
-                    // @phpstan-ignore-next-line
-                    if ($this->getUser()->getVotes()->contains($vote)) {
+                    /** @var User */
+                    $user = $this->getUser();
+                    if ($user->getVotes()->contains($vote)) {
                         $hasVoted = true;
                     }
                 }

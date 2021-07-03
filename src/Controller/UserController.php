@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
  * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -49,8 +50,7 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, EntityManagerInterface $entityManager, User $user): Response
     {
-        // @phpstan-ignore-next-line
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), (string)$request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
         }
@@ -64,7 +64,7 @@ class UserController extends AbstractController
     public function deleteAccount(Request $request, EntityManagerInterface $entityManager): Response
     {
         // @phpstan-ignore-next-line
-        if ($this->isCsrfTokenValid('delete' . $this->getUser()->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $this->getUser()->getId(), (string)$request->request->get('_token'))) {
             // @phpstan-ignore-next-line
             $entityManager->remove($this->getUser());
             $entityManager->flush();
@@ -72,8 +72,9 @@ class UserController extends AbstractController
 
         $this->addFlash('primary', 'Ton compte a bien été supprimé, désolé·e·s de te voir partir :\'(');
 
-        // @phpstan-ignore-next-line
-        $this->get('security.token_storage')->setToken(null);
+        /** @var TokenStorage */
+        $tokenStorage = $this->get('security.token_storage');
+        $tokenStorage->setToken(null);
 
         return $this->redirectToRoute('showcase_home');
     }

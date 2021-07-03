@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Availability;
 use App\Entity\Concert;
+use App\Entity\User;
 use App\Repository\AvailabilityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -40,8 +41,9 @@ class VoteController extends AbstractController
                 $entityManager->persist($availibility);
             }
 
-            // @phpstan-ignore-next-line
-            $availibility->setVote($vote)->setVoter($this->getUser())->setConcert($concert);
+            /** @var User */
+            $user = $this->getUser();
+            $availibility->setVote($vote)->setVoter($user)->setConcert($concert);
             $entityManager->flush();
 
             $this->addFlash('success', 'Merci pour ton vote!');
