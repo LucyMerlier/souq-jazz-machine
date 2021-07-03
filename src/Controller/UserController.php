@@ -63,10 +63,10 @@ class UserController extends AbstractController
      */
     public function deleteAccount(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // @phpstan-ignore-next-line
-        if ($this->isCsrfTokenValid('delete' . $this->getUser()->getId(), (string)$request->request->get('_token'))) {
-            // @phpstan-ignore-next-line
-            $entityManager->remove($this->getUser());
+        /** @var User */
+        $user = $this->getUser();
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), (string)$request->request->get('_token'))) {
+            $entityManager->remove($user);
             $entityManager->flush();
         }
 
