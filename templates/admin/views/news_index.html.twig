@@ -1,0 +1,31 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Toutes les actus - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Toutes les actus :</h1>
+
+    <a href="{{ path('admin_news_add') }}">Ajouter un article</a>
+
+    {% for news_article in news_articles %}
+        <div class="card mb-3 border-0 mt-5">
+            <div class="row g-0">
+                <div class="card-title col-md-4">
+                    <h2 class="h5">{{ news_article.title }}</h2>
+                    <p class="h5">{{ news_article.createdAt|date('d/m/Y') }}</p>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-0">
+                        <p class="card-text">{{ news_article.content|markdown }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a class="btn btn-primary" href="{{ path('admin_news_edit', {'id': news_article.id}) }}">Modifier</a>
+
+        {{ include('admin/components/_news_delete_form.html.twig') }}
+    {% else %}
+        <p>Aucun article trouvé :(</p>
+    {% endfor %}
+{% endblock %}

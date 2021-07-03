@@ -6,6 +6,7 @@ use App\DataClass\ContactRequest;
 use App\Form\ContactRequestType;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
+use App\Repository\NewsArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,9 +22,12 @@ class ShowcaseController extends AbstractController
     /**
      * @Route("/", name="home", methods={"GET"})
      */
-    public function index(): Response
+    public function index(NewsArticleRepository $newsRepository, ConcertRepository $concertRepository): Response
     {
-        return $this->render('showcase/views/index.html.twig');
+        return $this->render('showcase/views/index.html.twig', [
+            'news_articles' => $newsRepository->findBy([], ['createdAt' => 'DESC'], 6),
+            'concert' => $concertRepository->findOneBy([], ['date' => 'ASC'])
+        ]);
     }
 
     /**
