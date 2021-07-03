@@ -343,6 +343,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setFirstname('Lucy')
             ->setLastname('Merlier')
             ->setEmail('lucy@merlier.jazz')
+            ->setCatchphrase('Call me daddy')
             ->setPseudonym('Lu')
             ->setPhone('+33 6 96 52 74 85')
             ->setInstrument($this->getReference('bass'))
