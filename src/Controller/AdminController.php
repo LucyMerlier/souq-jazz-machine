@@ -21,6 +21,7 @@ class AdminController extends AbstractController
      */
     public function index(ConcertRepository $concertRepository): Response
     {
+        // DISCUSS : surely there's a simpler way to do that, maybe just by using a custom query -> refactor later?
         $unvotedConcerts = [];
 
         $notValidatedConcerts = $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']);

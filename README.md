@@ -50,8 +50,8 @@ If your machine follows all the prerequisites, then you can just follow the inst
 
 ## USAGE
 
-TODO
+TODO : fill in this section
 
 ## CREDITS
 
-TODO
+TODO : fill in this section

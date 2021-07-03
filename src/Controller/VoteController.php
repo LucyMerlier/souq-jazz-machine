@@ -32,6 +32,11 @@ class VoteController extends AbstractController
         $availibility = $availabilityRepository->findOneBy(
             ['concert' => $concert, 'voter' => $this->getUser()]
         ) ?? new Availability();
+
+        /**
+         * DISCUSS : surely there's a way to do all this vote interaction "properly" by following Symfony best practices
+         * -> refactor later?
+         */
         $vote = $request->request->get('vote');
 
         if ($vote === '0' || $vote === '1') {
