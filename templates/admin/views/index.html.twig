@@ -8,7 +8,7 @@
     {% if unvoted_concerts %}
         {% for concert in unvoted_concerts %}
             <div class="card mb-3 border-0 mt-5">
-                <h2 class="h6">Une nouvelle data a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
+                <h2 class="h6">Une nouvelle date a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
                 <div class="row g-0">
                     <div class="card-title col-md-4">
                         <p class="h5">{{ concert.city }}</p>
