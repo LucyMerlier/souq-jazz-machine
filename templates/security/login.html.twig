@@ -12,11 +12,11 @@
 
         {% if app.user %}
             <div class="mb-3">
-                Tu est connecté·e en tant que {{ app.user.username }}. <a href="{{ path('app_logout') }}">Déconnecte-toi en cliquant ici.</a>
+                Tu es connecté·e en tant que {{ app.user.username }}. <a href="{{ path('app_logout') }}">Déconnecte-toi en cliquant ici.</a>
             </div>
         {% else %}
             <div class="mb-3">
-                Vous ne faites pas parti du groupe? <a href="{{ path('showcase_home') }}">Retournez sur le site en cliquant ici.</a>
+                Vous ne faites pas partie du groupe? <a href="{{ path('showcase_home') }}">Retournez sur le site en cliquant ici.</a>
             </div>
         {% endif %}
 

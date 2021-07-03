@@ -17,9 +17,9 @@ class NewsArticleFixtures extends Fixture
         $newsArticle->setContent('Le **13 juillet 2021** aura lieu le traditionnel BBQ chez Lolo,
         notre bien aimé chef d\'orchestre! Ce sera l\'occasion de se retrouver
         après une année vide d\'événements *big-band-esques*,
-        et de discuter de l\'année à venir, qui nous l\'epsérons sera bien plus fructueuse!
+        et de discuter de l\'année à venir, qui nous l\'espérons sera bien plus fructueuse!
         
-Surveillez donc bien les actus dans les mois qui viennent, et à la votre!
+Surveillez donc bien les actus dans les mois qui viennent, et à la vôtre!
         ');
         $manager->persist($newsArticle);
 
