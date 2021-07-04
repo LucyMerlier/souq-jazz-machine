@@ -1,0 +1,12 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Modifier l'instrument - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Modifier l'instrument :</h1>
+
+    <a href="{{ path('admin_instrument_index') }}">Revenir sur la liste des instruments</a>
+
+    {{ include('admin/components/instrument/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('admin/components/instrument/_delete_form.html.twig') }}
+{% endblock %}

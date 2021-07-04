@@ -57,7 +57,7 @@ class AdminController extends AbstractController
      */
     public function agenda(ConcertRepository $concertRepository): Response
     {
-        return $this->render('admin/views/agenda.html.twig', [
+        return $this->render('admin/views/concert/agenda.html.twig', [
             'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
             'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'ASC']),
         ]);
@@ -68,7 +68,7 @@ class AdminController extends AbstractController
      */
     public function bandMembers(InstrumentRepository $instrumentRepository): Response
     {
-        return $this->render('admin/views/user_index.html.twig', [
+        return $this->render('admin/views/user/index.html.twig', [
             'instruments' => $instrumentRepository->findAll(),
         ]);
     }

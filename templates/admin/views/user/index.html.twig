@@ -32,7 +32,7 @@
                             {% endif %}
                             <div>Droits admin : {% if 'ROLE_ADMIN' in user.roles %}Oui{% else %}Non{% endif %}</div>
                             {% if is_granted("ROLE_ADMIN") %}
-                                <div>{% include "admin/components/_user_delete_form.html.twig" %}</div>
+                                <div>{% include "admin/components/user/_delete_form.html.twig" %}</div>
                             {% endif %}
                         </div>
                     </div>

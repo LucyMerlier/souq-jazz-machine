@@ -1,0 +1,23 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Tous les instruments - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Tous les instruments :</h1>
+
+    <a href="{{ path('admin_instrument_add') }}">Ajouter un instrument</a>
+
+    {% for instrument in instruments %}
+        <div class="card mb-3 border-0 mt-5">
+            <div class="card-title col-md-4">
+                <h2 class="h5">{{ instrument.name }}</h2>
+            </div>
+        </div>
+
+        <a class="btn btn-primary" href="{{ path('admin_instrument_edit', {'id': instrument.id}) }}">Modifier</a>
+
+        {{ include('admin/components/instrument/_delete_form.html.twig') }}
+    {% else %}
+        <p>Aucun article trouvé :(</p>
+    {% endfor %}
+{% endblock %}
