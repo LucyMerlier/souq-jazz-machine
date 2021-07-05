@@ -11,7 +11,7 @@
         <h2 class="h5 my-4 text-decoration-underline">Date(s) proposées :</h2>
         {% for concert in not_validated_concerts %}
             <div class="card mb-3 border-0 mt-5">
-                <h3 class="h6">Proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }} :</h3>
+                <h3 class="h5 text-decoration-underline">Proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }} :</h3>
                 <div class="row g-0">
                     <div class="card-title col-md-4">
                         <h3 class="h5">{{ concert.city }}</h3>
