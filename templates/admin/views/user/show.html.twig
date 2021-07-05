@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Salut {{ app.user.pseudonym ?? app.user.firstname }}!</h1>
 
-    <h2 class="h5 my-4">C'est ici que tu peux retrouver et modifier tes informations personnelles :)</h2>
+    <h2 class="h5 my-4 text-decoration-underline">C'est ici que tu peux retrouver et modifier tes informations personnelles :)</h2>
 
     <a href="{{ path('admin_members') }}">Revenir sur la liste des membres</a>
 
@@ -42,5 +42,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('admin_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
+    <a class="btn btn-warning" href="{{ path('admin_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
 {% endblock %}

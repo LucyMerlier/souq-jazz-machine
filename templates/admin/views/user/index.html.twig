@@ -6,7 +6,7 @@
     <h1 class="h1 my-4">Les Membres :</h1>
 
     {% if is_granted("ROLE_ADMIN") %}
-        <a href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
+        <a class="btn btn-success" href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
     {% endif %}
 
     <div class="accordion accordion-flush" id="membersAccordion">
@@ -14,9 +14,9 @@
         {% for instrument in instruments %}
             {% for user in instrument.players %}
                 {% set count = count + 1 %}
-                <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
+                <div class="accordion-item border-0 {{ count is odd ? 'bg-secondary' }}">
                     <h2 class="accordion-header" id="flush-title-{{ user.id }}">
-                        <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
+                        <button class="accordion-button collapsed {{ count is odd ? 'bg-secondary' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
                             <div class="col-12 d-flex justify-content-around">
                                 <div class="col-3 px-4">{{ user.firstname ~ ' ' ~ user.lastname }}</div>
                                 <div class="col-3 px-4 text-center">{{ instrument.name }}</div>

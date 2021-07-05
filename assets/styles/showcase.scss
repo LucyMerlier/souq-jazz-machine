@@ -1,0 +1,24 @@
+@import "showcaseVariables";
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    font-family: $text-font;
+    font-size: $text-size;
+}
+
+h1, h2, h3, h4, h5, h6, nav {
+    font-family: $title-font;
+}
+
+.card {
+    background-color: $dark;
+    font-size: $text-size;
+}
+
+.navbar-brand {
+    font-size: $title-size;
+}
+
+.nav-link {
+    font-size: $text-size;
+}

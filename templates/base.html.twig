@@ -9,17 +9,17 @@
                 Souq' Jazz Machine
             {% endblock %}
         </title>
-        {{ encore_entry_link_tags('app') }}
+        {# {{ encore_entry_link_tags('app') }} #}
         {% block stylesheets %}{% endblock %}
 
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
     </head>
-    <body class="container">
+    <body class="bg-dark text-light">
         <header>
             {% block navbar %}{% endblock %}
         </header>
-        <main>
+        <main class="container">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }}">

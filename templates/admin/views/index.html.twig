@@ -8,11 +8,11 @@
     {% if unvoted_concerts %}
         {% for concert in unvoted_concerts %}
             <div class="card mb-3 border-0 mt-5">
-                <h2 class="h6">Une nouvelle date a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
-                <div class="row g-0">
+                <h2 class="h6 text-decoration-underline">Une nouvelle date a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
+                <div class="row g-0 mt-5">
                     <div class="card-title col-md-4">
-                        <p class="h5">{{ concert.city }}</p>
-                        <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
+                        <h3 class="h5">{{ concert.city }}</h3>
+                        <h3 class="h5">{{ concert.date|date('d/m/Y, H:i') }}</h3>
                         {% for rate in concert.rates %}
                             <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
                         {% endfor %}
@@ -28,13 +28,15 @@
         {% endfor %}
     {% endif %}
 
-    <h2 class="h5 my-4">Prochain concert :</h2>
+    <hr>
+
+    <h2 class="h5 my-4 text-decoration-underline">Prochain concert :</h2>
     {% if concert %}
         <div class="card mb-3 border-0 mt-5">
             <div class="row g-0">
                 <div class="card-title col-md-4">
-                    <p class="h5">{{ concert.city }}</p>
-                    <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
+                    <h3 class="h5">{{ concert.city }}</h3>
+                    <h3 class="h5">{{ concert.date|date('d/m/Y, H:i') }}</h3>
                     {% for rate in concert.rates %}
                         <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
                     {% endfor %}
@@ -51,7 +53,7 @@
                     <button class="btn btn-warning dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                         Admin
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
+                    <ul class="dropdown-menu border-0" aria-labelledby="admin-dropdown-{{ concert.id }}">
                         <li>
                             <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
                         </li>

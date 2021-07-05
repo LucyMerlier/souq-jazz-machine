@@ -1,5 +1,9 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
 {% block navbar %}
     {% include "admin/components/_navbar.html.twig" %}
 {% endblock %}

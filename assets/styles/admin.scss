@@ -1,0 +1,15 @@
+@import "adminVariables";
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    font-family: $font;
+}
+
+.btn {
+    height: 30px;
+    border-radius: 15px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

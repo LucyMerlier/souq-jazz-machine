@@ -1,39 +1,46 @@
 <form action="{{ path('admin_vote', {'id': concert.id}) }}" method="POST">
-    <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
+    <div class="d-flex justify-content-around">
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ concert.votes|filter(vote => vote.vote)|length }}
-        </button>
+            <div class="dropdown">
+                <button class="btn bg-dark dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ concert.votes|filter(vote => vote.vote)|length }}
+                </button>
 
-        <ul class="dropdown-menu" aria-labelledby="accepted-dropdown-{{ concert.id }}">
-            {% for vote in concert.votes|filter(vote => vote.vote) %}
-                <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+                <ul class="dropdown-menu" aria-labelledby="accepted-dropdown-{{ concert.id }}">
+                    {% for vote in concert.votes|filter(vote => vote.vote) %}
+                        <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 
-    <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ concert.votes|filter(vote => not vote.vote)|length }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="denied-dropdown-{{ concert.id }}">
-            {% for vote in concert.votes|filter(vote => not vote.vote) %}
-                <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
-            {% endfor %}
-        </ul>
+            <div class="dropdown">
+                <button class="btn bg-dark dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ concert.votes|filter(vote => not vote.vote)|length }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="denied-dropdown-{{ concert.id }}">
+                    {% for vote in concert.votes|filter(vote => not vote.vote) %}
+                        <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 
     <input type="hidden" name="route" value="{{ app.request.attributes.get('_route') }}">
 </form>
+
 {% if is_granted("ROLE_ADMIN") %}
-    <div class="dropdown">
+    <div class="dropdown d-flex justify-content-center">
         <button class="btn btn-warning dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
         </button>
-        <ul class="dropdown-menu" aria-labelledby="admin-dropdown-{{ concert.id }}">
+        <ul class="dropdown-menu dropdown-menu border-0" aria-labelledby="admin-dropdown-{{ concert.id }}">
             <li>
                 {% include "admin/components/concert/_validate_form.html.twig" %}
             </li>

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-xl navbar-light">
+    <div class="container-fluid container">
         <a class="navbar-brand" href="{{ path('showcase_home') }}">&lt;- Retour au site vitrine</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
                 {% if is_granted("ROLE_ADMIN") %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="admin-tasks-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Tâches administratives
+                            Admin
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="admin-tasks-dropdown">
                             <li>

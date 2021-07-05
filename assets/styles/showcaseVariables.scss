@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Enriqueta';
+    src: url('../fonts/Enriqueta-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Josefin';
+    src: url('../fonts/JosefinSans-VariableFont_wght.ttf');
+}
+
+$title-font: 'Enriqueta';
+$text-font: 'Josefin';
+
+$title-size: 2rem;
+$text-size: 1.2rem;
+
+$dark: #020202;
+$light: #F7B239;

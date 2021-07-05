@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Toutes les actus :</h1>
 
-    <a href="{{ path('admin_news_add') }}">Ajouter un article</a>
+    <a class="btn btn-success" href="{{ path('admin_news_add') }}">Ajouter un article</a>
 
     {% for news_article in news_articles %}
         <div class="card mb-3 border-0 mt-5">
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <a class="btn btn-primary" href="{{ path('admin_news_edit', {'id': news_article.id}) }}">Modifier</a>
+        <a class="btn btn-warning" href="{{ path('admin_news_edit', {'id': news_article.id}) }}">Modifier</a>
 
         {{ include('admin/components/news/_delete_form.html.twig') }}
     {% else %}
