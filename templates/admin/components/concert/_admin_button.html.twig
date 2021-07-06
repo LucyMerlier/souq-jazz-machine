@@ -1,8 +1,8 @@
-<div class="dropdown mb-4">
-    <button class="btn btn-info dropdown-toggle" type="button" id="admin-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="d-flex flex-column align-items-center mb-4">
+    <button class="btn btn-info dropdown-toggle mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-admin-{{ concert.id }}" aria-expanded="false" aria-controls="collapse-admin-{{ concert.id }}">
         Admin
     </button>
-    <ul class="dropdown-menu border-0" aria-labelledby="admin-dropdown-{{ concert.id }}">
+    <ul class="collapse border-0 list-unstyled" id="collapse-admin-{{ concert.id }}">
         <div class="btn-group">
             {% if not concert.isValidated %}
                 <li class="mx-1">
