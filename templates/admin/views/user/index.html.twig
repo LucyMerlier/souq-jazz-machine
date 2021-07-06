@@ -14,10 +14,10 @@
         {% for instrument in instruments %}
             {% for user in instrument.players %}
                 {% set count = count + 1 %}
-                <div class="accordion-item border-0 {{ count is odd ? 'bg-secondary' }}">
+                <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
                     <h2 class="accordion-header" id="flush-title-{{ user.id }}">
-                        <button class="accordion-button collapsed {{ count is odd ? 'bg-secondary' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
-                            <div class="col-12 d-flex justify-content-around">
+                        <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
+                            <div class="col-12 d-flex justify-content-around text-dark">
                                 <div class="col-3 px-4">{{ user.firstname ~ ' ' ~ user.lastname }}</div>
                                 <div class="col-3 px-4 text-center">{{ instrument.name }}</div>
                                 <div class="col-3 px-4 text-center">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</div>

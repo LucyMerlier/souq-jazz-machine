@@ -176,7 +176,8 @@ class ConcertController extends AbstractController
         EntityManagerInterface $entityManager,
         Concert $concert,
         UserRepository $userRepository,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        Request $request
     ): Response {
         $concert->setIsValidated(true);
         $entityManager->flush();
@@ -193,7 +194,7 @@ class ConcertController extends AbstractController
         }
         $mailer->send($email);
         $this->addFlash('success', 'Date de concert validée!');
-        return $this->redirectToRoute('admin_concert_agenda');
+        return $this->redirectToRoute((string)$request->request->get('route'));
     }
 
     /**
