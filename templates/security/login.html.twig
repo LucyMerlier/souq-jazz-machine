@@ -12,11 +12,11 @@
 
         {% if app.user %}
             <div class="mb-3">
-                Tu es connecté·e en tant que {{ app.user.username }}. <a class="link-light" href="{{ path('app_logout') }}">Déconnecte-toi en cliquant ici.</a>
+                Tu es connecté·e en tant que {{ app.user.username }}. <a class="link-secondary" href="{{ path('app_logout') }}">Déconnecte-toi en cliquant ici.</a>
             </div>
         {% else %}
             <div class="mb-3">
-                Vous ne faites pas partie du groupe? <a class="link-light" href="{{ path('showcase_home') }}">Retournez sur le site en cliquant ici.</a>
+                Vous ne faites pas partie du groupe? <a class="link-secondary" href="{{ path('showcase_home') }}">Retournez sur le site en cliquant ici.</a>
             </div>
         {% endif %}
 
@@ -30,7 +30,7 @@
         </div>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button class="btn btn-light" type="submit">
+        <button class="btn btn-secondary" type="submit">
             Connexion
         </button>
     </form>

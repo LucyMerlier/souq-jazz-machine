@@ -4,7 +4,7 @@
             <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
 
             <div class="dropdown">
-                <button class="btn bg-dark dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ concert.votes|filter(vote => vote.vote)|length }}
                 </button>
 
@@ -20,7 +20,7 @@
             <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
 
             <div class="dropdown">
-                <button class="btn bg-dark dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ concert.votes|filter(vote => not vote.vote)|length }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="denied-dropdown-{{ concert.id }}">
