@@ -7,8 +7,8 @@
 
     {% if unvoted_concerts %}
         {% for concert in unvoted_concerts %}
+            <h2 class="h5 mt-3 mb-5 text-decoration-underline">Une nouvelle date a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
             <div class="card mb-3 border-0 mt-5">
-                <h2 class="h5 my-4 text-decoration-underline">Une nouvelle date a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
                 <div class="row g-0 mt-5">
                     <div class="card-title col-md-4">
                         <h3 class="h5">{{ concert.city }}</h3>
@@ -29,7 +29,7 @@
         {% endfor %}
     {% endif %}
 
-    <h2 class="h5 my-4 text-decoration-underline">Prochain concert :</h2>
+    <h2 class="h5 mt-3 mb-5 text-decoration-underline">Prochain concert :</h2>
     {% if concert %}
         <div class="card mb-3 border-0 mt-5">
             <div class="row g-0">
