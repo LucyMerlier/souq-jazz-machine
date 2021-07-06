@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier mes informations :</h1>
 
-    <a href="{{ path('admin_members') }}">Revenir sur la liste des membres</a>
+    <a class="link-dark" href="{{ path('admin_user_show') }}">Revenir sur mon profil</a>
 
     {% include "admin/components/user/_edit_form.html.twig" with {"button_label": "Modifier"} %}
 

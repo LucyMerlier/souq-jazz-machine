@@ -4,13 +4,15 @@
             <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
 
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="border-0 bg-primary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ concert.votes|filter(vote => vote.vote)|length }}
                 </button>
 
                 <ul class="dropdown-menu" aria-labelledby="accepted-dropdown-{{ concert.id }}">
                     {% for vote in concert.votes|filter(vote => vote.vote) %}
                         <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                    {% else %}
+                        <li>Personne n'a encore voté</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -20,12 +22,14 @@
             <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
 
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="border-0 bg-primary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ concert.votes|filter(vote => not vote.vote)|length }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="denied-dropdown-{{ concert.id }}">
                     {% for vote in concert.votes|filter(vote => not vote.vote) %}
                         <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
+                    {% else %}
+                        <li>Personne n'a encore voté</li>
                     {% endfor %}
                 </ul>
             </div>

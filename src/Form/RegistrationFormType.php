@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,41 +21,23 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'max' => 255,
-                    ]),
-                ],
                 'label' => 'Prénom',
             ])
             ->add('lastname', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'max' => 255,
-                    ]),
-                ],
                 'label' => 'Nom de famille',
             ])
             ->add('email', EmailType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'max' => 255,
-                    ]),
-                    new Email()
-                ],
                 'label' => 'Adresse email',
+            ])
+            ->add('phone', TelType::class, [
+                'label' => 'Numéro de téléphone (facultatif)',
+                'required' => false,
             ])
             ->add('instrument', EntityType::class, [
                 'class' => Instrument::class,
                 'choice_label' => 'name',
                 'multiple' => false,
                 'expanded' => false,
-                'constraints' => [
-                    new NotBlank(),
-                ],
                 'label' => 'Instrument',
             ])
         ;

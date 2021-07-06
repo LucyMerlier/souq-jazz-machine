@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier le tarif :</h1>
 
-    <a href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">Revenir sur le concert</a>
+    <a class="link-dark" href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">Revenir sur le concert</a>
 
     {% include "admin/components/concert/_rate_form.html.twig" with {"button_label": "Modifier"} %}
     {% include "admin/components/concert/_rate_delete_form.html.twig" %}
