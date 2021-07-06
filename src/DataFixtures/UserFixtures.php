@@ -39,6 +39,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($vero);
+        $this->addReference('vero', $vero);
 
         $jess = new User();
         $jess
@@ -55,6 +56,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($jess);
+        $this->addReference('jess', $jess);
 
         $marc = new User();
         $marc
@@ -71,6 +73,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($marc);
+        $this->addReference('marc', $marc);
 
         // SAXOPHONES
 
@@ -128,6 +131,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($coco);
+        $this->addReference('coco', $coco);
 
         $jc = new User();
         $jc
@@ -145,6 +149,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($jc);
+        $this->addReference('jc', $jc);
 
         $pat = new User();
         $pat
@@ -162,6 +167,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($pat);
+        $this->addReference('pat', $pat);
 
         // TRUMPETS
 
@@ -180,6 +186,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($jp);
+        $this->addReference('jp', $jp);
 
         $maelys = new User();
         $maelys
@@ -196,6 +203,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($maelys);
+        $this->addReference('maelys', $maelys);
 
         $micha = new User();
         $micha
@@ -213,6 +221,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($micha);
+        $this->addReference('micha', $micha);
 
         $fifi = new User();
         $fifi
@@ -230,6 +239,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($fifi);
+        $this->addReference('fifi', $fifi);
 
         $vinz = new User();
         $vinz
@@ -247,6 +257,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($vinz);
+        $this->addReference('vinz', $vinz);
 
         $nono = new User();
         $nono
@@ -264,6 +275,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($nono);
+        $this->addReference('nono', $nono);
 
         // TROMBONES
 
@@ -282,6 +294,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($raph);
+        $this->addReference('raph', $raph);
 
         $emilien = new User();
         $emilien
@@ -298,6 +311,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($emilien);
+        $this->addReference('em', $emilien);
 
         // PIANO
 
@@ -317,6 +331,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($adrien);
+        $this->addReference('ad', $adrien);
 
         // GUITAR
 
@@ -335,6 +350,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($geo);
+        $this->addReference('geo', $geo);
 
         // BASS
 
@@ -372,6 +388,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($marco);
+        $this->addReference('marco', $marco);
 
         // DRUMS
 
@@ -380,7 +397,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setFirstname('Amaury')
             ->setLastname('Le Dantec')
             ->setEmail('amaury@ledantec.jazz')
-            ->setCatchphrase('poom ts tss ka ts tss poom')
+            ->setCatchphrase('poom ts tss ka ts tss poom ts tss ka ts tss')
             ->setPhone('+33 6 63 52 74 96')
             ->setInstrument($this->getReference('drums'))
             ->setRoles(['ROLE_USER'])
@@ -391,6 +408,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsVerified(true)
         ;
         $manager->persist($amaury);
+        $this->addReference('amo', $amaury);
 
         $manager->flush();
     }
