@@ -9,9 +9,13 @@
 
     {% include "admin/components/user/_edit_form.html.twig" with {"button_label": "Modifier"} %}
 
-    <a class="btn btn-warning" href="{{ path('admin_change_password') }}">Modifier mon mot de passe</a>
-    <form method="post" action="{{ path('admin_user_delete_account') }}" onsubmit="return confirm('Es-tu certain·e de vouloir supprimer ton compte? Cette action est irréversible');">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
-        <button class="btn btn-danger">Supprimer mon compte</button>
-    </form>
+    <div class="my-1">
+        <a class="btn btn-warning" href="{{ path('admin_change_password') }}">Modifier mon mot de passe</a>
+    </div>
+    <div class="my-1">
+        <form method="post" action="{{ path('admin_user_delete_account') }}" onsubmit="return confirm('Es-tu certain·e de vouloir supprimer ton compte? Cette action est irréversible');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+            <button class="btn btn-danger">Supprimer mon compte</button>
+        </form>
+    </div>
 {% endblock %}

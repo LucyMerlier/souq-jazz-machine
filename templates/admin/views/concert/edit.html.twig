@@ -8,16 +8,22 @@
     <a class="link-dark" href="{{ path('admin_concert_agenda') }}">Revenir sur le calendrier</a>
 
     {% include "admin/components/concert/_form.html.twig" with {"button_label": "Modifier"} %}
-    {% include "admin/components/concert/_delete_form.html.twig" %}
+    <div class="my-1">
+        {% include "admin/components/concert/_delete_form.html.twig" %}
+    </div>
 
     <h2 class="h2 my-4 text-decoration-underline">Les tarifs :</h2>
 
     <a class="btn btn-success" href="{{ path('admin_concert_rate_add', {'id': concert.id}) }}">Ajouter un tarif</a>
 
     {% for rate in concert.rates %}
-        <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
-        <a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier</a>
-        {% include "admin/components/concert/_rate_delete_form.html.twig" %}
+        <div class="my-5">
+            <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+            <a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier</a>
+            <div class="my-1">
+                {% include "admin/components/concert/_rate_delete_form.html.twig" %}
+            </div>
+        </div>
     {% else %}
         <p>Aucun tarif trouvé</p>
     {% endfor %}

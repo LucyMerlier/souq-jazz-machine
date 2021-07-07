@@ -8,5 +8,7 @@
     <a class="link-dark" href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">Revenir sur le concert</a>
 
     {% include "admin/components/concert/_rate_form.html.twig" with {"button_label": "Modifier"} %}
-    {% include "admin/components/concert/_rate_delete_form.html.twig" %}
+    <div class="my-1">
+        {% include "admin/components/concert/_rate_delete_form.html.twig" %}
+    </div>
 {% endblock %}
