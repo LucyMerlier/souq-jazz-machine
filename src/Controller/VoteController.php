@@ -29,31 +29,29 @@ class VoteController extends AbstractController
         AvailabilityRepository $availabilityRepository,
         Concert $concert
     ): Response {
-        $availibility = $availabilityRepository->findOneBy(
-            ['concert' => $concert, 'voter' => $this->getUser()]
-        ) ?? new Availability();
+        if ($this->isCsrfTokenValid('vote' . $concert->getId(), (string)$request->request->get('_token'))) {
+            $availibility = $availabilityRepository->findOneBy(
+                ['concert' => $concert, 'voter' => $this->getUser()]
+            ) ?? new Availability();
 
-        /**
-         * DISCUSS : surely there's a way to do all this vote interaction "properly" and follow Symfony best practices
-         * -> refactor later?
-         */
-        $vote = $request->request->get('vote');
+            $vote = $request->request->get('vote');
 
-        if ($vote === '0' || $vote === '1') {
-            $vote = boolval($request->request->get('vote'));
+            if ($vote === '0' || $vote === '1') {
+                $vote = boolval($request->request->get('vote'));
 
-            if (!$availabilityRepository->findOneBy(['concert' => $concert, 'voter' => $this->getUser()])) {
-                $entityManager->persist($availibility);
+                if (!$availabilityRepository->findOneBy(['concert' => $concert, 'voter' => $this->getUser()])) {
+                    $entityManager->persist($availibility);
+                }
+
+                /** @var User */
+                $user = $this->getUser();
+                $availibility->setVote($vote)->setVoter($user)->setConcert($concert);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Merci pour ton vote!');
+            } else {
+                $this->addFlash('warning', 'Vote invalide');
             }
-
-            /** @var User */
-            $user = $this->getUser();
-            $availibility->setVote($vote)->setVoter($user)->setConcert($concert);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Merci pour ton vote!');
-        } else {
-            $this->addFlash('warning', 'Vote invalide');
         }
 
         return $this->redirectToRoute((string)$request->request->get('route'));

@@ -1,6 +1,7 @@
 <form action="{{ path('admin_vote', {'id': concert.id}) }}" method="POST">
     <div class="d-flex justify-content-around">
         <div class="d-flex justify-content-center">
+            <input type="hidden" name="_token" value="{{ csrf_token('vote' ~ concert.id) }}">
             <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
 
             <div class="dropdown">

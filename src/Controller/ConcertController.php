@@ -179,21 +179,24 @@ class ConcertController extends AbstractController
         MailerInterface $mailer,
         Request $request
     ): Response {
-        $concert->setIsValidated(true);
-        $entityManager->flush();
-        $email = (new Email())
-                ->from('souqjazzmachine@bigband.fr')
-                ->subject('Date de concert validée!')
-                ->html($this->renderView('email/views/validate_concert_email.html.twig', [
-                    'concert' => $concert,
-                ]))
-            ;
-        foreach ($userRepository->findAll() as /** @var User */ $user) {
-            $emailAddress = (string)$user->getEmail();
-            $email->addTo($emailAddress);
+        if ($this->isCsrfTokenValid('validate' . $concert->getId(), (string)$request->request->get('_token'))) {
+            $concert->setIsValidated(true);
+            $entityManager->flush();
+            $email = (new Email())
+                    ->from('souqjazzmachine@bigband.fr')
+                    ->subject('Date de concert validée!')
+                    ->html($this->renderView('email/views/validate_concert_email.html.twig', [
+                        'concert' => $concert,
+                    ]))
+                ;
+            foreach ($userRepository->findAll() as /** @var User */ $user) {
+                $emailAddress = (string)$user->getEmail();
+                $email->addTo($emailAddress);
+            }
+            $mailer->send($email);
+            $this->addFlash('success', 'Date de concert validée!');
         }
-        $mailer->send($email);
-        $this->addFlash('success', 'Date de concert validée!');
+
         return $this->redirectToRoute((string)$request->request->get('route'));
     }
 
