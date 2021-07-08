@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -42,6 +44,39 @@ class UserController extends AbstractController
         return $this->render('admin/views/user/edit.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/donner-les-droits-admin/{id}", name="grant_admin", methods={"POST"})
+     */
+    public function grantAdmin(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer,
+        User $user
+    ): Response {
+        if ($this->isCsrfTokenValid('grant_admin' . $user->getId(), (string)$request->request->get('_token'))) {
+            $user->setRoles(['ROLE_ADMIN']);
+            $entityManager->flush();
+
+            $email = (new Email())
+                ->from('souqjazzmachine@bigband.fr')
+                ->subject('Droits d\'admin')
+                ->addTo((string)$user->getEmail())
+                ->html($this->renderView('email/views/grant_admin_email.html.twig', [
+                    'user' => $this->getUser(),
+                ]))
+            ;
+            $mailer->send($email);
+
+            $this->addFlash(
+                'success',
+                $user->getFirstname() . ' ' . $user->getLastname() . ' a désormais les droits d\'administration!'
+            );
+        }
+
+        return $this->redirectToRoute('admin_members');
     }
 
     /**
