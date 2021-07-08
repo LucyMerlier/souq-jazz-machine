@@ -6,6 +6,7 @@ use App\Repository\InstrumentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=InstrumentRepository::class)
@@ -21,6 +22,8 @@ class Instrument
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
      */
     private ?string $name;
 
@@ -29,9 +32,15 @@ class Instrument
      */
     private Collection $players;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MusicSheet::class, mappedBy="instrument", orphanRemoval=true)
+     */
+    private Collection $musicSheets;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
+        $this->musicSheets = new ArrayCollection();
     }
 
     public function __serialize(): array
@@ -77,6 +86,36 @@ class Instrument
             // set the owning side to null (unless already changed)
             if ($player->getInstrument() === $this) {
                 $player->setInstrument(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MusicSheet[]
+     */
+    public function getMusicSheets(): Collection
+    {
+        return $this->musicSheets;
+    }
+
+    public function addMusicSheet(MusicSheet $musicSheet): self
+    {
+        if (!$this->musicSheets->contains($musicSheet)) {
+            $this->musicSheets[] = $musicSheet;
+            $musicSheet->setInstrument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicSheet(MusicSheet $musicSheet): self
+    {
+        if ($this->musicSheets->removeElement($musicSheet)) {
+            // set the owning side to null (unless already changed)
+            if ($musicSheet->getInstrument() === $this) {
+                $musicSheet->setInstrument(null);
             }
         }
 

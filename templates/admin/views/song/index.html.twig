@@ -1,0 +1,53 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Les partitions - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Les Partitions :</h1>
+
+    <a class="btn btn-success" href="{{ path('admin_song_add') }}">Ajouter un nouveau morceau</a>
+
+    <div class="accordion accordion-flush mt-5" id="membersAccordion">
+        {% set count = 0 %}
+        {% for song in songs %}
+            {% set count = count + 1 %}
+            <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
+                <h2 class="accordion-header" id="flush-title-{{ song.id }}">
+                    <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ song.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ song.id }}">
+                        <div class="col-12 d-flex justify-content-around text-secondary">
+                            <div class="col-6 px-4">{{ song.title }}</div>
+                            <div class="col-6 px-4 text-end">{{ song.musicSheets|length }} partition(s)</div>
+                        </div>
+                    </button>
+                </h2>
+                <div id="flush-collapse-{{ song.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ song.id }}" data-bs-parent="#membersAccordion">
+                    <div class="accordion-body">
+                        <div class="d-flex">
+                            <div class="col-6 px-4">
+                                <div>Compositeur : {{ song.composer ?? 'Non renseigné' }}</div>
+                                <div>Arrangeur : {{ song.arranger ?? 'Non renseigné' }}</div>
+                                <div>Ajouté par : {{ song.owner.pseudonym ?? song.owner.firstname }}</div>
+                                <div>Ajouté le : {{ song.createdAt|date('d/m/Y') }}</div>
+                            </div>
+                            <div class="col-6 px-4 text-end">
+                                {% for sheet in song.musicSheets %}
+                                    <div class="col-12">
+                                        <a class="link-dark" target="_blank" href="{{ sheet.url }}">
+                                            {{ sheet.instrument ? sheet.instrument.name ~ ' - ' }}{{ sheet.specification ?? '' }}{{ (not sheet.instrument and not sheet.specification) ? 'Non renseigné' }} : Télécharger
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    <div>Aucune partition trouvée pour ce morceau :(</div>
+                                {% endfor %}
+                                <a class="btn btn-success" href="{{ path('admin_song_sheet_add', {'id': song.id}) }}">Ajouter une partition</a>
+                                <a class="btn btn-warning" href="{{ path('admin_song_edit', {'id': song.id}) }}">Modifier le morceau</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="accordion-item">Aucun morceau trouvé :(</div>
+        {% endfor %}
+    </div>
+{% endblock %}

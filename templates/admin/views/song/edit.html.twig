@@ -1,0 +1,30 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Modifier le morceau - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Modifier le morceau :</h1>
+
+    <a class="link-dark" href="{{ path('admin_songs') }}">Revenir sur la liste des partitions</a>
+
+    {% include "admin/components/song/_form.html.twig" with {"button_label": "Modifier"} %}
+    <div class="my-1">
+        {% include "admin/components/song/_delete_form.html.twig" %}
+    </div>
+
+    <h2 class="h2 my-4 text-decoration-underline">Les partitions :</h2>
+
+    <a class="btn btn-success" href="{{ path('admin_song_sheet_add', {'id': song.id}) }}">Ajouter une partition</a>
+
+    {% for sheet in song.musicSheets %}
+        <div class="my-5">
+            <p class="h6">{{ sheet.instrument ? sheet.instrument.name ~ ' - ' }}{{ sheet.specification ?? '' }}{{ (not sheet.instrument and not sheet.specification) ? 'Non renseigné' }}</p>
+            <a class="btn btn-warning" href="{{ path('admin_song_sheet_edit', {'id': sheet.id}) }}">Modifier</a>
+            <div class="my-1">
+                {% include "admin/components/song/_sheet_delete_form.html.twig" %}
+            </div>
+        </div>
+    {% else %}
+        <p>Aucune partition trouvée :(</p>
+    {% endfor %}
+{% endblock %}

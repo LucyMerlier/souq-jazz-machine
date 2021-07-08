@@ -99,6 +99,7 @@ class ConcertController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/ajouter-un-tarif/{id}", name="rate_add", methods={"GET", "POST"})
      */
     public function addRate(

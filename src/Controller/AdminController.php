@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
+use App\Repository\SongRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,6 +50,16 @@ class AdminController extends AbstractController
         return $this->render('admin/views/index.html.twig', [
             'unvoted_concerts' => $unvotedConcerts,
             'concert' => $concertRepository->findOneBy(['isValidated' => true], ['date' => 'ASC']),
+        ]);
+    }
+
+    /**
+     * @Route("/partitions", name="songs", methods={"GET"})
+     */
+    public function songs(SongRepository $songRepository): Response
+    {
+        return $this->render('admin/views/song/index.html.twig', [
+            'songs' => $songRepository->findAll(),
         ]);
     }
 
