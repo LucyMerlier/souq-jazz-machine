@@ -20,9 +20,8 @@ class ChangePasswordType extends AbstractType
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Veuillez saisir votre nouveau mot de passe'],
-                'second_options' => ['label' => 'Veuillez répéter votre mot de passe'],
+                'second_options' => ['label' => 'Veuillez répéter votre nouveau mot de passe'],
                 'invalid_message' => 'Les deux mots de passe doivent être identiques',
-                'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
             ]);
     }

@@ -13,6 +13,7 @@ class ChangePassword
     private string $oldPassword;
 
     /**
+     * @Assert\NotBlank()
      * @Assert\Length(min=6)
      */
     private string $newPassword;
