@@ -1,0 +1,14 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Modifier la partition - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Modifier la partition :</h1>
+
+    <a class="link-dark" href="{{ path('admin_song_edit', {'id': sheet.song.id}) }}">Revenir sur le morceau</a>
+
+    {% include "admin/components/song/_sheet_form.html.twig" with {"button_label": "Modifier"} %}
+    <div class="my-1">
+        {% include "admin/components/song/_sheet_delete_form.html.twig" %}
+    </div>
+{% endblock %}

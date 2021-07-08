@@ -10,7 +10,7 @@
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'admin_home' ? 'active' }}" href="{{ path('admin_home') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Partitions</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'admin_songs' ? 'active' }}" href="{{ path('admin_songs') }}">Partitions</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'admin_concert_agenda' ? 'active' }}" href="{{ path('admin_concert_agenda') }}">Concerts</a>

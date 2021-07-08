@@ -1,0 +1,11 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Ajouter un morceau - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Ajouter un morceau :</h1>
+
+    <a class="link-dark" href="{{ path('admin_songs') }}">Revenir sur la liste des partitions</a>
+
+    {{ include('admin/components/song/_form.html.twig') }}
+{% endblock %}

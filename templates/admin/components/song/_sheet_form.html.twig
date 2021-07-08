@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <datalist id="specifications">
+        <option value="Conducteur"></option>
+        <option value="Partition complète"></option>
+        <option value="Alto"></option>
+        <option value="Ténor"></option>
+        <option value="Soprano"></option>
+        <option value="Baryton"></option>
+        <option value="Basse"></option>
+        <option value="Voix 1"></option>
+        <option value="Voix 2"></option>
+        <option value="Voix 3"></option>
+    </datalist>
+    <button class="btn btn-{{ button_label is defined ? 'warning' : 'success' }}">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

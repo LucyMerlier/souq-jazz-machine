@@ -5,10 +5,15 @@ namespace App\Entity;
 use App\Entity\Instrument;
 use App\Entity\Song;
 use App\Repository\MusicSheetRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=MusicSheetRepository::class)
+ * @Vich\Uploadable
  */
 class MusicSheet
 {
@@ -27,13 +32,32 @@ class MusicSheet
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $url;
+    private ?string $url = null;
+
+    /**
+     * @Vich\UploadableField(
+     *      mapping="music_sheets",
+     *      fileNameProperty="url",
+     * )
+     * @Assert\File(maxSize="2M", mimeTypes={"application/pdf", "application/x-pdf"})
+     */
+    private ?File $file = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Song::class, inversedBy="musicSheets")
      * @ORM\JoinColumn(nullable=false)
      */
     private ?Song $song;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private ?DateTime $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private ?string $specification;
 
     public function getId(): ?int
     {
@@ -54,12 +78,28 @@ class MusicSheet
 
     public function getUrl(): ?string
     {
-        return $this->url;
+        return '/uploads/music-sheets/' . $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file = null): self
+    {
+        $this->file = $file;
+
+        if (null !== $file) {
+            $this->updatedAt = new DateTime('now');
+        }
 
         return $this;
     }
@@ -72,6 +112,30 @@ class MusicSheet
     public function setSong(?Song $song): self
     {
         $this->song = $song;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTime $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getSpecification(): ?string
+    {
+        return $this->specification;
+    }
+
+    public function setSpecification(?string $specification): self
+    {
+        $this->specification = $specification;
 
         return $this;
     }
