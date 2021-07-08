@@ -85,7 +85,9 @@ class SongController extends AbstractController
     ): Response {
         $sheet = new MusicSheet();
         $sheet->setSong($song);
-        $form = $this->createForm(MusicSheetType::class, $sheet);
+        $form = $this->createForm(MusicSheetType::class, $sheet, [
+            'validation_groups' => ['admin_song_sheet_add'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -40,6 +40,7 @@ class MusicSheet
      *      fileNameProperty="url",
      * )
      * @Assert\File(maxSize="2M", mimeTypes={"application/pdf", "application/x-pdf"})
+     * @Assert\NotBlank(groups={"admin_song_sheet_add"})
      */
     private ?File $file = null;
 
@@ -78,7 +79,7 @@ class MusicSheet
 
     public function getUrl(): ?string
     {
-        return '/uploads/music-sheets/' . $this->url;
+        return $this->url;
     }
 
     public function setUrl(?string $url): self

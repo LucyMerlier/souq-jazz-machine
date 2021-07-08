@@ -20,6 +20,7 @@ class MusicSheetType extends AbstractType
                 'label' => 'Fichier au format PDF',
                 'allow_delete' => false,
                 'download_uri' => false,
+                'required' => false,
             ])
             ->add('instrument', EntityType::class, [
                 'class' => Instrument::class,
