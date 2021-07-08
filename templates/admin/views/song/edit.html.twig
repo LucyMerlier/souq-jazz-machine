@@ -18,7 +18,15 @@
 
     {% for sheet in song.musicSheets %}
         <div class="my-5">
-            <p class="h6">{{ sheet.instrument ? sheet.instrument.name ~ ' - ' }}{{ sheet.specification ?? '' }}{{ (not sheet.instrument and not sheet.specification) ? 'Non renseigné' }}</p>
+            <p class="h6">
+                {% if sheet.instrument and sheet.specification %}
+                    {{ sheet.instrument.name }} - {{ sheet.specification }}
+                {% elseif sheet.instrument or sheet.specification %}
+                    {{ sheet.specification ?? '' }}{{ sheet.instrument.name ?? '' }}
+                {% else %}
+                    Non renseigné
+                {% endif %}
+            </p>
             <a class="btn btn-warning" href="{{ path('admin_song_sheet_edit', {'id': sheet.id}) }}">Modifier</a>
             <div class="my-1">
                 {% include "admin/components/song/_sheet_delete_form.html.twig" %}

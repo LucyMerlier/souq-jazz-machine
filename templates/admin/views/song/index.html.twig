@@ -33,7 +33,14 @@
                                 {% for sheet in song.musicSheets %}
                                     <div class="col-12">
                                         <a class="link-dark" target="_blank" href="/uploads/music-sheets/{{ sheet.url }}">
-                                            {{ sheet.instrument ? sheet.instrument.name ~ ' - ' }}{{ sheet.specification ?? '' }}{{ (not sheet.instrument and not sheet.specification) ? 'Non renseigné' }} : Ouvrir
+                                            {% if sheet.instrument and sheet.specification %}
+                                                {{ sheet.instrument.name }} - {{ sheet.specification }}
+                                            {% elseif sheet.instrument or sheet.specification %}
+                                                {{ sheet.specification ?? '' }}{{ sheet.instrument.name ?? '' }}
+                                            {% else %}
+                                                Non renseigné
+                                            {% endif %}
+                                             : Ouvrir
                                         </a>
                                     </div>
                                 {% else %}
