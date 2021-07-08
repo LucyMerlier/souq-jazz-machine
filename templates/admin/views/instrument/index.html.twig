@@ -7,21 +7,25 @@
 
     <a class="btn btn-success" href="{{ path('admin_instrument_add') }}">Ajouter un instrument</a>
 
-    {% for instrument in instruments %}
-        <div class="card mb-3 border-0 mt-5">
-            <div class="card-title col-md-4">
-                <h2 class="h5">{{ instrument.name }}</h2>
-            </div>
-        </div>
-        <div class="d-flex justify-content-start">
-            <div class="mx-1">
-                <a class="btn btn-warning" href="{{ path('admin_instrument_edit', {'id': instrument.id}) }}">Modifier</a>
-            </div>
-            <div class="mx-1">
-                {{ include('admin/components/instrument/_delete_form.html.twig') }}
-            </div>
-        </div>
+    {% if instruments is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for instrument in instruments %}
+                    <tr>
+                        <td>{{ instrument.name }}</td>
+                        <td><a class="btn btn-warning" href="{{ path('admin_instrument_edit', {'id': instrument.id}) }}">Modifier</a></td>
+                        <td>{% include "admin/components/instrument/_delete_form.html.twig" %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
-        <p>Aucun article trouvé :(</p>
-    {% endfor %}
+        <p>Aucun instrument trouvé</p>
+    {% endif %}
 {% endblock %}

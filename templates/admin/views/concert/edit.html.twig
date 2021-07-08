@@ -16,15 +16,27 @@
 
     <a class="btn btn-success" href="{{ path('admin_concert_rate_add', {'id': concert.id}) }}">Ajouter un tarif</a>
 
-    {% for rate in concert.rates %}
-        <div class="my-5">
-            <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
-            <a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier</a>
-            <div class="my-1">
-                {% include "admin/components/concert/_rate_delete_form.html.twig" %}
-            </div>
-        </div>
+    {% if concert.rates is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rate in concert.rates %}
+                    <tr>
+                        <td>{{ rate.category == '' ? 'Entrée' : rate.category }}</td>
+                        <td>{{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</td>
+                        <td><a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier</a></td>
+                        <td>{% include "admin/components/concert/_rate_delete_form.html.twig" %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>Aucun tarif trouvé</p>
-    {% endfor %}
+    {% endif %}
 {% endblock %}

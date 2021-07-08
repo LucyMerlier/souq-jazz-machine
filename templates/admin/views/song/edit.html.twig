@@ -16,23 +16,28 @@
 
     <a class="btn btn-success" href="{{ path('admin_song_sheet_add', {'id': song.id}) }}">Ajouter une partition</a>
 
-    {% for sheet in song.musicSheets %}
-        <div class="my-5">
-            <p class="h6">
-                {% if sheet.instrument and sheet.specification %}
-                    {{ sheet.instrument.name }} - {{ sheet.specification }}
-                {% elseif sheet.instrument or sheet.specification %}
-                    {{ sheet.specification ?? '' }}{{ sheet.instrument.name ?? '' }}
-                {% else %}
-                    Non renseigné
-                {% endif %}
-            </p>
-            <a class="btn btn-warning" href="{{ path('admin_song_sheet_edit', {'id': sheet.id}) }}">Modifier</a>
-            <div class="my-1">
-                {% include "admin/components/song/_sheet_delete_form.html.twig" %}
-            </div>
-        </div>
+    {% if song.musicSheets is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Instrument</th>
+                    <th>Spécifications</th>
+                    <th colspan="3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sheet in song.musicSheets %}
+                    <tr>
+                        <td>{{ sheet.instrument.name ?? 'Non renseigné' }}</td>
+                        <td>{{ sheet.specification ?? 'Non renseigné' }}</td>
+                        <td><a class="link-dark" target="_blank" href="/uploads/music-sheets/{{ sheet.url }}">Visualiser</a></td>
+                        <td><a class="btn btn-warning" href="{{ path('admin_song_sheet_edit', {'id': sheet.id}) }}">Modifier</a></td>
+                        <td>{% include "admin/components/song/_sheet_delete_form.html.twig" %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>Aucune partition trouvée :(</p>
-    {% endfor %}
+    {% endif %}
 {% endblock %}
