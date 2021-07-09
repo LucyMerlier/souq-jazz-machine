@@ -3,6 +3,7 @@
 ## INDEX
 
 * [Description](#description)
+* [Todo](#todo)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -16,6 +17,18 @@ This project is a website created for the "Souq' Jazz Machine" big band. Its goa
 * and on the other hand to have a minimalistic but practical "administration" interface for the band members to collect information about possible concerts, sheet music, as well as current and potential partners.
 
 This web application has been developped using some cool frameworks and tools like [Symfony](https://symfony.com/) and [Bootstrap](https://getbootstrap.com/). You can find a more exhaustive list in the [credits section](#credits).
+
+## TODO
+
+Please note that this is still a work in progress, and as such, some functionnalities are yet to be implemented, such as :
+
+* [ADMIN] : adding a new album to the gallery and filling it with images and videos
+* [ADMIN] : leting band members upload a profile picture
+* [ADMIN] : seeing a list of partners of the band and adding partners to the list
+* [ADMIN] : publishing an article when the band is looking for new members
+* [ADMIN] : adding an icon associated with a musical instrument
+* [GENERAL] : stop displaying past concerts in calendar
+* [VISITOR] : having access to a public gallery of photos and videos
 
 ## PREREQUISITES
 
