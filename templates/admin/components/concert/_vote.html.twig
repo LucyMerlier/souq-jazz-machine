@@ -9,7 +9,7 @@
                         {{ concert.votes|filter(vote => vote.vote)|length }}
                     </button>
 
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accepted-dropdown-{{ concert.id }}">
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="accepted-dropdown-{{ concert.id }}">
                         {% for vote in concert.votes|filter(vote => vote.vote) %}
                             <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
                         {% else %}
@@ -26,7 +26,7 @@
                     <button class="border-0 bg-primary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ concert.votes|filter(vote => not vote.vote)|length }}
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="denied-dropdown-{{ concert.id }}">
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="denied-dropdown-{{ concert.id }}">
                         {% for vote in concert.votes|filter(vote => not vote.vote) %}
                             <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
                         {% else %}
