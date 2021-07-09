@@ -26,7 +26,7 @@ class ShowcaseController extends AbstractController
     {
         return $this->render('showcase/views/index.html.twig', [
             'news_articles' => $newsRepository->findBy([], ['createdAt' => 'DESC'], 6),
-            'concert' => $concertRepository->findOneBy([], ['date' => 'ASC'])
+            'concert' => $concertRepository->findByFutureDate(1)[0] ?? null,
         ]);
     }
 
@@ -46,7 +46,7 @@ class ShowcaseController extends AbstractController
     public function agenda(ConcertRepository $concertRepository): Response
     {
         return $this->render('showcase/views/agenda.html.twig', [
-            'concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'ASC']),
+            'concerts' => $concertRepository->findByFutureDate() ?? null,
         ]);
     }
 

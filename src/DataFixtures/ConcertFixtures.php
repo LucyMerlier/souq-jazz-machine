@@ -78,6 +78,18 @@ Suspendisse lectus tortor, dignissim sit amet. Sit ea ab provident, fuga enim im
         $manager->persist($concert);
         $this->addReference('concert_5', $concert);
 
+        $concert = new Concert();
+        $concert->setOwner($this->getReference('lu'));
+        $concert->setDate((new DateTime('2021-06-15'))->setTime(20, 30));
+        $concert->setIsValidated(true);
+        $concert->setCity('Tours');
+        $concert->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+Suspendisse lectus tortor, dignissim sit amet. Sit ea ab provident, fuga enim impedit ipsa.'
+        );
+        $manager->persist($concert);
+        $this->addReference('concert_6', $concert);
+
         $manager->flush();
     }
 

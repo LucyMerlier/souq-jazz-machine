@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Form\ConcertRateType;
 use App\Form\ConcertType;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -216,7 +217,7 @@ class ConcertController extends AbstractController
             $entityManager->remove($concert);
             $entityManager->flush();
 
-            if ($concert->getIsValidated()) {
+            if ($concert->getIsValidated() && $concert->getDate() > new DateTime('now')) {
                 $email = (new Email())
                     ->from('souqjazzmachine@bigband.fr')
                     ->subject('Date de concert annulée!')

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Concert;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,34 @@ class ConcertRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Concert::class);
+    }
+
+    public function findByFutureDate(?int $limit = null): array
+    {
+        return $this->createQueryBuilder('concert')
+            ->andWhere('concert.isValidated = :validation')
+            ->andWhere('concert.date >= :today')
+            ->setParameter('validation', true)
+            ->setParameter('today', new DateTime('now'))
+            ->orderBy('concert.date', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByPastDate(?int $limit = null): array
+    {
+        return $this->createQueryBuilder('concert')
+            ->andWhere('concert.isValidated = :validation')
+            ->andWhere('concert.date < :today')
+            ->setParameter('validation', true)
+            ->setParameter('today', new DateTime('now'))
+            ->orderBy('concert.date', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**

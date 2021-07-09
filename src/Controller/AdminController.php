@@ -49,7 +49,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/views/index.html.twig', [
             'unvoted_concerts' => $unvotedConcerts,
-            'concert' => $concertRepository->findOneBy(['isValidated' => true], ['date' => 'ASC']),
+            'concert' => $concertRepository->findByFutureDate(1)[0],
         ]);
     }
 
@@ -70,7 +70,8 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/views/concert/agenda.html.twig', [
             'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
-            'validated_concerts' => $concertRepository->findBy(['isValidated' => true], ['date' => 'ASC']),
+            'future_concerts' => $concertRepository->findByFutureDate(),
+            'past_concerts' => $concertRepository->findByPastDate(),
         ]);
     }
 

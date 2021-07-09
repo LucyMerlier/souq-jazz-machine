@@ -27,7 +27,6 @@ Please note that this is still a work in progress, and as such, some functionnal
 * [ADMIN] : seeing a list of partners of the band and adding partners to the list
 * [ADMIN] : publishing an article when the band is looking for new members
 * [ADMIN] : adding an icon associated with a musical instrument
-* [GENERAL] : stop displaying past concerts in calendar
 * [VISITOR] : having access to a public gallery of photos and videos
 
 ## PREREQUISITES
