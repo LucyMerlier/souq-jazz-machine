@@ -11,12 +11,20 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Photo de profil (facultatif)',
+                'allow_delete' => true,
+                'download_uri' => false,
+                'required' => false,
+                'help' => 'Seules les images carrées de moins de 2M sont autorisées'
+            ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
             ])

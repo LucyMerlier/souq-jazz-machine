@@ -3,16 +3,20 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @Vich\Uploadable
  * @UniqueEntity(fields={"email"}, message="Il y a déjà un utilisateur enregistré avec cette adresse email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -91,9 +95,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private bool $isVerified = false;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $imageUrl = null;
+
+    /**
+     * @Vich\UploadableField(
+     *      mapping="profile_pictures",
+     *      fileNameProperty="imageUrl",
+     * )
+     * @Assert\File(maxSize="2M", mimeTypes={"image/jpeg", "image/gif", "image/png", "image/webp"})
+     * @Assert\Image(allowPortrait=false, allowLandscape=false)
+     */
+    private ?File $imageFile = null;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private ?DateTime $updatedAt = null;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
+    }
+
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'password' => $this->password,
+        ];
     }
 
     public function getId(): ?int
@@ -296,6 +329,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(?string $imageUrl): self
+    {
+        $this->imageUrl = $imageUrl;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new DateTime('now');
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTime $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

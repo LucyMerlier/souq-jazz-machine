@@ -8,3 +8,10 @@ vich_uploader:
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             delete_on_update: true
             delete_on_remove: true
+
+        profile_pictures:
+            uri_prefix: /uploads/profile-pictures
+            upload_destination: '%kernel.project_dir%/public/uploads/profile-pictures'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true

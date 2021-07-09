@@ -10,6 +10,12 @@
     <table class="table">
         <tbody>
             <tr>
+                <th>Photo de profil</th>
+                <td>
+                    <img class="col-3" src="{{ app.user.imageUrl ? '/uploads/profile-pictures/' ~ app.user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" class="card-img-top" alt="Une photo de {{ app.user.firstname ~ ' ' ~ app.user.lastname }}">
+                </td>
+            </tr>
+            <tr>
                 <th>Prénom</th>
                 <td>{{ app.user.firstname }}</td>
             </tr>

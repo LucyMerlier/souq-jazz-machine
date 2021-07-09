@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\DataFixtures\InstrumentFixtures;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -37,6 +38,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($vero);
         $this->addReference('vero', $vero);
@@ -54,6 +56,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($jess);
         $this->addReference('jess', $jess);
@@ -71,6 +74,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($marc);
         $this->addReference('marc', $marc);
@@ -92,6 +96,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($lolo);
         $this->addReference('lolo', $lolo);
@@ -111,6 +116,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($wiwi);
         $this->addReference('wiwi', $wiwi);
@@ -129,6 +135,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($coco);
         $this->addReference('coco', $coco);
@@ -147,6 +154,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($jc);
         $this->addReference('jc', $jc);
@@ -165,6 +173,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($pat);
         $this->addReference('pat', $pat);
@@ -184,6 +193,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($jp);
         $this->addReference('jp', $jp);
@@ -201,6 +211,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($maelys);
         $this->addReference('maelys', $maelys);
@@ -219,6 +230,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($micha);
         $this->addReference('micha', $micha);
@@ -237,6 +249,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($fifi);
         $this->addReference('fifi', $fifi);
@@ -255,6 +268,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($vinz);
         $this->addReference('vinz', $vinz);
@@ -273,6 +287,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($nono);
         $this->addReference('nono', $nono);
@@ -292,6 +307,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($raph);
         $this->addReference('raph', $raph);
@@ -309,6 +325,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($emilien);
         $this->addReference('em', $emilien);
@@ -329,6 +346,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($adrien);
         $this->addReference('ad', $adrien);
@@ -348,6 +366,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($geo);
         $this->addReference('geo', $geo);
@@ -369,6 +388,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($lucy);
         $this->addReference('lu', $lucy);
@@ -386,6 +406,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($marco);
         $this->addReference('marco', $marco);
@@ -406,6 +427,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'machine'
             ))
             ->setIsVerified(true)
+            ->setUpdatedAt(new DateTime('now'))
         ;
         $manager->persist($amaury);
         $this->addReference('amo', $amaury);
