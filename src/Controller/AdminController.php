@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\AlbumRepository;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
 use App\Repository\SongRepository;
@@ -54,16 +55,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/partitions", name="songs", methods={"GET"})
-     */
-    public function songs(SongRepository $songRepository): Response
-    {
-        return $this->render('admin/song/index.html.twig', [
-            'songs' => $songRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/calendrier", name="concert_agenda", methods={"GET"})
      */
     public function agenda(ConcertRepository $concertRepository): Response
@@ -76,12 +67,32 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/partitions", name="songs", methods={"GET"})
+     */
+    public function songs(SongRepository $songRepository): Response
+    {
+        return $this->render('admin/song/index.html.twig', [
+            'songs' => $songRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/tous-les-membres", name="members", methods={"GET"})
      */
     public function bandMembers(InstrumentRepository $instrumentRepository): Response
     {
         return $this->render('admin/user/index.html.twig', [
             'instruments' => $instrumentRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/albums-photos", name="albums", methods={"GET"})
+     */
+    public function albums(AlbumRepository $albumRepository): Response
+    {
+        return $this->render('admin/album/index.html.twig', [
+            'albums' => $albumRepository->findAll(),
         ]);
     }
 }
