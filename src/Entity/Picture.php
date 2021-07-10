@@ -29,6 +29,11 @@ class Picture
      */
     private ?Album $album;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private ?bool $isVisible = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +59,18 @@ class Picture
     public function setAlbum(?Album $album): self
     {
         $this->album = $album;
+
+        return $this;
+    }
+
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): self
+    {
+        $this->isVisible = $isVisible;
 
         return $this;
     }
