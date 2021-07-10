@@ -112,7 +112,9 @@ class SongController extends AbstractController
         EntityManagerInterface $entityManager,
         MusicSheet $sheet
     ): Response {
-        $form = $this->createForm(MusicSheetType::class, $sheet);
+        $form = $this->createForm(MusicSheetType::class, $sheet, [
+            'validation_groups' => ['admin_song_sheet_edit'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

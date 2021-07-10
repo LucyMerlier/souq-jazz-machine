@@ -39,7 +39,11 @@ class MusicSheet
      *      mapping="music_sheets",
      *      fileNameProperty="url",
      * )
-     * @Assert\File(maxSize="2M", mimeTypes={"application/pdf", "application/x-pdf"})
+     * @Assert\File(
+     *      groups={"admin_song_sheet_add", "admin_song_sheet_edit"},
+     *      maxSize="2M",
+     *      mimeTypes={"application/pdf", "application/x-pdf"}
+     * )
      * @Assert\NotBlank(groups={"admin_song_sheet_add"})
      */
     private ?File $file = null;

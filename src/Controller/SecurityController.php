@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\ChangePasswordType;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -67,6 +68,7 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user
+                ->setUpdatedAt(new DateTime('now'))
                 ->setRoles(['ROLE_USER'])
             // encode the plain password
                 ->setPassword(
