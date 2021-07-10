@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SongController extends AbstractController
 {
     /**
-     * @Route("/ajouter un morceau", name="add", methods={"GET", "POST"})
+     * @Route("/ajouter-un-morceau", name="add", methods={"GET", "POST"})
      */
     public function add(
         Request $request,
