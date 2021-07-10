@@ -36,10 +36,10 @@
                                     <a class="link-dark" href="{{ path('admin_album_show', {'id': album.id}) }}">Voir les photos</a>
                                 </div>
                                 <div class="my-1">
-                                    <a class="btn btn-success" href="{{ path('admin_album_picture_add', {'id': album.id}) }}">Ajouter des photos</a>
+                                    <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}">Modifier l'album</a>
                                 </div>
                                 <div class="my-1">
-                                    <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}">Modifier l'album</a>
+                                    <a class="btn btn-danger" href="{{ path('admin_album_delete', {'id': album.id}) }}">Supprimer l'album</a>
                                 </div>
                             </div>
                         </div>
