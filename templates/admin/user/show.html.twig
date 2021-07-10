@@ -7,45 +7,46 @@
 
     <h2 class="h5 my-4 text-decoration-underline">C'est ici que tu peux retrouver et modifier tes informations personnelles :)</h2>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Photo de profil</th>
-                <td>
-                    <img class="col-3" src="{{ app.user.imageUrl ? '/uploads/profile-pictures/' ~ app.user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" class="card-img-top" alt="Une photo de {{ app.user.firstname ~ ' ' ~ app.user.lastname }}">
-                </td>
-            </tr>
-            <tr>
-                <th>Prénom</th>
-                <td>{{ app.user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Nom de famille</th>
-                <td>{{ app.user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Pseudo</th>
-                <td>{{ app.user.pseudonym ?? "Non renseigné" }}</td>
-            </tr>
-            <tr>
-                <th>Instrument</th>
-                <td>{{ app.user.instrument.name }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ app.user.email }}</td>
-            </tr>
-            <tr>
-                <th>Numéro de téléphone</th>
-                <td>{{ app.user.phone ?? "Non renseigné" }}</td>
-            </tr>
-            <tr>
-                <th>Phrase d'accroche</th>
-                <td>{{ app.user.catchphrase ? "\"" ~ app.user.catchphrase ~ "\"" : "Non renseignée" }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="my-1">
-        <a class="btn btn-warning" href="{{ path('admin_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
+    <div class="d-flex py-4">
+        <div class="col-3">
+            <img class="col-12" src="{{ app.user.imageUrl ? '/uploads/profile-pictures/' ~ app.user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" alt="Une photo de {{ app.user.firstname ~ ' ' ~ app.user.lastname }}">
+        </div>
+        <div class="col-7 px-4">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>{{ app.user.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom de famille</th>
+                        <td>{{ app.user.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pseudo</th>
+                        <td>{{ app.user.pseudonym ?? "Non renseigné" }}</td>
+                    </tr>
+                    <tr>
+                        <th>Instrument</th>
+                        <td>{{ app.user.instrument.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ app.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Numéro de téléphone</th>
+                        <td>{{ app.user.phone ?? "Non renseigné" }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phrase d'accroche</th>
+                        <td>{{ app.user.catchphrase ? "\"" ~ app.user.catchphrase ~ "\"" : "Non renseignée" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="my-1">
+                <a class="btn btn-warning" href="{{ path('admin_user_edit') }}" class="btn btn-primary">Modifier mes informations</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
