@@ -44,8 +44,8 @@
                                 </div>
                                 <div class="col-3 px-4 text-end">
                                     {% if is_granted("ROLE_ADMIN") and "ROLE_ADMIN" not in user.roles %}
-                                        <div class="my-1">{% include "admin/components/user/_grant_admin_form.html.twig" %}</div>
-                                        <div class="my-1">{% include "admin/components/user/_delete_form.html.twig" %}</div>
+                                        <div class="my-1">{% include "admin/user/components/_grant_admin_form.html.twig" %}</div>
+                                        <div class="my-1">{% include "admin/user/components/_delete_form.html.twig" %}</div>
                                     {% endif %}
                                 </div>
                             </div>

@@ -2,14 +2,14 @@
     <div class="btn-group">
         {% if not concert.isValidated %}
             <li class="mx-1">
-                {% include "admin/components/concert/_validate_form.html.twig" %}
+                {% include "admin/concert/components/_validate_form.html.twig" %}
             </li>
         {% endif %}
         <li class="mx-1">
             <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}">Modifier</a>
         </li>
         <li class="mx-1">
-            {% include "admin/components/concert/_delete_form.html.twig" %}
+            {% include "admin/concert/components/_delete_form.html.twig" %}
         </li>
     </div>
 </ul>

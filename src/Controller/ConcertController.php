@@ -69,7 +69,7 @@ class ConcertController extends AbstractController
             return $this->redirectToRoute('admin_concert_agenda');
         }
 
-        return $this->render('admin/views/concert/add.html.twig', [
+        return $this->render('admin/concert/add.html.twig', [
             'concert' => $concert,
             'form' => $form->createView(),
         ]);
@@ -93,7 +93,7 @@ class ConcertController extends AbstractController
             return $this->redirectToRoute('admin_concert_agenda');
         }
 
-        return $this->render('admin/views/concert/edit.html.twig', [
+        return $this->render('admin/concert/edit.html.twig', [
             'concert' => $concert,
             'form' => $form->createView(),
         ]);
@@ -120,7 +120,7 @@ class ConcertController extends AbstractController
             return $this->redirectToRoute('admin_concert_edit', ['id' => $concert->getId()]);
         }
 
-        return $this->render('admin/views/concert/rate_add.html.twig', [
+        return $this->render('admin/concert/rate_add.html.twig', [
             'rate' => $rate,
             'form' => $form->createView(),
         ]);
@@ -147,7 +147,7 @@ class ConcertController extends AbstractController
             return $this->redirectToRoute('admin_concert_edit', ['id' => $concert->getId()]);
         }
 
-        return $this->render('admin/views/concert/rate_edit.html.twig', [
+        return $this->render('admin/concert/rate_edit.html.twig', [
             'rate' => $rate,
             'form' => $form->createView(),
         ]);

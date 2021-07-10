@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            {% include "admin/components/concert/_vote.html.twig" %}
+            {% include "admin/concert/components/_vote.html.twig" %}
         {% endfor %}
         <hr>
     {% endif %}
@@ -53,7 +53,7 @@
         </div>
         {% if is_granted("ROLE_ADMIN") %}
             <div class="d-flex justify-content-end">
-                {% include "admin/components/concert/_admin_button.html.twig" %}
+                {% include "admin/concert/components/_admin_button.html.twig" %}
             </div>
         {% endif %}
     {% else %}
@@ -82,7 +82,7 @@
         </div>
         {% if is_granted("ROLE_ADMIN") %}
             <div class="d-flex justify-content-end">
-                {% include "admin/components/concert/_admin_button.html.twig" %}
+                {% include "admin/concert/components/_admin_button.html.twig" %}
             </div>
         {% endif %}
     {% else %}

@@ -46,7 +46,7 @@ class SongController extends AbstractController
             return $this->redirectToRoute('admin_song_sheet_add', ['id' => $song->getId()]);
         }
 
-        return $this->render('admin/views/song/add.html.twig', [
+        return $this->render('admin/song/add.html.twig', [
             'song' => $song,
             'form' => $form->createView(),
         ]);
@@ -69,7 +69,7 @@ class SongController extends AbstractController
             return $this->redirectToRoute('admin_songs');
         }
 
-        return $this->render('admin/views/song/edit.html.twig', [
+        return $this->render('admin/song/edit.html.twig', [
             'song' => $song,
             'form' => $form->createView(),
         ]);
@@ -98,7 +98,7 @@ class SongController extends AbstractController
             return $this->redirectToRoute('admin_song_sheet_add', ['id' => $song->getId()]);
         }
 
-        return $this->render('admin/views/song/sheet_add.html.twig', [
+        return $this->render('admin/song/sheet_add.html.twig', [
             'sheet' => $sheet,
             'form' => $form->createView(),
         ]);
@@ -127,7 +127,7 @@ class SongController extends AbstractController
             return $this->redirectToRoute('admin_song_edit', ['id' => $song->getId()]);
         }
 
-        return $this->render('admin/views/song/sheet_edit.html.twig', [
+        return $this->render('admin/song/sheet_edit.html.twig', [
             'sheet' => $sheet,
             'form' => $form->createView(),
         ]);

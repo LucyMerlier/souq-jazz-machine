@@ -7,7 +7,7 @@
 
     <a class="link-dark" href="{{ path('admin_user_show') }}">Revenir sur mon profil</a>
 
-    {% include "admin/components/user/_edit_form.html.twig" with {"button_label": "Modifier"} %}
+    {% include "admin/user/components/_edit_form.html.twig" with {"button_label": "Modifier"} %}
 
     <div class="my-1">
         <a class="btn btn-warning" href="{{ path('admin_change_password') }}">Modifier mon mot de passe</a>

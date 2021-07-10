@@ -23,7 +23,7 @@ class InstrumentController extends AbstractController
      */
     public function index(InstrumentRepository $instrumentRepository): Response
     {
-        return $this->render('admin/views/instrument/index.html.twig', [
+        return $this->render('admin/instrument/index.html.twig', [
             'instruments' => $instrumentRepository->findAll(),
         ]);
     }
@@ -45,7 +45,7 @@ class InstrumentController extends AbstractController
             return $this->redirectToRoute('admin_instrument_index');
         }
 
-        return $this->render('admin/views/instrument/add.html.twig', [
+        return $this->render('admin/instrument/add.html.twig', [
             'instrument' => $instrument,
             'form' => $form->createView(),
         ]);
@@ -66,7 +66,7 @@ class InstrumentController extends AbstractController
             return $this->redirectToRoute('admin_instrument_index');
         }
 
-        return $this->render('admin/views/instrument/edit.html.twig', [
+        return $this->render('admin/instrument/edit.html.twig', [
             'instrument' => $instrument,
             'form' => $form->createView(),
         ]);
