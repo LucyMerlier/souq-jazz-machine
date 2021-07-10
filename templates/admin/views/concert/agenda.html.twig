@@ -30,9 +30,8 @@
             </div>
             {% include "admin/components/concert/_vote.html.twig" %}
         {% endfor %}
+        <hr>
     {% endif %}
-
-    <hr>
 
     <h2 class="h5 my-4 text-decoration-underline">Date(s) à venir :</h2>
     {% for concert in future_concerts %}
