@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Toutes les actus :</h1>
 
-    <a class="btn btn-success" href="{{ path('admin_news_add') }}">Ajouter un article</a>
+    <div class="d-flex">
+        <a class="btn btn-success" href="{{ path('admin_news_add') }}">Ajouter un article</a>
+    </div>
 
     {% for news_article in news_articles %}
         <div class="card mb-3 border-0 mt-5">

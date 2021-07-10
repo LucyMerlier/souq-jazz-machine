@@ -6,7 +6,9 @@
     <h1 class="h1 my-4">Les Membres :</h1>
 
     {% if is_granted("ROLE_ADMIN") %}
-        <a class="btn btn-success" href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
+        <div class="d-flex">
+            <a class="btn btn-success" href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
+        </div>
     {% endif %}
 
     <div class="accordion accordion-flush mt-5" id="membersAccordion">

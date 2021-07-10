@@ -4,8 +4,9 @@
 
 {% block content %}
     <h1 class="h1 my-4">Les Concerts :</h1>
-
-    <a class="btn btn-success" href="{{ path('admin_concert_add') }}">Proposer une date</a>
+    <div class="d-flex">
+        <a class="btn btn-success" href="{{ path('admin_concert_add') }}">Proposer une date</a>
+    </div>
 
     {% if not_validated_concerts %}
         <h2 class="h5 mb-5 mt-3 text-decoration-underline">Date(s) proposées :</h2>

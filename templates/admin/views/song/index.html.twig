@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Les Partoches :</h1>
 
-    <a class="btn btn-success" href="{{ path('admin_song_add') }}">Ajouter un nouveau morceau</a>
+    <div class="d-flex">
+        <a class="btn btn-success" href="{{ path('admin_song_add') }}">Ajouter un nouveau morceau</a>
+    </div>
 
     <div class="accordion accordion-flush mt-5" id="membersAccordion">
         {% set count = 0 %}
