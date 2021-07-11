@@ -52,7 +52,7 @@ class ShowcaseController extends AbstractController
     }
 
     /**
-     * @Route("/gallerie", name="gallery", methods={"GET"})
+     * @Route("/galerie", name="gallery", methods={"GET"})
      */
     public function gallery(PictureRepository $pictureRepository): Response
     {
