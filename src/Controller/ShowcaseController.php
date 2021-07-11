@@ -7,6 +7,7 @@ use App\Form\ContactRequestType;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
 use App\Repository\NewsArticleRepository;
+use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +48,16 @@ class ShowcaseController extends AbstractController
     {
         return $this->render('showcase/views/agenda.html.twig', [
             'concerts' => $concertRepository->findByFutureDate() ?? null,
+        ]);
+    }
+
+    /**
+     * @Route("/gallerie", name="gallery", methods={"GET"})
+     */
+    public function gallery(PictureRepository $pictureRepository): Response
+    {
+        return $this->render('showcase/views/gallery.html.twig', [
+            'pictures' => $pictureRepository->findByIsVisible(true),
         ]);
     }
 

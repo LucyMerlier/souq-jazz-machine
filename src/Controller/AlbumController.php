@@ -23,7 +23,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AlbumController extends AbstractController
 {
     /**
-     * @Route("voir-les-photos/{id}", name="show", methods={"GET"})
+     * @Route("/voir-les-photos/{id}", name="show", methods={"GET"})
      */
     public function show(Album $album): Response
     {
@@ -132,14 +132,14 @@ class AlbumController extends AbstractController
     }
 
     /**
-     * @Route("/supprimer-une-photo/{id}", name="sheet_delete", methods={"POST"})
+     * @Route("/supprimer-une-photo/{id}", name="picture_delete", methods={"POST"})
      */
     public function deleteImage(Request $request, EntityManagerInterface $entityManager, Picture $picture): Response
     {
         if ($this->isCsrfTokenValid('delete' . $picture->getId(), (string)$request->request->get('_token'))) {
             $url = (string)$picture->getImageUrl();
             /** @var string */
-            $path = $this->getParameter('albums-pictures');
+            $path = $this->getParameter('albums_directory');
             unlink($path . $url);
 
             $entityManager->remove($picture);
@@ -149,7 +149,7 @@ class AlbumController extends AbstractController
 
         /** @var Album */
         $album = $picture->getAlbum();
-        return $this->redirectToRoute('admin_album_edit', ['id' => $album->getId()]);
+        return $this->redirectToRoute('admin_album_show', ['id' => $album->getId()]);
     }
 
     /**
@@ -167,7 +167,7 @@ class AlbumController extends AbstractController
             foreach ($album->getPictures() as $picture) {
                 $url = (string)$picture->getImageUrl();
                 /** @var string */
-                $path = $this->getParameter('albums-pictures');
+                $path = $this->getParameter('albums_directory');
                 unlink($path . $url);
             }
 
@@ -175,5 +175,27 @@ class AlbumController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_albums');
+    }
+
+    /**
+     * @Route("/modifier-la-visibilite/{id}", name="picture_toggle_visibility", methods={"POST"})
+     */
+    public function toggleVisibility(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Picture $picture
+    ): Response {
+        if ($this->isCsrfTokenValid('visibility' . $picture->getId(), (string)$request->request->get('_token'))) {
+            $picture->setIsVisible(!$picture->getIsVisible());
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Visibilité modifiée');
+        }
+
+        /** @var Album */
+        $album = $picture->getAlbum();
+        return $this->redirectToRoute('admin_album_show', [
+            'id' => $album->getId(),
+        ]);
     }
 }
