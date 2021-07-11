@@ -22,11 +22,9 @@ This web application has been developped using some cool frameworks and tools li
 
 Please note that this is still a work in progress, and as such, some functionnalities are yet to be implemented, such as :
 
-* [ADMIN] : having style on all albums related pages
 * [ADMIN] : seeing a list of partners of the band and adding partners to the list
 * [ADMIN] : publishing an article when the band is looking for new members
 * [ADMIN] : adding an icon associated with a musical instrument
-* [VISITOR] : having access to a public gallery of photos and videos
 
 ## PREREQUISITES
 
