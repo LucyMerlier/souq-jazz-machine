@@ -178,6 +178,7 @@ class AlbumController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/modifier-la-visibilite/{id}", name="picture_toggle_visibility", methods={"POST"})
      */
     public function toggleVisibility(
