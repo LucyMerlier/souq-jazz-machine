@@ -1,0 +1,53 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Les albums - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Les Albums :</h1>
+
+    <div class="d-flex">
+        <a class="btn btn-success" href="{{ path('admin_album_add') }}">Ajouter un nouvel album</a>
+    </div>
+
+    <div class="accordion accordion-flush mt-5" id="membersAccordion">
+        {% set count = 0 %}
+        {% for album in albums %}
+            {% set count = count + 1 %}
+            <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
+                <h2 class="accordion-header" id="flush-title-{{ album.id }}">
+                    <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ album.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ album.id }}">
+                        <div class="col-12 d-flex justify-content-around text-secondary">
+                            <div class="col-6 px-4">{{ album.title }}</div>
+                            <div class="col-6 px-4 text-end">{{ album.pictures|length }} photo(s)</div>
+                        </div>
+                    </button>
+                </h2>
+                <div id="flush-collapse-{{ album.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ album.id }}" data-bs-parent="#membersAccordion">
+                    <div class="accordion-body">
+                        <div class="d-flex">
+                            <div class="col-6 px-4">
+                                <ul>
+                                    <li>Ajouté le : {{ album.createdAt|date('d/m/Y') }}</li>
+                                    <li>Description : {{ album.description ?? 'Aucune description' }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-6 px-4 text-end">
+                                <div class="my-1">
+                                    <a class="link-dark" href="{{ path('admin_album_show', {'id': album.id}) }}">Voir les photos</a>
+                                </div>
+                                <div class="my-1">
+                                    <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}">Modifier l'album</a>
+                                </div>
+                                <div class="my-1">
+                                    {% include "admin/album/components/_delete_form.html.twig" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="accordion-item">Aucun album trouvé :(</div>
+        {% endfor %}
+    </div>
+{% endblock %}

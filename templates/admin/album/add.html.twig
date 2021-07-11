@@ -1,0 +1,11 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Ajouter un album - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Ajouter un album :</h1>
+
+    <a class="link-dark" href="{{ path('admin_albums') }}">Revenir sur la liste des albums</a>
+
+    {% include "admin/album/components/_form.html.twig" %}
+{% endblock %}
