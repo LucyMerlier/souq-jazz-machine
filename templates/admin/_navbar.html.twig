@@ -19,7 +19,7 @@
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'admin_members' ? 'active' }}" href="{{ path('admin_members') }}">Membres</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Contacts</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'admin_partners' ? 'active' }}" href="{{ path('admin_partners') }}">Contacts</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.attributes.get('_route') == 'admin_albums' ? 'active' }}" href="{{ path('admin_albums') }}">Médias</a>

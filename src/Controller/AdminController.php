@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\AlbumRepository;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
+use App\Repository\PartnerRepository;
 use App\Repository\SongRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -83,6 +84,16 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/user/index.html.twig', [
             'instruments' => $instrumentRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/tous-les-partenaires", name="partners", methods={"GET"})
+     */
+    public function partners(PartnerRepository $partnerRepository): Response
+    {
+        return $this->render('admin/partner/index.html.twig', [
+            'partners' => $partnerRepository->findAll(),
         ]);
     }
 

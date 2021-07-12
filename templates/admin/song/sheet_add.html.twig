@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Ajouter une partition :</h1>
 
-    <a class="link-dark" href="{{ path('admin_song_edit', {'id': sheet.song.id}) }}">Revenir sur le morceau</a>
+    <a class="link-dark" href="{{ path('admin_song_index') }}">Revenir sur la liste des partitions</a>
 
     {% include "admin/song/components/_sheet_form.html.twig" %}
 {% endblock %}

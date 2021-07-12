@@ -22,10 +22,8 @@ This web application has been developped using some cool frameworks and tools li
 
 Please note that this is still a work in progress, and as such, some functionnalities are yet to be implemented, such as :
 
-* [ADMIN] : seeing a list of partners of the band and adding partners to the list
-* [ADMIN] : publishing an article when the band is looking for new members
-* [ADMIN] : adding an icon associated with a musical instrument
-* [ADMIn] : being able to filter or search specific results on the different pages (members, music sheets...)
+* [ADMIN] : publishing a special kind of article when the band is looking for new members
+* [ADMIn] : being able to filter or search specific results on the different pages (members, music sheets, partners...)
 
 ## PREREQUISITES
 
