@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Ajouter un morceau :</h1>
 
-    <a class="link-dark" href="{{ path('admin_songs') }}">Revenir sur la liste des partitions</a>
+    <a href="{{ path('admin_songs') }}">Revenir sur la liste des partitions</a>
 
     {% include "admin/song/components/_form.html.twig" %}
 {% endblock %}

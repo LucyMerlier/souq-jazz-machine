@@ -36,3 +36,12 @@ hr {
 .form-check-input {
     appearance: checkbox;
 }
+
+a {
+    color: $info;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: $info-hover;
+}

@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Ajouter une petite annonce :</h1>
 
-    <a class="link-dark" href="{{ path('admin_offer_index') }}">Revenir sur la liste des petites annonces</a>
+    <a href="{{ path('admin_offer_index') }}">Revenir sur la liste des petites annonces</a>
 
     {% include "admin/offer/components/_form.html.twig" %}
 {% endblock %}
