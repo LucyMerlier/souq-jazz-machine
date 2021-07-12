@@ -1,15 +1,15 @@
 {% extends "admin/layout.html.twig" %}
 
-{% block title %}Tous les partenaires - {{ parent() }}{% endblock %}
+{% block title %}Les contacts externes - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">Tous les partenaires :</h1>
+    <h1 class="h1 my-4">Les contacts externes :</h1>
 
     <div class="d-flex">
-        <a class="btn btn-success" href="{{ path('admin_partner_add') }}">Ajouter un partenaire</a>
+        <a class="btn btn-success" href="{{ path('admin_partner_add') }}">Ajouter un contact</a>
     </div>
 
-    <div class="accordion accordion-flush mt-5" id="membersAccordion">
+    <div class="accordion accordion-flush mt-5" id="partnersAccordion">
         {% set count = 0 %}
         {% for partner in partners %}
             {% set count = count + 1 %}
@@ -22,7 +22,7 @@
                         </div>
                     </button>
                 </h2>
-                <div id="flush-collapse-{{ partner.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ partner.id }}" data-bs-parent="#membersAccordion">
+                <div id="flush-collapse-{{ partner.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ partner.id }}" data-bs-parent="#partnersAccordion">
                     <div class="accordion-body">
                         <div class="d-flex">
                             <div class="col-9 px-4">
@@ -46,7 +46,7 @@
                 </div>
             </div>
         {% else %}
-            <div class="accordion-item">Aucun partenaire trouvé :(</div>
+            <div class="accordion-item">Aucun contact trouvé :(</div>
         {% endfor %}
     </div>
 {% endblock %}

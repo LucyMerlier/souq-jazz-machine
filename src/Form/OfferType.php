@@ -23,7 +23,7 @@ class OfferType extends AbstractType
                 'expanded' => false,
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'description',
+                'label' => 'Description',
             ])
         ;
     }
