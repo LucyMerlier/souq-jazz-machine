@@ -34,7 +34,7 @@ class NewsArticle
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Length(max=5000)
+     * @Assert\Length(max=4000)
      */
     private ?string $content;
 
