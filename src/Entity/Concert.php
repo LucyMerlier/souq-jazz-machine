@@ -31,7 +31,7 @@ class Concert
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Length(max=400)
+     * @Assert\Length(max=4000)
      */
     private ?string $description;
 
