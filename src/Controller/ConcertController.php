@@ -51,8 +51,11 @@ class ConcertController extends AbstractController
             $entityManager->persist($vote);
 
             $entityManager->flush();
+
+            /** @var string */
+            $emailFrom = $this->getParameter('email_address');
             $email = (new Email())
-                ->from('souqjazzmachine@bigband.fr')
+                ->from($emailFrom)
                 ->subject('Nouvelle proposition de date de concert!')
                 ->html($this->renderView('email/views/new_concert_email.html.twig', [
                     'concert' => $concert,
@@ -184,8 +187,11 @@ class ConcertController extends AbstractController
         if ($this->isCsrfTokenValid('validate' . $concert->getId(), (string)$request->request->get('_token'))) {
             $concert->setIsValidated(true);
             $entityManager->flush();
+
+            /** @var string */
+            $emailFrom = $this->getParameter('email_address');
             $email = (new Email())
-                    ->from('souqjazzmachine@bigband.fr')
+                    ->from($emailFrom)
                     ->subject('Date de concert validée!')
                     ->html($this->renderView('email/views/validate_concert_email.html.twig', [
                         'concert' => $concert,
@@ -218,8 +224,10 @@ class ConcertController extends AbstractController
             $entityManager->flush();
 
             if ($concert->getIsValidated() && $concert->getDate() > new DateTime('now')) {
+                /** @var string */
+                $emailFrom = $this->getParameter('email_address');
                 $email = (new Email())
-                    ->from('souqjazzmachine@bigband.fr')
+                    ->from($emailFrom)
                     ->subject('Date de concert annulée!')
                     ->html($this->renderView('email/views/deleted_concert_email.html.twig', [
                         'concert' => $concert,

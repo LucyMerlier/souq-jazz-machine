@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Container3xN5XhP\getPartnerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,8 +61,10 @@ class UserController extends AbstractController
             $user->setRoles(['ROLE_ADMIN']);
             $entityManager->flush();
 
+            /** @var string */
+            $emailFrom = $this->getParameter('email_address');
             $email = (new Email())
-                ->from('souqjazzmachine@bigband.fr')
+                ->from($emailFrom)
                 ->subject('Droits d\'admin')
                 ->addTo((string)$user->getEmail())
                 ->html($this->renderView('email/views/grant_admin_email.html.twig', [

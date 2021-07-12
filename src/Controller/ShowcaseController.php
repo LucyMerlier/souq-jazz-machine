@@ -79,9 +79,11 @@ class ShowcaseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var string */
+            $emailTo = $this->getParameter('email_address');
             $email = (new Email())
                 ->from((string)$contact->getEmailAddress())
-                ->to('souqjazzmachine@bigband.fr')
+                ->to($emailTo)
                 ->subject((string)$contact->getSubject())
                 ->html($this->renderView('email/views/contact_request_email.html.twig', ['contact' => $contact]))
             ;
@@ -116,9 +118,12 @@ class ShowcaseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Instrument */
             $instrument = $offer->getInstrument();
+
+            /** @var string */
+            $emailTo = $this->getParameter('email_address');
             $email = (new Email())
                 ->from((string)$apply->getEmailAddress())
-                ->to('souqjazzmachine@bigband.fr')
+                ->to($emailTo)
                 ->subject(
                     'Quelqu\'un a répondu à l\'annonce pour le pupitre ' . $instrument->getName() . '!'
                 )
