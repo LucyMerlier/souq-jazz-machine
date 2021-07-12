@@ -1,13 +1,16 @@
 {% extends "email/layout.html.twig" %}
 
 {% block content %}
-    <h1>Nouveau message de
-        {{ contact.firstname|lower|title }}
-        {{ contact.lastname|lower|title }}
-        {% if contact.phoneNumber %}
-            - {{ contact.phoneNumber }}
-        {% endif %}
-    </h1>
+    <h1>Nouveau message!</h1>
+
+    <h2>Informations de contact :</h2>
+
+    <ul>
+        <li>Prénom : {{ contact.firstname|lower|title }}</li>
+        <li>Nom : {{ contact.lastname|lower|title }}</li>
+        <li>Adresse email : {{ contact.emailAddress }}</li>
+        <li>Numéro de téléphone : {{ contact.phoneNumber ?? 'Non renseigné' }}</li>
+    </ul>
 
     <h2>Objet : {{ contact.subject }}</h2>
 
