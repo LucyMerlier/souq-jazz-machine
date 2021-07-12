@@ -9,6 +9,7 @@ grumphp:
             project: '7.2'
         phpcpd:
             directory: ['src']
+            exclude: ['src/DataClass']
         phpcs:
             standard: ~
         phpmnd:

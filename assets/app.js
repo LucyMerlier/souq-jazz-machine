@@ -11,4 +11,16 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-require('bootstrap');
+const bootstrap = require('bootstrap');
+
+const dismissButtons = document.getElementsByClassName('btn-dismiss');
+dismissButtons.forEach((dismiss) => {
+    dismiss.addEventListener('click', () => {
+        sessionStorage.setItem('noToast', true);
+    });
+});
+
+const toastList = [].slice.call(document.querySelectorAll('.toast'));
+if (!sessionStorage.noToast) {
+    toastList.map((toast) => (new bootstrap.Toast(toast)).show());
+}

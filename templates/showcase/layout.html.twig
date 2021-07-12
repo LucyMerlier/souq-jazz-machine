@@ -7,3 +7,5 @@
 {% block navbar %}
     {% include "showcase/_navbar.html.twig" %}
 {% endblock %}
+
+{% block toast %}{{ render(controller('App\\Controller\\ShowcaseController::toast')) }}{% endblock %}
