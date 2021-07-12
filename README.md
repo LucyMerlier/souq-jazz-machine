@@ -22,12 +22,11 @@ This web application has been developped using some cool frameworks and tools li
 
 Please note that this is still a work in progress, and as such, some functionnalities are yet to be implemented, such as :
 
-* [ADMIN] : publishing a special kind of article when the band is looking for new members
-* [ADMIn] : being able to filter or search specific results on the different pages (members, music sheets, partners...)
+* [ADMIN] : being able to filter or search specific results on the different pages (members, music sheets, partners...)
 
 ## PREREQUISITES
 
-To install this project, you will need to have some packages installed on your machine. Here is the minimal recommended setup :
+To install this project, you will need to have some packages installed on your machine. Here is the recommended setup :
 
 * [PHP 7.4.*](https://www.php.net/downloads.php#v7.4.20) (check by running `php -v` in your console)
 * [Composer 2.*](https://getcomposer.org/) (check by running `composer --version` in your console)
