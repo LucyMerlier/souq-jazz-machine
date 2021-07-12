@@ -6,8 +6,8 @@
     <h2>Informations de contact :</h2>
 
     <ul>
-        <li>Prénom : {{ apply.firstname }}</li>
-        <li>Nom : {{ apply.lastname }}</li>
+        <li>Prénom : {{ apply.firstname|lower|title }}</li>
+        <li>Nom : {{ apply.lastname|lower|title }}</li>
         <li>Adresse email : {{ apply.emailAddress }}</li>
         <li>Numéro de téléphone : {{ apply.phoneNumber ?? 'Non renseigné' }}</li>
     </ul>
