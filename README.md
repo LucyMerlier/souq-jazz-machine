@@ -25,6 +25,7 @@ Please note that this is still a work in progress, and as such, some functionnal
 * [ADMIN] : seeing a list of partners of the band and adding partners to the list
 * [ADMIN] : publishing an article when the band is looking for new members
 * [ADMIN] : adding an icon associated with a musical instrument
+* [ADMIn] : being able to filter or search specific results on the different pages (members, music sheets...)
 
 ## PREREQUISITES
 
