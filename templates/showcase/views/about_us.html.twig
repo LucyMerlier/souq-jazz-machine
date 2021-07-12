@@ -13,27 +13,25 @@
 
     <h2 class="h2 my-4">L'équipe</h2>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            {% for instrument in instruments %}
-                {% if instrument.players is not empty %}
-                    <h3 class="h2 my-4 text-center text-decoration-underline">{{ instrument.name }}</h3>
-                    {% for player in instrument.players %}
-                        <div class="col-3 p-4">
-                            <div class="card border-0">
-                                <img src="{{ player.imageUrl ? '/uploads/profile-pictures/' ~ player.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" class="card-img-top" alt="Une photo de {{ player.firstname ~ ' ' ~ player.lastname }}">
-                                <div class="card-body text-center">
-                                    <h3 class="card-title h3">{{ player.firstname }} {{ player.pseudonym ? '"' ~ player.pseudonym ~ '"' }} {{ player.lastname }}</h3>
-                                    {% if player.catchphrase %}
-                                        <p class="card-text">"{{ player.catchphrase }}"</p>
-                                    {% endif %}
-                                </div>
+    <div class="row justify-content-center">
+        {% for instrument in instruments %}
+            {% if instrument.players is not empty %}
+                <h3 class="h2 my-4 text-center text-decoration-underline">{{ instrument.name }}</h3>
+                {% for player in instrument.players %}
+                    <div class="col-3 p-4">
+                        <div class="card border-0">
+                            <img src="{{ player.imageUrl ? '/uploads/profile-pictures/' ~ player.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" class="card-img-top" alt="Une photo de {{ player.firstname ~ ' ' ~ player.lastname }}">
+                            <div class="card-body text-center">
+                                <h3 class="card-title h3">{{ player.firstname }} {{ player.pseudonym ? '"' ~ player.pseudonym ~ '"' }} {{ player.lastname }}</h3>
+                                {% if player.catchphrase %}
+                                    <p class="card-text">"{{ player.catchphrase }}"</p>
+                                {% endif %}
                             </div>
                         </div>
-                    {% endfor %}
-                    <hr>
-                {% endif %}
-            {% endfor %}
-        </div>
+                    </div>
+                {% endfor %}
+                <hr>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock %}

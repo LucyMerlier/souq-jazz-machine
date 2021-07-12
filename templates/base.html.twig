@@ -22,12 +22,13 @@
         <main class="container">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
+                    <div class="alert alert-{{ label }} my-3">
                         {{ message }}
                     </div>
                 {% endfor %}
             {% endfor %}
             {% block content %}{% endblock %}
         </main>
+        {% block toast %}{% endblock %}
     </body>
 </html>

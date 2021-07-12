@@ -2,11 +2,16 @@
 
 namespace App\Controller;
 
+use App\DataClass\ApplyOffer;
 use App\DataClass\ContactRequest;
+use App\Entity\Instrument;
+use App\Entity\Offer;
+use App\Form\ApplyOfferType;
 use App\Form\ContactRequestType;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
 use App\Repository\NewsArticleRepository;
+use App\Repository\OfferRepository;
 use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +30,9 @@ class ShowcaseController extends AbstractController
      */
     public function index(NewsArticleRepository $newsRepository, ConcertRepository $concertRepository): Response
     {
+        if (isset($_SESSION)) {
+            var_dump($_SESSION);
+        }
         return $this->render('showcase/views/index.html.twig', [
             'news_articles' => $newsRepository->findBy([], ['createdAt' => 'DESC'], 6),
             'concert' => $concertRepository->findByFutureDate(1)[0] ?? null,
@@ -72,9 +80,9 @@ class ShowcaseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $email = (new Email())
-                ->from($contact->getEmailAddress() ?? 'souqjazzmachine@bigband.fr')
+                ->from((string)$contact->getEmailAddress())
                 ->to('souqjazzmachine@bigband.fr')
-                ->subject($contact->getSubject() ?? 'Demande d\'informations')
+                ->subject((string)$contact->getSubject())
                 ->html($this->renderView('email/views/contact_request_email.html.twig', ['contact' => $contact]))
             ;
 
@@ -90,6 +98,57 @@ class ShowcaseController extends AbstractController
 
         return $this->render('showcase/views/contact.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/repondre-a-une-annonce/{id}", name="apply_offer", methods={"GET", "POST"})
+     */
+    public function applyOffer(
+        Request $request,
+        MailerInterface $mailer,
+        Offer $offer
+    ): Response {
+        $apply = new ApplyOffer();
+        $form = $this->createForm(ApplyOfferType::class, $apply);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Instrument */
+            $instrument = $offer->getInstrument();
+            $email = (new Email())
+                ->from((string)$apply->getEmailAddress())
+                ->to('souqjazzmachine@bigband.fr')
+                ->subject(
+                    'Quelqu\'un a répondu à l\'annonce pour le pupitre ' . $instrument->getName() . '!'
+                )
+                ->html($this->renderView('email/views/apply_email.html.twig', [
+                    'apply' => $apply,
+                    'offer' => $offer,
+                ]))
+            ;
+
+            $mailer->send($email);
+
+            $this->addFlash(
+                'success',
+                'Votre demande a bien été envoyée,
+                le Souq\' vous recontactera par email ou téléhone dans les plus brefs délais!'
+            );
+
+            return $this->redirectToRoute('showcase_home');
+        }
+
+        return $this->render('showcase/views/apply.html.twig', [
+            'form' => $form->createView(),
+            'offer' => $offer,
+        ]);
+    }
+
+    public function toast(OfferRepository $offerRepository): Response
+    {
+        return $this->render('showcase/_toast.html.twig', [
+            'offers' => $offerRepository->findAll(),
         ]);
     }
 }

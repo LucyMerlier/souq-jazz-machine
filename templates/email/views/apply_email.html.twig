@@ -1,0 +1,18 @@
+{% extends "email/layout.html.twig" %}
+
+{% block content %}
+    <h1>Quelqu'un a répondu à l'annonce pour le pupitre {{ offer.instrument.name }}!</h1>
+
+    <h2>Informations de contact :</h2>
+
+    <ul>
+        <li>Prénom : {{ apply.firstname }}</li>
+        <li>Nom : {{ apply.lastname }}</li>
+        <li>Adresse email : {{ apply.emailAddress }}</li>
+        <li>Numéro de téléphone : {{ apply.phoneNumber ?? 'Non renseigné' }}</li>
+    </ul>
+
+    <h2>Message :</h2>
+
+    <p>{{ apply.message }}</p>
+{% endblock %}
