@@ -110,7 +110,7 @@ class AlbumController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $exception) {
-                    $this->addFlash('danger', 'Une erreur est survenue lors de l\'enregistrement des images :(');
+                    $this->addFlash('danger', 'Une erreur est survenue lors de l\'enregistrement des photos :(');
                     return $this->redirectToRoute('admin_album_picture_add', ['id' => $album->getId()]);
                 }
 
@@ -121,7 +121,7 @@ class AlbumController extends AbstractController
             }
 
             $entityManager->flush();
-            $this->addFlash('success', 'Image(s) ajoutée(s)!');
+            $this->addFlash('success', 'Photo(s) ajoutée(s)!');
             return $this->redirectToRoute('admin_album_show', ['id' => $album->getId()]);
         }
 
@@ -144,7 +144,7 @@ class AlbumController extends AbstractController
 
             $entityManager->remove($picture);
             $entityManager->flush();
-            $this->addFlash('warning', 'Image supprimée!');
+            $this->addFlash('warning', 'Photo supprimée!');
         }
 
         /** @var Album */
@@ -190,7 +190,7 @@ class AlbumController extends AbstractController
             $picture->setIsVisible(!$picture->getIsVisible());
             $entityManager->flush();
 
-            $this->addFlash('success', 'Visibilité modifiée');
+            $this->addFlash('success', 'Visibilité modifiée!');
         }
 
         /** @var Album */
