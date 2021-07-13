@@ -26,11 +26,11 @@ class ConcertRate
     private ?string $category;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal", precision=6, scale=2)
      * @Assert\NotBlank()
      * @Assert\PositiveOrZero()
      */
-    private ?int $price;
+    private ?float $price;
 
     /**
      * @ORM\ManyToOne(targetEntity=Concert::class, inversedBy="rates")
@@ -55,12 +55,12 @@ class ConcertRate
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): self
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 

@@ -29,7 +29,7 @@
                 {% for rate in concert.rates %}
                     <tr>
                         <td>{{ rate.category == '' ? 'Entrée' : rate.category }}</td>
-                        <td>{{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</td>
+                        <td>{{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', '.') ~ '€' }}</td>
                         <td><a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier</a></td>
                         <td>{% include "admin/concert/components/_rate_delete_form.html.twig" %}</td>
                     </tr>
