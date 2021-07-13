@@ -14,7 +14,7 @@
                         <h3 class="h5">{{ concert.city }}</h3>
                         <h3 class="h5">{{ concert.date|date('d/m/Y, H:i') }}</h3>
                         {% for rate in concert.rates %}
-                            <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+                            <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', ' ') ~ '€' }}</p>
                         {% endfor %}
                     </div>
                     <div class="col-md-8">
@@ -37,7 +37,7 @@
                     <h3 class="h5">{{ concert.city }}</h3>
                     <h3 class="h5">{{ concert.date|date('d/m/Y, H:i') }}</h3>
                     {% for rate in concert.rates %}
-                        <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price ~ '€' }}</p>
+                        <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', ' ') ~ '€' }}</p>
                     {% endfor %}
                 </div>
                 <div class="col-md-8">
