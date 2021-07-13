@@ -19,6 +19,7 @@
         <header class="sticky-top">
             {% block navbar %}{% endblock %}
         </header>
+        {% block banner %}{% endblock %}
         <main class="container">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
