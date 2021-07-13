@@ -1,16 +1,18 @@
 {% extends "showcase/layout.html.twig" %}
 
-{% block content %}
+{% block banner %}
     <div class="card">
         <img src="{{ asset('build/images/banner.jpg') }}" class="card-img" alt="A picture of saxophones">
-        <div class="card-img-overlay text-center d-flex flex-column justify-content-center">
-            <div class="">
-                <h2 class="card-title h1 bg-dark">Bienvenue au Souq' Jazz Machine!</h2>
-                <p class="card-text bg-dark">Le Big Band qui te fait rêver!</p>
+        <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center">
+            <div class="w-50 bg-dark">
+                <h2 class="card-title h1">Bienvenue au Souq' Jazz Machine!</h2>
+                <p class="card-text">Le Big Band qui te fait rêver!</p>
             </div>
         </div>
     </div>
+{% endblock %}
 
+{% block content %}
     <h2 class="h1 my-4">ACTUALITÉS</h2>
 
     {% for news_article in news_articles %}
