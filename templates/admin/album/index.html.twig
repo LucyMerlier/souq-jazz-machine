@@ -1,9 +1,9 @@
 {% extends "admin/layout.html.twig" %}
 
-{% block title %}Les albums - {{ parent() }}{% endblock %}
+{% block title %}Les albums photo - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">Les Albums :</h1>
+    <h1 class="h1 my-4">Les Albums Photos :</h1>
 
     <div class="d-flex">
         <a class="btn btn-success" href="{{ path('admin_album_add') }}">Ajouter un nouvel album</a>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         {% else %}
-            <div class="accordion-item">Aucun album trouvé :(</div>
+            <div class="accordion-item">Aucun album photo trouvé :(</div>
         {% endfor %}
     </div>
 {% endblock %}

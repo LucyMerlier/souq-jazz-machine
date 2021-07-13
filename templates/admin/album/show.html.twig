@@ -13,9 +13,11 @@
         <p>{{ album.description }}</p>
     {% endif %}
 
-    <div class="d-flex">
-        <a class="btn btn-success" href="{{ path('admin_album_picture_add', {'id': album.id}) }}">Ajouter des photos</a>
-    </div>
+    <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}">Modifier l'album</a>
+
+    <h2 class="h5 my-4 text-decoration-underline">Ajouter des photos à l'album :</h2>
+
+    {% include "admin/album/components/_picture_form.html.twig" %}
 
     {% if album.pictures is not empty %}
         <div class="d-flex mt-3">

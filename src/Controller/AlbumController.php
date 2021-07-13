@@ -23,12 +23,51 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AlbumController extends AbstractController
 {
     /**
-     * @Route("/voir-les-photos/{id}", name="show", methods={"GET"})
+     * @Route("/voir-les-photos/{id}", name="show", methods={"GET", "POST"})
      */
-    public function show(Album $album): Response
-    {
+    public function show(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger,
+        Album $album
+    ): Response {
+        $form = $this->createForm(PictureType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pictures = $form->get('images')->getData();
+
+            foreach ($pictures as $picture) {
+                $image = new Picture();
+
+                $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
+
+                try {
+                    $picture->move(
+                        $this->getParameter('albums_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $exception) {
+                    $this->addFlash('danger', 'Une erreur est survenue lors de l\'enregistrement des photos :(');
+                    return $this->redirectToRoute('admin_album_picture_add', ['id' => $album->getId()]);
+                }
+
+                $image->setImageUrl($newFilename);
+                $image->setAlbum($album);
+
+                $entityManager->persist($image);
+            }
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Photo(s) ajoutée(s)!');
+            return $this->redirectToRoute('admin_album_show', ['id' => $album->getId()]);
+        }
+
         return $this->render('admin/album/show.html.twig', [
             'album' => $album,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -77,55 +116,6 @@ class AlbumController extends AbstractController
         }
 
         return $this->render('admin/album/edit.html.twig', [
-            'album' => $album,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/ajouter-des-photos/{id}", name="picture_add", methods={"GET", "POST"})
-     */
-    public function addPictures(
-        Request $request,
-        EntityManagerInterface $entityManager,
-        SluggerInterface $slugger,
-        Album $album
-    ): Response {
-        $form = $this->createForm(PictureType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $pictures = $form->get('images')->getData();
-
-            foreach ($pictures as $picture) {
-                $image = new Picture();
-
-                $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
-
-                try {
-                    $picture->move(
-                        $this->getParameter('albums_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $exception) {
-                    $this->addFlash('danger', 'Une erreur est survenue lors de l\'enregistrement des photos :(');
-                    return $this->redirectToRoute('admin_album_picture_add', ['id' => $album->getId()]);
-                }
-
-                $image->setImageUrl($newFilename);
-                $image->setAlbum($album);
-
-                $entityManager->persist($image);
-            }
-
-            $entityManager->flush();
-            $this->addFlash('success', 'Photo(s) ajoutée(s)!');
-            return $this->redirectToRoute('admin_album_show', ['id' => $album->getId()]);
-        }
-
-        return $this->render('admin/album/picture_add.html.twig', [
             'album' => $album,
             'form' => $form->createView(),
         ]);

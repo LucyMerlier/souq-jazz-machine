@@ -12,8 +12,6 @@
         {% include "admin/album/components/_delete_form.html.twig" %}
     </div>
 
-    <a class="btn btn-success" href="{{ path('admin_album_picture_add', {'id': album.id}) }}">Ajouter des photos</a>
-
     {% if album.pictures is not empty %}
         <a href="{{ path('admin_album_show', {'id': album.id}) }}">Voir les {{ album.pictures|length }} photos de cet album</a>
     {% else %}

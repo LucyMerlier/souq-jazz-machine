@@ -7,5 +7,7 @@
 
     <a href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">Revenir sur le concert</a>
 
+    <h2 class="h5 my-4 text-decoration-underline">Concert du {{ rate.concert.date|date('d/m/Y') }} à {{ rate.concert.city }} :</h2>
+
     {% include "admin/concert/components/_rate_form.html.twig" %}
 {% endblock %}
