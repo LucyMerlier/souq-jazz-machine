@@ -8,7 +8,7 @@
 * [Installation](#installation)
 * [Usage](#usage)
 * [Credits](#credits)
-* [Acknowledgements](#Acknowledgements)
+* [Acknowledgements](#acknowledgements)
 
 ## DESCRIPTION
 
@@ -64,5 +64,9 @@ If your machine follows all the prerequisites, then you can just follow the inst
 TODO : fill in this section
 
 ## CREDITS
+
+TODO : fill in this section
+
+## ACKNOWLEDGEMENTS
 
 TODO : fill in this section
