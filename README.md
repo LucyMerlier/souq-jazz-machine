@@ -24,7 +24,7 @@ This web application has been developped using some cool frameworks and tools li
 Please note that this is still a work in progress, and as such, some functionnalities are yet to be implemented, such as :
 
 * [GENERAL] : having a fully responsive website
-* [GENERAL] : having a complete README
+* [GENERAL] : having a complete, clear, and clean README
 * [GENERAL] : having customized error pages (401, 404, 500)
 * [ADMIN] : being able to filter or search specific results on the different pages (members, music sheets, partners...)
 
