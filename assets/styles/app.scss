@@ -1,3 +1,25 @@
 body {
     padding-bottom: 100px;
 }
+
+.carousel-inner {
+    height: 500px;
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-item img {
+    height: 100%;
+}
+
+.carousel-row {
+    height: 125px;
+    display: flex;
+    justify-content: center;
+}
+
+.img-fluid {
+    object-fit: cover !important;
+}

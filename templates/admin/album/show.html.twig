@@ -25,8 +25,8 @@
                 <div id="picturesCarousel" class="carousel slide carousel-fade my-3" data-bs-ride="carousel" data-bs-interval="false">
                     <div class="carousel-inner">
                         {% for picture in album.pictures %}
-                            <div class="carousel-item {{ loop.index == 1 ? 'active' }}">
-                                <img class="d-block w-100 m-0" src="{{ '/uploads/albums-pictures/' ~ picture.imageUrl }}" alt="Une photo du Souq' Jazz Machine">
+                            <div class="carousel-item d-flex justify-content-center align-items-center  {{ loop.index == 1 ? 'active' }}">
+                                <img class="m-0" src="{{ '/uploads/albums-pictures/' ~ picture.imageUrl }}" alt="Une photo du Souq' Jazz Machine">
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <div class="carousel-caption d-flex justify-content-center">
                                         <div class="mx-1">
@@ -53,9 +53,9 @@
             <div class="d-flex col-4 ps-2 pt-3">
                 <div class="row align-content-start">
                     {% for picture in album.pictures %}
-                        <div class="col-4 pe-1 pb-1 pt-0 ps-0 m-0">
-                            <a type="button" data-bs-target="#picturesCarousel" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.index == 1 ? 'active' }}" aria-current="true" aria-label="Slide {{ loop.index }}">
-                                <img class="w-100 h-100 {{ picture.isVisible ? 'border border-4 border-success' }}" src="{{ '/uploads/albums-pictures/' ~ picture.imageUrl }}" alt="Une photo du Souq' Jazz Machine">
+                        <div class="col-4 pe-1 pb-1 pt-0 ps-0 m-0 carousel-row">
+                            <a class="d-flex justify-content-center bg-dark {{ picture.isVisible ? 'border border-4 border-success' }}" type="button" data-bs-target="#picturesCarousel" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.index == 1 ? 'active' }}" aria-current="true" aria-label="Slide {{ loop.index }}">
+                                <img class="img-fluid" src="{{ '/uploads/albums-pictures/' ~ picture.imageUrl }}" alt="Une photo du Souq' Jazz Machine">
                             </a>
                         </div>
                     {% endfor %}
