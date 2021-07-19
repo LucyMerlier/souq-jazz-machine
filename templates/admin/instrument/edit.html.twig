@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier l'instrument :</h1>
 
-    <a href="{{ path('admin_instrument_index') }}">Revenir sur la liste des instruments</a>
+    <a href="{{ path('admin_instrument_index') }}">&lt;- Revenir sur la liste des instruments</a>
 
     {% include "admin/instrument/components/_form.html.twig" with {'button_label': 'Modifier'} %}
     <div class="my-1">
