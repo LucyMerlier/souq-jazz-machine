@@ -25,6 +25,10 @@ body {
     object-fit: cover;
 }
 
+textarea {
+    height: 200px;
+}
+
 @media screen and (max-width: 768px) {
     .carousel-inner {
         height: 300px;
