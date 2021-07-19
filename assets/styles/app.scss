@@ -21,5 +21,22 @@ body {
 }
 
 .img-fluid {
-    object-fit: cover !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    .carousel-inner {
+        height: 300px;
+    }
+
+    .carousel-row {
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .carousel-inner {
+        height: 200px;
+    }
 }
