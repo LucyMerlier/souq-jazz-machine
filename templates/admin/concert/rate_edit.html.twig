@@ -9,7 +9,7 @@
 
     <h2 class="h5 my-4 text-decoration-underline">Concert du {{ rate.concert.date|date('d/m/Y') }} à {{ rate.concert.city }} :</h2>
 
-    {% include "admin/concert/components/_rate_form.html.twig" with {"button_label": "Modifier"} %}
+    {% include "admin/_form.html.twig" with {"button_label": "Modifier"} %}
     <div class="my-1">
         {% include "admin/concert/components/_rate_delete_form.html.twig" %}
     </div>
