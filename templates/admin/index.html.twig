@@ -8,50 +8,14 @@
     {% if unvoted_concerts %}
         {% for concert in unvoted_concerts %}
             <h2 class="h4 mt-3 mb-5 text-decoration-underline">Une nouvelle date a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
-            <div class="card mb-3 border-0 mt-5">
-                <div class="row g-0">
-                    <div class="card-title col-md-4">
-                        <h3 class="h5">{{ concert.city }}</h3>
-                        <h3 class="h5">{{ concert.date|date('d/m/Y, H:i') }}</h3>
-                        {% for rate in concert.rates %}
-                            <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', ' ') ~ '€' }}</p>
-                        {% endfor %}
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body p-0">
-                            <p class="card-text">{{ concert.description }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% include "admin/concert/components/_vote.html.twig" %}
-            <hr>
+            {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
         {% endfor %}
+        <hr>
     {% endif %}
 
     <h2 class="h4 mt-3 mb-5 text-decoration-underline">Prochain concert :</h2>
     {% if concert %}
-        <div class="card mb-3 border-0 mt-5">
-            <div class="row g-0">
-                <div class="card-title col-md-4">
-                    <h3 class="h5">{{ concert.city }}</h3>
-                    <h3 class="h5">{{ concert.date|date('d/m/Y, H:i') }}</h3>
-                    {% for rate in concert.rates %}
-                        <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', ' ') ~ '€' }}</p>
-                    {% endfor %}
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body p-0">
-                        <div class="card-text">{{ concert.description|markdown }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% if is_granted("ROLE_ADMIN") %}
-            <div class="d-flex justify-content-end">
-                {% include "admin/concert/components/_admin_button.html.twig" %}
-            </div>
-        {% endif %}
+        {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
     {% else %}
         <p>Aucun concert trouvé :(</p>
     {% endif %}

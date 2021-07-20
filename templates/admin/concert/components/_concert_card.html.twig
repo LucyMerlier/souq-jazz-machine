@@ -1,0 +1,26 @@
+<div class="card mb-3 border-0 mt-5">
+    {% if not concert.isValidated %}
+        <h3 class="h5 text-decoration-underline">Proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }} :</h3>
+    {% endif %}
+    <div class="row g-0">
+        <div class="card-title col-md-4">
+            <h3 class="h5">{{ concert.city }}</h3>
+            <h3 class="h5">{{ concert.date|date('d/m/Y, H:i') }}</h3>
+            {% for rate in concert.rates %}
+                <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', '.') ~ '€' }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body p-0">
+                <div class="card-text">{{ concert.description|markdown }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if not concert.isValidated %}
+    {% include "admin/concert/components/_vote.html.twig" %}
+{% elseif is_granted("ROLE_ADMIN") %}
+    <div class="d-flex justify-content-end">
+        {% include "admin/concert/components/_admin_button.html.twig" %}
+    </div>
+{% endif %}
