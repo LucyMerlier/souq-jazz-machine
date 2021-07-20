@@ -6,8 +6,15 @@
     <h1 class="h1 my-4">Salut {{ app.user.pseudonym ?? app.user.firstname }}!</h1>
 
     {% if unvoted_concerts %}
+        <h2 class="h4 mt-3 mb-5 text-decoration-underline">
+            {% if unvoted_concerts|length == 1 %}
+                Une nouvelle date a été proposée!
+            {% else %}
+                De nouvelles dates ont été proposées!
+            {% endif %}
+            Pense à indiquer si tu seras présent·e! ;)
+        </h2>
         {% for concert in unvoted_concerts %}
-            <h2 class="h4 mt-3 mb-5 text-decoration-underline">Une nouvelle date a été proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }}!</h2>
             {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
         {% endfor %}
         <hr>
