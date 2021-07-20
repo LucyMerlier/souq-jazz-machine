@@ -2,7 +2,11 @@
     <form action="{{ path('admin_vote', {'id': concert.id}) }}" method="POST">
         <div class="d-flex justify-content-start">
             <div class="d-flex justify-content-center mx-1">
-                <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
+                {% if app.user.votes|filter((vote) => vote in concert.votes) is not empty and app.user.votes|filter((vote) => vote in concert.votes|filter(vote => vote.vote)) is empty %}
+                    <button class="btn btn-success disabled" type="submit" value="1" name="vote">A voté présent·e!</button>
+                {% else %}
+                    <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
+                {% endif %}
 
                 <div class="dropdown">
                     <button class="border-0 bg-primary dropdown-toggle" type="button" id="accepted-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
@@ -13,14 +17,18 @@
                         {% for vote in concert.votes|filter(vote => vote.vote) %}
                             <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
                         {% else %}
-                            <li>Personne n'a encore voté</li>
+                            <li>Personne n'a encore voté présent·e</li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
 
             <div class="d-flex justify-content-center mx-1">
-                <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
+                {% if app.user.votes|filter((vote) => vote in concert.votes) is not empty and app.user.votes|filter((vote) => vote in concert.votes|filter(vote => not vote.vote)) is empty %}
+                    <button class="btn btn-danger disabled" type="submit" value="1" name="vote">A voté absent·e!</button>
+                {% else %}
+                    <button class="btn btn-danger" type="submit" value="1" name="vote">Pas dispo :(</button>
+                {% endif %}
 
                 <div class="dropdown">
                     <button class="border-0 bg-primary dropdown-toggle" type="button" id="denied-dropdown-{{ concert.id }}" data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,7 +38,7 @@
                         {% for vote in concert.votes|filter(vote => not vote.vote) %}
                             <li>{{ vote.voter.pseudonym ?? vote.voter.firstname }}</li>
                         {% else %}
-                            <li>Personne n'a encore voté</li>
+                            <li>Personne n'a encore voté absent·e</li>
                         {% endfor %}
                     </ul>
                 </div>
