@@ -89,7 +89,7 @@ class AlbumController extends AbstractController
 
             $this->addFlash('success', 'Album ajouté, plus qu\'à lui ajouter des images!');
 
-            return $this->redirectToRoute('admin_album_picture_add', ['id' => $album->getId()]);
+            return $this->redirectToRoute('admin_album_show', ['id' => $album->getId()]);
         }
 
         return $this->render('admin/album/add.html.twig', [
