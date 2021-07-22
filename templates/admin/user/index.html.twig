@@ -5,54 +5,64 @@
 {% block content %}
     <h1 class="h1 my-4">Les Membres :</h1>
 
-    {% if is_granted("ROLE_ADMIN") %}
-        <div class="d-flex">
+    <div class="d-flex justify-content-between">
+        {% if is_granted("ROLE_ADMIN") %}
             <a class="btn btn-success" href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
-        </div>
-    {% endif %}
+        {% endif %}
+        {{ form_start(filterForm) }}
+            <div class="d-flex">
+                <div class="input-group ms-3">
+                    {{ form_widget(filterForm.instrument) }}
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">Trier</button>
+                </div>
+                <div class="input-group ms-3">
+                    {{ form_widget(filterForm.query) }}
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                </div>
+            </div>
+        {{ form_end(filterForm) }}
+    </div>
 
     <div class="accordion accordion-flush mt-5" id="membersAccordion">
         {% set count = 0 %}
-        {% for instrument in instruments %}
-            {% for user in instrument.players %}
-                {% set count = count + 1 %}
-                <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
-                    <h2 class="accordion-header" id="flush-title-{{ user.id }}">
-                        <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
-                            <div class="col-12 d-flex justify-content-around text-secondary">
-                                <div class="col-4 px-4">{{ user.firstname }}{{ user.pseudonym ? ' "' ~ user.pseudonym ~ '"' }} {{ user.lastname }}</div>
-                                <div class="col-4 px-4 text-center">{{ instrument.name }}</div>
-                                <div class="col-4 px-4 text-end">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</div>
+        {% for user in users %}
+            {% set count = count + 1 %}
+            <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
+                <h2 class="accordion-header" id="flush-title-{{ user.id }}">
+                    <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
+                        <div class="col-12 d-flex justify-content-around text-secondary">
+                            <div class="col-4 px-4">{{ user.firstname }}{{ user.pseudonym ? ' "' ~ user.pseudonym ~ '"' }} {{ user.lastname }}</div>
+                            <div class="col-4 px-4 text-center">{{ user.instrument.name }}</div>
+                            <div class="col-4 px-4 text-end">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</div>
+                        </div>
+                    </button>
+                </h2>
+                <div id="flush-collapse-{{ user.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ user.id }}" data-bs-parent="#membersAccordion">
+                    <div class="accordion-body">
+                        <div class="d-flex">
+                            <div class="col-3">
+                                <img class="col-12" src="{{ user.imageUrl ? '/uploads/profile-pictures/' ~ user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" alt="Une photo de {{ user.firstname ~ ' ' ~ user.lastname }}">
                             </div>
-                        </button>
-                    </h2>
-                    <div id="flush-collapse-{{ user.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ user.id }}" data-bs-parent="#membersAccordion">
-                        <div class="accordion-body">
-                            <div class="d-flex">
-                                <div class="col-3">
-                                    <img class="col-12" src="{{ user.imageUrl ? '/uploads/profile-pictures/' ~ user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" alt="Une photo de {{ user.firstname ~ ' ' ~ user.lastname }}">
-                                </div>
-                                <div class="col-6 px-4">
-                                    <ul>
-                                        <li>Adresse email : {{ user.email }}</li>
-                                        <li>Numéro de téléphone : {{ user.phone ?? 'Non renseigné' }}</li>
-                                        {% if user.catchphrase %}
-                                            <li>Quelques mots : "{{ user.catchphrase }}"</li>
-                                        {% endif %}
-                                        <li>Droits admin : {% if 'ROLE_ADMIN' in user.roles %}Oui{% else %}Non{% endif %}</li>
-                                    </ul>
-                                </div>
-                                <div class="col-3 px-4 text-end">
-                                    {% if is_granted("ROLE_ADMIN") and "ROLE_ADMIN" not in user.roles %}
-                                        <div class="my-1">{% include "admin/user/components/_grant_admin_form.html.twig" %}</div>
-                                        <div class="my-1">{% include "admin/user/components/_delete_form.html.twig" %}</div>
+                            <div class="col-6 px-4">
+                                <ul>
+                                    <li>Adresse email : {{ user.email }}</li>
+                                    <li>Numéro de téléphone : {{ user.phone ?? 'Non renseigné' }}</li>
+                                    {% if user.catchphrase %}
+                                        <li>Quelques mots : "{{ user.catchphrase }}"</li>
                                     {% endif %}
-                                </div>
+                                    <li>Droits admin : {% if 'ROLE_ADMIN' in user.roles %}Oui{% else %}Non{% endif %}</li>
+                                </ul>
+                            </div>
+                            <div class="col-3 px-4 text-end">
+                                {% if is_granted("ROLE_ADMIN") and "ROLE_ADMIN" not in user.roles %}
+                                    <div class="my-1">{% include "admin/user/components/_grant_admin_form.html.twig" %}</div>
+                                    <div class="my-1">{% include "admin/user/components/_delete_form.html.twig" %}</div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
         {% else %}
             <div class="accordion-item">Aucun membre trouvé :(</div>
         {% endfor %}

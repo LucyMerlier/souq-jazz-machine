@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Instrument;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,9 +18,43 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    private InstrumentRepository $instrumentRepository;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        InstrumentRepository $instrumentRepository
+    ) {
         parent::__construct($registry, User::class);
+        $this->instrumentRepository = $instrumentRepository;
+    }
+
+    public function findByQuery(?string $query = '', ?Instrument $instrument = null): array
+    {
+        return $this->createQueryBuilder('user')
+            ->join('user.instrument', 'instrument')
+            ->where('user.firstname LIKE :query')
+            ->orWhere('user.lastname LIKE :query')
+            ->orWhere('user.pseudonym LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->andWhere('instrument.id IN (:instruments)')
+            ->setParameter(
+                'instruments',
+                $instrument ? [$instrument->getId()] : $this->instrumentRepository->findAllIds()
+            )
+            ->orderBy('instrument.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findAllOrderByInstrument(): array
+    {
+        return $this->createQueryBuilder('user')
+            ->join('user.instrument', 'instrument')
+            ->orderBy('instrument.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
