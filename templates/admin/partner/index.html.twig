@@ -32,7 +32,7 @@
                                     <li>Adresse email : {{ partner.email ?? 'Non renseignée' }}</li>
                                     <li>Numéro de téléphone : {{ partner.phone ?? 'Non renseigné' }}</li>
                                     <li>Ajouté le : {{ partner.createdAt|date('d/m/Y') }}</li>
-                                    <li>Description : {{ partner.description|raw ?? 'Aucune description' }}</li>
+                                    <li>Description : {{ partner.description ? partner.description|raw : 'Aucune description' }}</li>
                                 </ul>
                             </div>
                             <div class="col-3 px-4 text-end">
