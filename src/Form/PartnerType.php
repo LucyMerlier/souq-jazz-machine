@@ -30,12 +30,7 @@ class PartnerType extends AbstractType
             ])
             ->add('category', ChoiceType::class, [
                 'label' => 'Catégorie (ancien membre, salle de concert...)',
-                'choices' => [
-                    'Ancien membre' => 'Ancien membre',
-                    'Copain / Copine' => 'Copain / Copine',
-                    'Salle de concert' => 'Salle de concert',
-                    'Autre' => 'Autre',
-                ],
+                'choices' => Partner::CATEGORIES,
                 'multiple' => false,
                 'expanded' => false,
             ])

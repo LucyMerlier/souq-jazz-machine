@@ -6,7 +6,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ApplyOffer
 {
-    /** @SuppressWarnings("CPD-START") */
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
@@ -96,5 +95,4 @@ class ApplyOffer
 
         return $this;
     }
-    /** @SuppressWarnings("CPD-END") */
 }

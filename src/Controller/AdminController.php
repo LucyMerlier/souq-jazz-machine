@@ -2,14 +2,19 @@
 
 namespace App\Controller;
 
+use App\DataClass\FilterSong;
+use App\DataClass\FilterUser;
 use App\Entity\User;
+use App\Form\FilterSongType;
+use App\Form\FilterUserType;
 use App\Repository\AlbumRepository;
 use App\Repository\ConcertRepository;
-use App\Repository\InstrumentRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\SongRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -70,20 +75,63 @@ class AdminController extends AbstractController
     /**
      * @Route("/partitions", name="songs", methods={"GET"})
      */
-    public function songs(SongRepository $songRepository): Response
-    {
+    public function songs(
+        Request $request,
+        SongRepository $songRepository
+    ): Response {
+        $filterSong = new FilterSong();
+        $filterForm = $this->createForm(FilterSongType::class, $filterSong);
+        $filterForm->handleRequest($request);
+
+        $orderBy = null;
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            switch ($filterSong->getSort()) {
+                case 'dateDescending':
+                    $orderBy = ['createdAt' => 'DESC'];
+                    break;
+                case 'dateAscending':
+                    $orderBy = ['createdAt' => 'ASC'];
+                    break;
+                case 'titleAscending':
+                    $orderBy = ['title' => 'ASC'];
+                    break;
+                case 'titleDescending':
+                    $orderBy = ['title' => 'DESC'];
+                    break;
+            }
+
+            $songs = $songRepository->findByQuery($orderBy ?? ['title' => 'ASC'], $filterSong->getQuery());
+        } else {
+            $songs = $songRepository->findBy([], ['title' => 'ASC']);
+        }
+
         return $this->render('admin/song/index.html.twig', [
-            'songs' => $songRepository->findBy([], ['title' => 'ASC']),
+            'filterForm' => $filterForm->createView(),
+            'songs' => $songs,
         ]);
     }
 
     /**
      * @Route("/tous-les-membres", name="members", methods={"GET"})
      */
-    public function bandMembers(InstrumentRepository $instrumentRepository): Response
-    {
+    public function bandMembers(
+        Request $request,
+        UserRepository $userRepository
+    ): Response {
+        $filterUser = new FilterUser();
+        $filterForm = $this->createForm(FilterUserType::class, $filterUser);
+        $filterForm->handleRequest($request);
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            $users = $userRepository->findByQuery($filterUser->getQuery(), $filterUser->getInstrument() ?? null);
+        } else {
+            $users = $userRepository->findAllOrderByInstrument();
+        }
+
         return $this->render('admin/user/index.html.twig', [
-            'instruments' => $instrumentRepository->findAll(),
+            'filterForm' => $filterForm->createView(),
+            'users' => $users,
         ]);
     }
 

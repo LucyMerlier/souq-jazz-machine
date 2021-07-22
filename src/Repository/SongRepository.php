@@ -19,6 +19,17 @@ class SongRepository extends ServiceEntityRepository
         parent::__construct($registry, Song::class);
     }
 
+    public function findByQuery(array $orderBy, ?string $query = ''): array
+    {
+        return $this->createQueryBuilder('song')
+            ->where('song.title LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('song.' . key($orderBy), $orderBy[key($orderBy)])
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Song[] Returns an array of Song objects
     //  */

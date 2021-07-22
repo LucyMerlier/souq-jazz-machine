@@ -19,6 +19,15 @@ class InstrumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Instrument::class);
     }
 
+    public function findAllIds(): array
+    {
+        return $this->createQueryBuilder('instrument')
+            ->select('instrument.id')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Instrument[] Returns an array of Instrument objects
     //  */

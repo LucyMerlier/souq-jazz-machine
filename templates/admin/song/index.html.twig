@@ -5,8 +5,20 @@
 {% block content %}
     <h1 class="h1 my-4">Les Partoches :</h1>
 
-    <div class="d-flex">
+    <div class="d-flex justify-content-between">
         <a class="btn btn-success" href="{{ path('admin_song_add') }}">Ajouter un nouveau morceau</a>
+        {{ form_start(filterForm) }}
+            <div class="d-flex">
+                <div class="input-group ms-3">
+                    {{ form_widget(filterForm.sort) }}
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">Trier</button>
+                </div>
+                <div class="input-group ms-3">
+                    {{ form_widget(filterForm.query) }}
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                </div>
+            </div>
+        {{ form_end(filterForm) }}
     </div>
 
     <div class="accordion accordion-flush mt-5" id="membersAccordion">

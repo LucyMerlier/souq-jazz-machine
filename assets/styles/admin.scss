@@ -16,6 +16,18 @@ body {
     min-width: 150px;
 }
 
+.btn-outline {
+    height: add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false));
+    border: 1px solid $input-border-color;
+    border-radius: $border-radius;
+    padding: $input-btn-padding-x $input-btn-padding-y;
+    background-color: $light;
+
+    &:hover {
+        background-color: $light;
+    }
+}
+
 hr {
     border: 1px solid $secondary;
 }
