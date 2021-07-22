@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\NewsArticle;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,9 +18,9 @@ class NewsArticleType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre',
             ])
-            ->add('content', TextareaType::class, [
-                'label' => 'Contenu',
-                'help' => 'Ce champ supporte le markdown ;)',
+            ->add('content', CKEditorType::class, [
+                'label' => 'Article',
+                'config_name' => 'custom_config',
             ])
         ;
     }

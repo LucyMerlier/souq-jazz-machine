@@ -10,7 +10,7 @@
     <h2 class="h5 my-4 text-decoration-underline">{{ album.title }} :</h2>
 
     {% if album.description %}
-        <p>{{ album.description }}</p>
+        <p>{{ album.description|raw }}</p>
     {% endif %}
 
     <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}">Modifier l'album</a>
