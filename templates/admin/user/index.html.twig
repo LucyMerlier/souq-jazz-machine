@@ -3,7 +3,7 @@
 {% block title %}Les membres - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">Les Membres :</h1>
+    <h1 class="h1 my-4">Les membres du groupe :</h1>
 
     <div class="d-flex justify-content-between">
         {% if is_granted("ROLE_ADMIN") %}
