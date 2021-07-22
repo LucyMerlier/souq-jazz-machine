@@ -73,7 +73,7 @@ class AdminController extends AbstractController
     public function songs(SongRepository $songRepository): Response
     {
         return $this->render('admin/song/index.html.twig', [
-            'songs' => $songRepository->findAll(),
+            'songs' => $songRepository->findBy([], ['title' => 'ASC']),
         ]);
     }
 
@@ -93,7 +93,7 @@ class AdminController extends AbstractController
     public function partners(PartnerRepository $partnerRepository): Response
     {
         return $this->render('admin/partner/index.html.twig', [
-            'partners' => $partnerRepository->findAll(),
+            'partners' => $partnerRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }
 
@@ -103,7 +103,7 @@ class AdminController extends AbstractController
     public function albums(AlbumRepository $albumRepository): Response
     {
         return $this->render('admin/album/index.html.twig', [
-            'albums' => $albumRepository->findAll(),
+            'albums' => $albumRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }
 }
