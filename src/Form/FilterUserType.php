@@ -29,7 +29,7 @@ class FilterUserType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher par titre',
+                    'placeholder' => 'Rechercher par nom',
                     'aria-label' => 'rechercher',
                 ]
             ])
