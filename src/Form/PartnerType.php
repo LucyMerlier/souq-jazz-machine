@@ -41,6 +41,7 @@ class PartnerType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description (facultatif)',
+                'config_name' => 'custom_config',
                 'required' => false,
                 'help' => 'Veuillez ne pas renseigner d\'informations personnelles',
             ])

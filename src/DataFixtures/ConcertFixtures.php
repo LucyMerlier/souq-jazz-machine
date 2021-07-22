@@ -19,10 +19,10 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
         $concert->setIsValidated(true);
         $concert->setCity('Azay-le-Rideau');
         $concert->setDescription(
-            'Lorem ipsum dolor sit **amet consectetur** adipisicing elit.
-Doloribus nemo dolor consequuntur voluptatum est ut *alias*, officia pariatur natus!
+            'Lorem ipsum dolor sit <b>amet consectetur</b> adipisicing elit.
+Doloribus nemo dolor consequuntur voluptatum est ut <i>alias</i>, officia pariatur natus!
 
-Magni omnis natus aperiam **aliquam excepturi facilis** cum dolorem non fuga, similique accusamus dicta iure!'
+Magni omnis natus aperiam <b>aliquam excepturi facilis</b> cum dolorem non fuga, similique accusamus dicta iure!'
         );
         $manager->persist($concert);
         $this->addReference('concert_1', $concert);
@@ -34,7 +34,7 @@ Magni omnis natus aperiam **aliquam excepturi facilis** cum dolorem non fuga, si
         $concert->setCity('Bréhémont');
         $concert->setDescription(
             'Sit ea ab provident, fuga enim impedit ipsa, eius suscipit atque tempora facilis qui dolore labore.
-Magni omnis natus aperiam **aliquam excepturi facilis** cum dolorem non fuga, similique accusamus dicta iure!'
+Magni omnis natus aperiam <b>aliquam excepturi facilis</b> cum dolorem non fuga, similique accusamus dicta iure!'
         );
         $manager->persist($concert);
         $this->addReference('concert_2', $concert);
@@ -46,10 +46,10 @@ Magni omnis natus aperiam **aliquam excepturi facilis** cum dolorem non fuga, si
         $concert->setCity('Aix-en-Provence');
         $concert->setDescription(
             'Lorem ipsum dolor sit amet consectetur adipisicing elit.
-Doloribus nemo dolor consequuntur *voluptatum* est ut alias, officia pariatur natus!
+Doloribus nemo dolor consequuntur <i>voluptatum</i> est ut alias, officia pariatur natus!
 Sit ea ab provident, fuga enim impedit ipsa, eius suscipit atque tempora facilis qui dolore labore.
 
-**Magni omnis** natus aperiam aliquam excepturi facilis cum dolorem non fuga, *similique* accusamus dicta iure!'
+<b>Magni omnis</b> natus aperiam aliquam excepturi facilis cum dolorem non fuga, <i>similique</i> accusamus dicta iure!'
         );
         $manager->persist($concert);
         $this->addReference('concert_3', $concert);
