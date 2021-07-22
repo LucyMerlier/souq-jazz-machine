@@ -20,7 +20,7 @@ class FilterUserType extends AbstractType
                 'choice_label' => 'name',
                 'required' => false,
                 'label' => false,
-                'placeholder' => 'Tous les pupitres',
+                'placeholder' => 'Tous pupitres',
                 'attr' => [
                     'aria-label' => 'trier par instrument',
                 ]
