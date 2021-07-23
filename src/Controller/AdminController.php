@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\DataClass\FilterConcert;
 use App\DataClass\FilterPartner;
 use App\DataClass\FilterSong;
 use App\DataClass\FilterUser;
 use App\Entity\User;
+use App\Form\FilterConcertType;
 use App\Form\FilterPartnerType;
 use App\Form\FilterSongType;
 use App\Form\FilterUserType;
@@ -65,12 +67,36 @@ class AdminController extends AbstractController
     /**
      * @Route("/calendrier", name="concert_agenda", methods={"GET"})
      */
-    public function agenda(ConcertRepository $concertRepository): Response
-    {
+    public function agenda(
+        Request $request,
+        ConcertRepository $concertRepository
+    ): Response {
+        $filterConcert = new FilterConcert();
+        $filterForm = $this->createForm(FilterConcertType::class, $filterConcert);
+        $filterForm->handleRequest($request);
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            switch ($filterConcert->getSort()) {
+                case 'proposed':
+                    $concerts = $concertRepository->findByIsValidated(false, ['date' => 'ASC']);
+                    break;
+                case 'future':
+                    $concerts = $concertRepository->findByFutureDate();
+                    break;
+                case 'past':
+                    $concerts = $concertRepository->findByPastDate();
+                    break;
+                default:
+                    $concerts = $concertRepository->findBy([], ['date' => 'ASC']);
+                    break;
+            }
+        } else {
+            $concerts = $concertRepository->findBy([], ['date' => 'ASC']);
+        }
+
         return $this->render('admin/concert/index.html.twig', [
-            'not_validated_concerts' => $concertRepository->findBy(['isValidated' => false], ['date' => 'ASC']),
-            'future_concerts' => $concertRepository->findByFutureDate(),
-            'past_concerts' => $concertRepository->findByPastDate(),
+            'filterForm' => $filterForm->createView(),
+            'concerts' => $concerts,
         ]);
     }
 
