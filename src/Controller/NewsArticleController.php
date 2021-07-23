@@ -56,7 +56,7 @@ class NewsArticleController extends AbstractController
         }
 
         return $this->render('admin/news/index.html.twig', [
-            'filterForm' => $filterForm->createView(),
+            'filter_form' => $filterForm->createView(),
             'news_articles' => $news,
         ]);
     }
