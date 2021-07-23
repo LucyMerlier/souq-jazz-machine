@@ -6,7 +6,7 @@
     <h1 class="h1 my-4">Salut {{ app.user.pseudonym ?? app.user.firstname }}!</h1>
 
     {% if unvoted_concerts %}
-        <h2 class="h4 mt-3 mb-5 text-decoration-underline">
+        <h2 class="h4 mt-5 mb-3 text-decoration-underline">
             {% if unvoted_concerts|length == 1 %}
                 Une nouvelle date a été proposée!
             {% else %}
@@ -20,7 +20,7 @@
         <hr>
     {% endif %}
 
-    <h2 class="h4 mt-3 mb-5 text-decoration-underline">Prochain concert :</h2>
+    <h2 class="h4 mt-5 mb-3 text-decoration-underline">Prochain concert :</h2>
     {% if concert %}
         {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
     {% else %}
