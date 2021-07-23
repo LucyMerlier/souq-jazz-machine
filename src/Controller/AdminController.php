@@ -141,7 +141,7 @@ class AdminController extends AbstractController
     public function partners(PartnerRepository $partnerRepository): Response
     {
         return $this->render('admin/partner/index.html.twig', [
-            'partners' => $partnerRepository->findBy([], ['createdAt' => 'DESC']),
+            'partners' => $partnerRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 
