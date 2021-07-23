@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\DataClass\FilterNews;
 use App\Entity\NewsArticle;
+use App\Form\FilterNewsType;
 use App\Form\NewsArticleType;
 use App\Repository\NewsArticleRepository;
 use DateTimeImmutable;
@@ -22,10 +24,40 @@ class NewsArticleController extends AbstractController
     /**
      * @Route("/gestion-des-actus", name="index", methods={"GET"})
      */
-    public function index(NewsArticleRepository $newsRepository): Response
-    {
+    public function index(
+        Request $request,
+        NewsArticleRepository $newsRepository
+    ): Response {
+        $filterNews = new FilterNews();
+        $filterForm = $this->createForm(FilterNewsType::class, $filterNews);
+        $filterForm->handleRequest($request);
+
+        $orderBy = null;
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            switch ($filterNews->getSort()) {
+                case 'dateDescending':
+                    $orderBy = ['createdAt' => 'DESC'];
+                    break;
+                case 'dateAscending':
+                    $orderBy = ['createdAt' => 'ASC'];
+                    break;
+                case 'titleAscending':
+                    $orderBy = ['title' => 'ASC'];
+                    break;
+                case 'titleDescending':
+                    $orderBy = ['title' => 'DESC'];
+                    break;
+            }
+
+            $news = $newsRepository->findByQuery($orderBy ?? ['createdAt' => 'DESC'], $filterNews->getQuery());
+        } else {
+            $news = $newsRepository->findBy([], ['createdAt' => 'DESC']);
+        }
+
         return $this->render('admin/news/index.html.twig', [
-            'news_articles' => $newsRepository->findBy([], ['createdAt' => 'DESC']),
+            'filterForm' => $filterForm->createView(),
+            'news_articles' => $news,
         ]);
     }
 
