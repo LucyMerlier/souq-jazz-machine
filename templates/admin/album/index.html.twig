@@ -5,8 +5,20 @@
 {% block content %}
     <h1 class="h1 my-4">Les albums photos :</h1>
 
-    <div class="d-flex">
+    <div class="d-flex justify-content-between">
         <a class="btn btn-success" href="{{ path('admin_album_add') }}">Ajouter un nouvel album</a>
+        {{ form_start(filterForm) }}
+            <div class="d-flex">
+                <div class="input-group ms-3">
+                    {{ form_widget(filterForm.sort) }}
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">Trier</button>
+                </div>
+                <div class="input-group ms-3">
+                    {{ form_widget(filterForm.query) }}
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                </div>
+            </div>
+        {{ form_end(filterForm) }}
     </div>
 
     <div class="accordion accordion-flush mt-5" id="membersAccordion">
@@ -17,8 +29,9 @@
                 <h2 class="accordion-header" id="flush-title-{{ album.id }}">
                     <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ album.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ album.id }}">
                         <div class="col-12 d-flex justify-content-around text-secondary">
-                            <div class="col-6 px-4">{{ album.title }}</div>
-                            <div class="col-6 px-4 text-end">{{ album.pictures|length }} photo(s)</div>
+                            <div class="col-4 px-4">{{ album.title }}</div>
+                            <div class="col-4 px-4 text-center">Ajouté le : {{ album.createdAt|date('d/m/Y') }}</div>
+                            <div class="col-4 px-4 text-end">{{ album.pictures|length }} photo(s)</div>
                         </div>
                     </button>
                 </h2>
