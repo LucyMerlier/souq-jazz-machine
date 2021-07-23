@@ -7,18 +7,18 @@
 
     <div class="d-flex justify-content-between">
         <a class="btn btn-success" href="{{ path('admin_song_add') }}">Ajouter un nouveau morceau</a>
-        {{ form_start(filterForm) }}
+        {{ form_start(filter_form) }}
             <div class="d-flex">
                 <div class="input-group ms-3">
-                    {{ form_widget(filterForm.sort) }}
+                    {{ form_widget(filter_form.sort) }}
                     <button class="btn-outline btn-outline-secondary d-flex align-items-center">Trier</button>
                 </div>
                 <div class="input-group ms-3">
-                    {{ form_widget(filterForm.query) }}
+                    {{ form_widget(filter_form.query) }}
                     <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
                 </div>
             </div>
-        {{ form_end(filterForm) }}
+        {{ form_end(filter_form) }}
     </div>
 
     <div class="accordion accordion-flush mt-5" id="membersAccordion">
