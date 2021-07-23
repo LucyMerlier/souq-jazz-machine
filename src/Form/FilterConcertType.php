@@ -17,7 +17,7 @@ class FilterConcertType extends AbstractType
                 'choices' => FilterConcert::CHOICES,
                 'required' => false,
                 'label' => false,
-                'placeholder' => 'Trier par',
+                'placeholder' => 'Toutes les dates',
                 'attr' => [
                     'aria-label' => 'trier par',
                 ]
