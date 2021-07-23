@@ -19,6 +19,19 @@ class PartnerRepository extends ServiceEntityRepository
         parent::__construct($registry, Partner::class);
     }
 
+    public function findByQuery(?string $query = '', ?string $category = ''): array
+    {
+        return $this->createQueryBuilder('partner')
+            ->where('partner.name LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->andWhere('partner.category IN (:categories)')
+            ->setParameter('categories', $category ? [$category] : Partner::CATEGORIES)
+            ->orderBy('partner.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Partner[] Returns an array of Partner objects
     //  */

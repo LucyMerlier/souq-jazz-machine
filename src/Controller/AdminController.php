@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\DataClass\FilterPartner;
 use App\DataClass\FilterSong;
 use App\DataClass\FilterUser;
 use App\Entity\User;
+use App\Form\FilterPartnerType;
 use App\Form\FilterSongType;
 use App\Form\FilterUserType;
 use App\Repository\AlbumRepository;
@@ -138,10 +140,25 @@ class AdminController extends AbstractController
     /**
      * @Route("/tous-les-partenaires", name="partners", methods={"GET"})
      */
-    public function partners(PartnerRepository $partnerRepository): Response
-    {
+    public function partners(
+        Request $request,
+        PartnerRepository $partnerRepository
+    ): Response {
+        $filterPartner = new FilterPartner();
+        $filterForm = $this->createForm(FilterPartnerType::class, $filterPartner);
+        $filterForm->handleRequest($request);
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            $partners = $partnerRepository->findByQuery(
+                $filterPartner->getQuery(),
+                $filterPartner->getCategory() ?? null
+            );
+        } else {
+            $partners = $partnerRepository->findBy([], ['name' => 'ASC']);
+        }
         return $this->render('admin/partner/index.html.twig', [
-            'partners' => $partnerRepository->findBy([], ['name' => 'ASC']),
+            'filterForm' => $filterForm->createView(),
+            'partners' => $partners,
         ]);
     }
 
