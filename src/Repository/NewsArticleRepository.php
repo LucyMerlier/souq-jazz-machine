@@ -19,6 +19,17 @@ class NewsArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, NewsArticle::class);
     }
 
+    public function findByQuery(array $orderBy, ?string $query = ''): array
+    {
+        return $this->createQueryBuilder('news')
+            ->where('news.title LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('news.' . key($orderBy), $orderBy[key($orderBy)])
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return NewsArticle[] Returns an array of NewsArticle objects
     //  */
