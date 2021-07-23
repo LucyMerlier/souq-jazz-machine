@@ -19,6 +19,17 @@ class AlbumRepository extends ServiceEntityRepository
         parent::__construct($registry, Album::class);
     }
 
+    public function findByQuery(array $orderBy, ?string $query = ''): array
+    {
+        return $this->createQueryBuilder('album')
+            ->where('album.title LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('album.' . key($orderBy), $orderBy[key($orderBy)])
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Album[] Returns an array of Album objects
     //  */

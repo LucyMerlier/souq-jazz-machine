@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\DataClass\FilterAlbum;
 use App\DataClass\FilterConcert;
 use App\DataClass\FilterPartner;
 use App\DataClass\FilterSong;
 use App\DataClass\FilterUser;
 use App\Entity\User;
+use App\Form\FilterAlbumType;
 use App\Form\FilterConcertType;
 use App\Form\FilterPartnerType;
 use App\Form\FilterSongType;
@@ -191,10 +193,40 @@ class AdminController extends AbstractController
     /**
      * @Route("/albums-photos", name="albums", methods={"GET"})
      */
-    public function albums(AlbumRepository $albumRepository): Response
-    {
+    public function albums(
+        Request $request,
+        AlbumRepository $albumRepository
+    ): Response {
+        $filterAlbum = new FilterAlbum();
+        $filterForm = $this->createForm(FilterAlbumType::class, $filterAlbum);
+        $filterForm->handleRequest($request);
+
+        $orderBy = null;
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            switch ($filterAlbum->getSort()) {
+                case 'dateDescending':
+                    $orderBy = ['createdAt' => 'DESC'];
+                    break;
+                case 'dateAscending':
+                    $orderBy = ['createdAt' => 'ASC'];
+                    break;
+                case 'titleAscending':
+                    $orderBy = ['title' => 'ASC'];
+                    break;
+                case 'titleDescending':
+                    $orderBy = ['title' => 'DESC'];
+                    break;
+            }
+
+            $albums = $albumRepository->findByQuery($orderBy ?? ['createdAt' => 'DESC'], $filterAlbum->getQuery());
+        } else {
+            $albums = $albumRepository->findBy([], ['createdAt' => 'DESC']);
+        }
+
         return $this->render('admin/album/index.html.twig', [
-            'albums' => $albumRepository->findBy([], ['createdAt' => 'DESC']),
+            'filterForm' => $filterForm->createView(),
+            'albums' => $albums,
         ]);
     }
 }
