@@ -157,8 +157,19 @@ class UserController extends AbstractController
     /**
      * @Route("/supprimer-mon-compte", name="delete_account", methods={"POST"})
      */
-    public function deleteAccount(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function deleteAccount(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Security $security
+    ): Response {
+        if ($security->isGranted('ROLE_SUPERADMIN')) {
+            $this->addFlash(
+                'danger',
+                'Tu dois d\'abord transmettre tes droits super-admin avant de supprimer ton compte!'
+            );
+            return $this->redirectToRoute('admin_user_show');
+        }
+
         /** @var User */
         $user = $this->getUser();
         if ($this->isCsrfTokenValid('delete' . $user->getId(), (string)$request->request->get('_token'))) {
