@@ -5,22 +5,24 @@
 {% block content %}
     <h1 class="h1 my-4">Les membres du groupe :</h1>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-inline-block w-100">
         {% if is_granted("ROLE_ADMIN") %}
-            <a class="btn btn-success" href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
+            <a class="btn btn-success float-start" href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
         {% endif %}
-        {{ form_start(filter_form) }}
-            <div class="d-flex">
-                <div class="input-group ms-3">
-                    {{ form_widget(filter_form.instrument) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">Filtrer</button>
+        <div class="float-end">
+            {{ form_start(filter_form) }}
+                <div class="d-flex">
+                    <div class="input-group ms-3">
+                        {{ form_widget(filter_form.instrument) }}
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center">Filtrer</button>
+                    </div>
+                    <div class="input-group ms-3">
+                        {{ form_widget(filter_form.query) }}
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                    </div>
                 </div>
-                <div class="input-group ms-3">
-                    {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
-                </div>
-            </div>
-        {{ form_end(filter_form) }}
+            {{ form_end(filter_form) }}
+        </div>
     </div>
 
     <div class="accordion accordion-flush mt-5" id="membersAccordion">
