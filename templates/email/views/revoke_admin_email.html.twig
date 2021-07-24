@@ -1,0 +1,15 @@
+{% extends "email/layout.html.twig" %}
+
+{% block content %}
+    <h1>Droits d'admin :</h1>
+
+    <p>
+        Tes droits d'administration viennent d'être révoqués!
+    </p>
+    <p>
+        Si tu penses qu'il s'agit d'une erreur, n'hésite pas à demander des informations à {{ user.pseudonym ?? (user.firstname ~ ' ' ~ user.lastname) }}.
+    </p>
+    <p>
+        Musicalement, le Souq'.
+    </p>
+{% endblock %}

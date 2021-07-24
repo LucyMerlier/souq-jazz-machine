@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('admin_user_grant_superadmin', {'id': user.id}) }}" onsubmit="return confirm('Es-tu certain·e de vouloir transmettre les droits super-admin à cet·te utilisateur·ice? Tu perdras alors tes droits de super-admin et aura des droits d'admin simple');">
     <input type="hidden" name="_token" value="{{ csrf_token('grant_superadmin' ~ user.id) }}">
-    <button class="btn btn-danger">Transmettre super-admin</button>
+    <button class="btn btn-danger">Céder super-admin</button>
 </form>

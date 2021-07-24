@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('admin_user_grant_admin', {'id': user.id}) }}" onsubmit="return confirm('Es-tu certain·e de vouloir accorder les droits d\'administration à cet·te utilisateur·ice?');">
     <input type="hidden" name="_token" value="{{ csrf_token('grant_admin' ~ user.id) }}">
-    <button class="btn btn-warning">Donner les droits d'admin</button>
+    <button class="btn btn-success">Donner les droits d'admin</button>
 </form>

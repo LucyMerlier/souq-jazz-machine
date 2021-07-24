@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('admin_user_revoke_admin', {'id': user.id}) }}" onsubmit="return confirm('Es-tu certain·e de vouloir révoquer les droits d\'administration de cet·te utilisateur·ice?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('revoke_admin' ~ user.id) }}">
+    <button class="btn btn-warning">Révoquer les droits</button>
+</form>

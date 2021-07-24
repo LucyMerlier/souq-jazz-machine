@@ -49,7 +49,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_SUPERADMIN")
      * @Route("/donner-les-droits-admin/{id}", name="grant_admin", methods={"POST"})
      */
     public function grantAdmin(
@@ -77,6 +77,42 @@ class UserController extends AbstractController
             $this->addFlash(
                 'success',
                 $user->getFirstname() . ' ' . $user->getLastname() . ' a désormais les droits d\'administration!'
+            );
+        }
+
+        return $this->redirectToRoute('admin_members');
+    }
+
+    /**
+     * @IsGranted("ROLE_SUPERADMIN")
+     * @Route("/revoquer-les-droits-admin/{id}", name="revoke_admin", methods={"POST"})
+     */
+    public function revokeAdmin(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer,
+        User $user
+    ): Response {
+        if ($this->isCsrfTokenValid('revoke_admin' . $user->getId(), (string)$request->request->get('_token'))) {
+            $user->setRoles(['ROLE_USER']);
+            $entityManager->flush();
+
+            /** @var string */
+            $emailFrom = $this->getParameter('email_address');
+            $email = (new Email())
+                ->from($emailFrom)
+                ->subject('Droits d\'admin')
+                ->addTo((string)$user->getEmail())
+                ->html($this->renderView('email/views/revoke_admin_email.html.twig', [
+                    'user' => $this->getUser(),
+                ]))
+            ;
+            $mailer->send($email);
+
+            $this->addFlash(
+                'success',
+                $user->getFirstname() . ' ' . $user->getLastname() .
+                ' n\'a désormais plus les droits d\'administration!'
             );
         }
 
@@ -129,7 +165,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_SUPERADMIN")
      * @Route("/supprimer-utilisateur/{id}", name="delete", methods={"POST"})
      */
     public function delete(
@@ -138,11 +174,12 @@ class UserController extends AbstractController
         Security $security,
         User $user
     ): Response {
-        if (
-            (!$security->isGranted('ROLE_SUPERADMIN') && in_array('ROLE_ADMIN', $user->getRoles())) ||
-            in_array('ROLE_SUPERADMIN', $user->getRoles())
-        ) {
-            throw new AccessDeniedException('Vous n\'avez pas les droits pour faire cette action');
+        if ($security->isGranted('ROLE_SUPERADMIN')) {
+            $this->addFlash(
+                'danger',
+                'Tu dois d\'abord transmettre tes droits super-admin avant de supprimer ton compte!'
+            );
+            return $this->redirectToRoute('admin_user_show');
         }
 
         if ($this->isCsrfTokenValid('delete' . $user->getId(), (string)$request->request->get('_token'))) {
