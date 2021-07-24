@@ -101,7 +101,7 @@ class UserController extends AbstractController
         ) {
             /** @var User */
             $currentSuperadmin = $this->getUser();
-            $currentSuperadmin->setRoles(["ROLE_ADMIN"]);
+            $currentSuperadmin->setRoles(['ROLE_ADMIN']);
             $newSuperadmin->setRoles(['ROLE_SUPERADMIN']);
             $entityManager->flush();
 
