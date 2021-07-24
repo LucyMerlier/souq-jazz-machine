@@ -84,6 +84,51 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_SUPERADMIN")
+     * @Route("/transmettre-les-droits-superadmin/{id}", name="grant_superadmin", methods={"POST"})
+     */
+    public function grantSuperAdmin(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer,
+        User $newSuperadmin
+    ): Response {
+        if (
+            $this->isCsrfTokenValid(
+                'grant_superadmin' . $newSuperadmin->getId(),
+                (string)$request->request->get('_token')
+            )
+        ) {
+            /** @var User */
+            $currentSuperadmin = $this->getUser();
+            $currentSuperadmin->setRoles(["ROLE_ADMIN"]);
+            $newSuperadmin->setRoles(['ROLE_SUPERADMIN']);
+            $entityManager->flush();
+
+            /** @var string */
+            $emailFrom = $this->getParameter('email_address');
+            $email = (new Email())
+                ->from($emailFrom)
+                ->subject('Droits super-admin')
+                ->addTo((string)$newSuperadmin->getEmail())
+                ->html($this->renderView('email/views/grant_superadmin_email.html.twig', [
+                    'user' => $currentSuperadmin,
+                ]))
+            ;
+            $mailer->send($email);
+
+            $this->addFlash(
+                'success',
+                'Tu as transmis tes droits super-admin à ' .
+                $newSuperadmin->getFirstname() . ' ' . $newSuperadmin->getLastname() . '.' .
+                ' Tu es désormais simple admin!'
+            );
+        }
+
+        return $this->redirectToRoute('admin_members');
+    }
+
+    /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/supprimer-utilisateur/{id}", name="delete", methods={"POST"})
      */
