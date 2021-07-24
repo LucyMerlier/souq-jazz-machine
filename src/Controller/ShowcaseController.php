@@ -30,9 +30,6 @@ class ShowcaseController extends AbstractController
      */
     public function index(NewsArticleRepository $newsRepository, ConcertRepository $concertRepository): Response
     {
-        if (isset($_SESSION)) {
-            var_dump($_SESSION);
-        }
         return $this->render('showcase/views/index.html.twig', [
             'news_articles' => $newsRepository->findBy([], ['createdAt' => 'DESC'], 6),
             'concert' => $concertRepository->findByFutureDate(1)[0] ?? null,
