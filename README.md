@@ -47,7 +47,6 @@ If your machine follows all the prerequisites, then you can just follow the inst
 * run `git clone {REPO_ADDRESS} {YOUR_CHOSEN_FOLDER_NAME}` in your console to fetch the repository from [GitHub](https://github.com/LucyMerlier/souq-jazz-machine)
 * run `cd {YOUR_CHOSEN_FOLDER_NAME}` to move into the folder where the project has been downloaded
 * run `composer install` to download and install PHP dependencies
-* run `bin/console ckeditor:install`, then `bin/console assets:install public` to enable CKEditor
 * run `yarn install` to download and install JS dependencies
 * run `yarn encore dev` to build assets
 * use the `.env` file as a template to create a `.env.local` file (which should never be versionned by Git), and fill the `MAILER_DSN`, `MAIL_TO` and `DATABASE_URL` lines with the appropriate information
