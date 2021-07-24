@@ -1,0 +1,11 @@
+{% extends "bundles/TwigBundle/Exception/error_layout.html.twig" %}
+
+{% block error %}
+    <h1 class="text-center my-5">Erreur 404</h1>
+
+    <p>Ooops! Il semblerait que la page que vous recherchez n'existe pas...</p>
+    <p>
+        Si vous pensez qu'il s'agit d'une erreur de notre part, n'hésitez pas à nous envoyer un message en vous rendant sur <a class="link-secondary" href="{{ path('showcase_contact') }}">cette page</a>.
+    </p>
+    <a class="link-secondary" href="{{ path('showcase_home') }}">Revenir sur le site du Souq'</a>
+{% endblock %}

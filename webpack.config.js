@@ -39,6 +39,8 @@ Encore
 
     .addStyleEntry('showcase', './assets/styles/showcase.scss')
 
+    .addStyleEntry('error', './assets/styles/error.scss')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 

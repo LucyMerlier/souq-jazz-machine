@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Erreur - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('showcase') }}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <div class="error-container col-12">
+            {% block error %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
