@@ -58,10 +58,9 @@ class Concert
     private Collection $votes;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private ?User $owner;
+    private ?string $owner;
 
     public function __construct()
     {
@@ -182,12 +181,12 @@ class Concert
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
 
-    public function setOwner(?User $owner): self
+    public function setOwner(?string $owner): self
     {
         $this->owner = $owner;
 

@@ -41,7 +41,7 @@
                                 <ul>
                                     <li>Compositeur : {{ song.composer ?? 'Non renseigné' }}</li>
                                     <li>Arrangeur : {{ song.arranger ?? 'Non renseigné' }}</li>
-                                    <li>Ajouté par : {{ song.owner.pseudonym ?? song.owner.firstname }}</li>
+                                    <li>Ajouté par : {{ song.owner }}</li>
                                     <li>Ajouté le : {{ song.createdAt|date('d/m/Y') }}</li>
                                 </ul>
                             </div>

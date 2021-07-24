@@ -52,12 +52,23 @@
                                     {% if user.catchphrase %}
                                         <li>Quelques mots : "{{ user.catchphrase }}"</li>
                                     {% endif %}
-                                    <li>Droits admin : {% if 'ROLE_ADMIN' in user.roles %}Oui{% else %}Non{% endif %}</li>
+                                    <li>
+                                        {% if "ROLE_SUPERADMIN" in user.roles %}
+                                            SUPERADMIN
+                                        {% else %}
+                                            Droits admin : {% if "ROLE_ADMIN" in user.roles %}Oui{% else %}Non{% endif %}
+                                        {% endif %}
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-3 px-4 text-end">
-                                {% if is_granted("ROLE_ADMIN") and "ROLE_ADMIN" not in user.roles %}
+                                {% if is_granted("ROLE_ADMIN") and "ROLE_ADMIN" not in user.roles and "ROLE_SUPERADMIN" not in user.roles %}
                                     <div class="my-1">{% include "admin/user/components/_grant_admin_form.html.twig" %}</div>
+                                    <div class="my-1">{% include "admin/user/components/_delete_form.html.twig" %}</div>
+                                {% elseif is_granted("ROLE_SUPERADMIN") and "ROLE_SUPERADMIN" not in user.roles %}
+                                    {% if "ROLE_ADMIN" not in user.roles %}
+                                        <div class="my-1">{% include "admin/user/components/_grant_admin_form.html.twig" %}</div>
+                                    {% endif %}
                                     <div class="my-1">{% include "admin/user/components/_delete_form.html.twig" %}</div>
                                 {% endif %}
                             </div>

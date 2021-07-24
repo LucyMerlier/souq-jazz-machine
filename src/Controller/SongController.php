@@ -36,7 +36,7 @@ class SongController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User */
             $user = $this->getUser();
-            $song->setOwner($user);
+            $song->setOwner($user->getPseudonym() ?? $user->getFirstname() . ' ' . $user->getLastname());
             $song->setCreatedAt(new DateTimeImmutable('now'));
             $entityManager->persist($song);
             $entityManager->flush();

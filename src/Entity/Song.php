@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\User;
 use App\Repository\SongRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -42,10 +41,9 @@ class Song
     private ?string $arranger;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private ?User $owner;
+    private ?string $owner;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -103,12 +101,12 @@ class Song
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
 
-    public function setOwner(?User $owner): self
+    public function setOwner(?string $owner): self
     {
         $this->owner = $owner;
 

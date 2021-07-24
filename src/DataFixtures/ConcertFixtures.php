@@ -14,7 +14,7 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $concert = new Concert();
-        $concert->setOwner($this->getReference('lolo'));
+        $concert->setOwner($this->getReference('lolo')->getPseudonym());
         $concert->setDate((new DateTime('2022-04-16'))->setTime(20, 0));
         $concert->setIsValidated(true);
         $concert->setCity('Azay-le-Rideau');
@@ -28,7 +28,7 @@ Magni omnis natus aperiam <b>aliquam excepturi facilis</b> cum dolorem non fuga,
         $this->addReference('concert_1', $concert);
 
         $concert = new Concert();
-        $concert->setOwner($this->getReference('lolo'));
+        $concert->setOwner($this->getReference('lolo')->getPseudonym());
         $concert->setDate((new DateTime('2022-06-25'))->setTime(20, 30));
         $concert->setIsValidated(true);
         $concert->setCity('Bréhémont');
@@ -40,7 +40,7 @@ Magni omnis natus aperiam <b>aliquam excepturi facilis</b> cum dolorem non fuga,
         $this->addReference('concert_2', $concert);
 
         $concert = new Concert();
-        $concert->setOwner($this->getReference('lu'));
+        $concert->setOwner($this->getReference('lu')->getPseudonym());
         $concert->setDate((new DateTime('2022-06-18'))->setTime(8, 0));
         $concert->setIsValidated(true);
         $concert->setCity('Aix-en-Provence');
@@ -55,7 +55,7 @@ Sit ea ab provident, fuga enim impedit ipsa, eius suscipit atque tempora facilis
         $this->addReference('concert_3', $concert);
 
         $concert = new Concert();
-        $concert->setOwner($this->getReference('wiwi'));
+        $concert->setOwner($this->getReference('wiwi')->getPseudonym());
         $concert->setDate((new DateTime('2022-12-07'))->setTime(19, 0));
         $concert->setIsValidated(false);
         $concert->setCity('Cinq-Mars-la-Pile');
@@ -67,7 +67,7 @@ Suspendisse lectus tortor, dignissim sit amet.'
         $this->addReference('concert_4', $concert);
 
         $concert = new Concert();
-        $concert->setOwner($this->getReference('lolo'));
+        $concert->setOwner($this->getReference('lolo')->getPseudonym());
         $concert->setDate((new DateTime('2022-09-15'))->setTime(20, 30));
         $concert->setIsValidated(false);
         $concert->setCity('Ballan-Miré');
@@ -79,7 +79,7 @@ Suspendisse lectus tortor, dignissim sit amet. Sit ea ab provident, fuga enim im
         $this->addReference('concert_5', $concert);
 
         $concert = new Concert();
-        $concert->setOwner($this->getReference('lu'));
+        $concert->setOwner($this->getReference('lu')->getPseudonym());
         $concert->setDate((new DateTime('2021-06-15'))->setTime(20, 30));
         $concert->setIsValidated(true);
         $concert->setCity('Tours');
