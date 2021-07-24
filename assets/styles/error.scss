@@ -1,0 +1,16 @@
+.error-container {
+    width: 50%;
+    height: 100vh;
+}
+
+@media screen and (max-width: 1199px) {
+    .error-container {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .error-container {
+        width: 100%;
+    }
+}
