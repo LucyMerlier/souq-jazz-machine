@@ -27,7 +27,6 @@ Please note that this is still a work in progress, and as such, some functionnal
 * [GENERAL] : having a complete, clear, and clean README
 * [GENERAL] : having customized error pages (401, 404, 500)
 * [GENERAL] : having access to a footer linking to legal mentions, credits, and eventually other informative sections
-* [ADMIN] : being able to filter or search specific results on the different pages (members, music sheets, partners...)
 
 ## PREREQUISITES
 
