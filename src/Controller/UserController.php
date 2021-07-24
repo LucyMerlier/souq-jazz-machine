@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use Container3xN5XhP\getPartnerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +13,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -86,8 +87,19 @@ class UserController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/supprimer-utilisateur/{id}", name="delete", methods={"POST"})
      */
-    public function delete(Request $request, EntityManagerInterface $entityManager, User $user): Response
-    {
+    public function delete(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Security $security,
+        User $user
+    ): Response {
+        if (
+            (!$security->isGranted('ROLE_SUPERADMIN') && in_array('ROLE_ADMIN', $user->getRoles())) ||
+            in_array('ROLE_SUPERADMIN', $user->getRoles())
+        ) {
+            throw new AccessDeniedException('Vous n\'avez pas les droits pour faire cette action');
+        }
+
         if ($this->isCsrfTokenValid('delete' . $user->getId(), (string)$request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();

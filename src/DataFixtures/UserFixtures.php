@@ -382,7 +382,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setPseudonym('Lu')
             ->setPhone('+33 6 96 52 74 85')
             ->setInstrument($this->getReference('bass'))
-            ->setRoles(['ROLE_ADMIN'])
+            ->setRoles(['ROLE_SUPERADMIN'])
             ->setPassword($this->passwordHasher->hashPassword(
                 $lucy,
                 'machine'

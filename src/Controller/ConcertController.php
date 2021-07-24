@@ -41,7 +41,7 @@ class ConcertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User */
             $user = $this->getUser();
-            $concert->setOwner($user);
+            $concert->setOwner($user->getPseudonym() ?? $user->getFirstname() . ' ' . $user->getLastname());
             $entityManager->persist($concert);
 
             $vote = new Availability();

@@ -1,6 +1,6 @@
 <div class="card mb-3 border-0 mt-5">
     {% if not concert.isValidated %}
-        <h3 class="h5 text-decoration-underline">Proposée par {{ concert.owner.pseudonym ?? (concert.owner.firstname ~ ' ' ~ concert.owner.lastname) }} :</h3>
+        <h3 class="h5 text-decoration-underline">Proposée par {{ concert.owner }} :</h3>
     {% endif %}
     <div class="row g-0">
         <div class="card-title col-md-4">
