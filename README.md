@@ -49,7 +49,7 @@ If your machine follows all the prerequisites, then you can just follow the inst
 * run `composer install` to download and install PHP dependencies
 * run `yarn install` to download and install JS dependencies
 * run `yarn encore dev` to build assets
-* use the `.env` file as a template to create a `.env.local` file (which should never be versionned by Git), and fill the `MAILER_DSN`, `MAIL_TO` and `DATABASE_URL` lines with the appropriate information
+* use the `.env` file as a template to create a `.env.local` file (which should never be versionned by Git), and fill the `MAILER_DSN`, `MAIL_ADDRESS` and `DATABASE_URL` lines with the appropriate information
     * note : the `DATABASE_URL` variable should contain the connection information of a user that has `CREATE/DROP DATABASE`, `CREATE/DROP TABLE`, `INSERT INTO`, `UPDATE`, `DELETE` and `SELECT` rights on the given database, and you may need to create that user and grant it those rights beforehand
 * run `bin/console doctrine:database:create` to create your database with the informations that you wrote in `.env.local`
 * run `bin/console doctrine:migrations:migrate` to create the tables structure of the database
