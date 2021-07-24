@@ -68,6 +68,8 @@
                                 {% elseif is_granted("ROLE_SUPERADMIN") and "ROLE_SUPERADMIN" not in user.roles %}
                                     {% if "ROLE_ADMIN" not in user.roles %}
                                         <div class="my-1">{% include "admin/user/components/_grant_admin_form.html.twig" %}</div>
+                                    {% else %}
+                                        <div class="my-1">{% include "admin/user/components/_grant_superadmin_form.html.twig" %}</div>
                                     {% endif %}
                                     <div class="my-1">{% include "admin/user/components/_delete_form.html.twig" %}</div>
                                 {% endif %}
