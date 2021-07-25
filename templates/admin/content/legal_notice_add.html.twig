@@ -1,0 +1,11 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Ajouter une mention légale - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Ajouter une mention légale :</h1>
+
+    <a href="{{ path('admin_content_legal_notices') }}">&lt;- Revenir sur la liste des mentions légales</a>
+
+    {% include "admin/_form.html.twig" %}
+{% endblock %}

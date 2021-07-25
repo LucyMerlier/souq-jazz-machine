@@ -1,0 +1,29 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Mentions légales - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Mentions légales :</h1>
+
+    <a class="btn btn-success" href="{{ path('admin_content_legal_notice_add') }}">Ajouter une mention légale</a>
+
+    {% for legal_notice in legal_notices %}
+        <section>
+            <h2 class="h5 mt-5 mb-3 text-decoration-underline">{{ legal_notice.title }}</h2>
+            <article>{{ legal_notice.content|raw }}</article>
+            <ul class="border-0 list-unstyled d-flex justify-content-end">
+                <div class="btn-group">
+                    <li class="mx-1">
+                        <a class="btn btn-warning" href="{{ path('admin_content_legal_notice_edit', {'id': legal_notice.id}) }}">Modifier</a>
+                    </li>
+                    <li class="mx-1">
+                        {% include "admin/content/components/_legal_notice_delete_form.html.twig" %}
+                    </li>
+                </div>
+            </ul>
+        </section>
+        <hr>
+    {% else %}
+        <p class="mt-5">Aucune mention légale trouvée...</p>
+    {% endfor %}
+{% endblock %}

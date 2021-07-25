@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Catchphrase;
 use App\Entity\History;
+use App\Entity\LegalNotice;
 use App\Form\CatchphraseType;
 use App\Form\HistoryType;
+use App\Form\LegalNoticeType;
 use App\Repository\CatchphraseRepository;
 use App\Repository\HistoryRepository;
+use App\Repository\LegalNoticeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,12 +59,86 @@ class ContentController extends AbstractController
 
             $entityManager->flush();
             $this->addFlash('success', 'Paragraphe "Notre histoire" modifié!');
-            return $this->redirectToRoute('admin_content-index');
+            return $this->redirectToRoute('admin_content_index');
         }
 
         return $this->render('admin/content/index.html.twig', [
             'catchphrase_form' => $catchphraseForm->createView(),
             'history_form' => $historyForm->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/mentions-legales", name="legal_notices")
+     */
+    public function legalNotices(LegalNoticeRepository $legalNoticeRepository): Response
+    {
+        return $this->render('admin/content/legal_notices.html.twig', [
+            'legal_notices' => $legalNoticeRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/ajouter-une-mention-legale", name="legal_notice_add", methods={"GET","POST"})
+     */
+    public function addLegalNotice(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $legalNotice = new LegalNotice();
+        $form = $this->createForm(LegalNoticeType::class, $legalNotice);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($legalNotice);
+            $entityManager->flush();
+            $this->addFlash('success', 'La mention légale a bien été ajoutée!');
+
+            return $this->redirectToRoute('admin_content_legal_notices');
+        }
+
+        return $this->render('admin/content/legal_notice_add.html.twig', [
+            'legal_notice' => $legalNotice,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/modifier-une-mention-legale/{id}", name="legal_notice_edit", methods={"GET","POST"})
+     */
+    public function editLegalNotice(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        LegalNotice $legalNotice
+    ): Response {
+        $form = $this->createForm(LegalNoticeType::class, $legalNotice);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'La mention légale a bien été modifiée!');
+
+            return $this->redirectToRoute('admin_content_legal_notices');
+        }
+
+        return $this->render('admin/content/legal_notice_edit.html.twig', [
+            'legal_notice' => $legalNotice,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/supprimer-une-mention-legale/{id}", name="legal_notice_delete", methods={"POST"})
+     */
+    public function deleteLegalNotice(
+        Request $request,
+        LegalNotice $legalNotice,
+        EntityManagerInterface $entityManager
+    ): Response {
+        if ($this->isCsrfTokenValid('delete' . $legalNotice->getId(), (string)$request->request->get('_token'))) {
+            $entityManager->remove($legalNotice);
+            $entityManager->flush();
+            $this->addFlash('warning', 'La mention légale a bien été supprimée!');
+        }
+
+        return $this->redirectToRoute('admin_content_legal_notices');
     }
 }
