@@ -6,9 +6,10 @@ use App\DataFixtures\InstrumentFixtures;
 use App\Entity\Offer;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class OfferFixtures extends Fixture
+class OfferFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
