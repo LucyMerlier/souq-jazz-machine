@@ -14,12 +14,11 @@ class NewsArticleFixtures extends Fixture
         $newsArticle = new NewsArticle();
         $newsArticle->setCreatedAt(new DateTimeImmutable('2021-07-02'));
         $newsArticle->setTitle('Apéroooooooooooooo!!!');
-        $newsArticle->setContent('Le **13 juillet 2021** aura lieu le traditionnel BBQ chez Lolo,
+        $newsArticle->setContent('<p>Le <strong>13 juillet 2021</strong> aura lieu le traditionnel BBQ chez Lolo,
         notre bien aimé chef d\'orchestre! Ce sera l\'occasion de se retrouver
-        après une année vide d\'événements *big-band-esques*,
-        et de discuter de l\'année à venir, qui nous l\'espérons sera bien plus fructueuse!
-        
-Surveillez donc bien les actus dans les mois qui viennent, et à la vôtre!
+        après une année vide d\'événements <i>big-band-esques</i>,
+        et de discuter de l\'année à venir, qui nous l\'espérons sera bien plus fructueuse!</p>
+        <p>Surveillez donc bien les actus dans les mois qui viennent, et à la vôtre!</p>
         ');
         $manager->persist($newsArticle);
 
