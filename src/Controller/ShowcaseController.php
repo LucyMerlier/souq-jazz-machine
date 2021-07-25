@@ -8,6 +8,7 @@ use App\Entity\Instrument;
 use App\Entity\Offer;
 use App\Form\ApplyOfferType;
 use App\Form\ContactRequestType;
+use App\Repository\CatchphraseRepository;
 use App\Repository\ConcertRepository;
 use App\Repository\InstrumentRepository;
 use App\Repository\NewsArticleRepository;
@@ -22,15 +23,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route(name="showcase_")
+ * @SuppressWarnings(PHPMD.LongVariable)
  */
 class ShowcaseController extends AbstractController
 {
     /**
      * @Route("/", name="home", methods={"GET"})
      */
-    public function index(NewsArticleRepository $newsRepository, ConcertRepository $concertRepository): Response
-    {
+    public function index(
+        CatchphraseRepository $catchphraseRepository,
+        NewsArticleRepository $newsRepository,
+        ConcertRepository $concertRepository
+    ): Response {
         return $this->render('showcase/views/index.html.twig', [
+            'catchphrase' => $catchphraseRepository->findOneBy([]),
             'news_articles' => $newsRepository->findBy([], ['createdAt' => 'DESC'], 6),
             'concert' => $concertRepository->findByFutureDate(1)[0] ?? null,
         ]);

@@ -1,0 +1,14 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Gestion du contenu - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Gestion du contenu :</h1>
+
+    <h2 class="h4 mt-5 mb-3 text-decoration-underline">Modification de la phrase d'accroche :</h2>
+
+    {{ form_start(catchphrase_form) }}
+        {{ form_widget(catchphrase_form) }}
+        <button class="btn btn-warning">Modifier</button>
+    {{ form_end(catchphrase_form) }}
+{% endblock %}
