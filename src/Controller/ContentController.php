@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Catchphrase;
+use App\Entity\History;
 use App\Form\CatchphraseType;
+use App\Form\HistoryType;
 use App\Repository\CatchphraseRepository;
+use App\Repository\HistoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,11 +28,16 @@ class ContentController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $entityManager,
-        CatchphraseRepository $catchphraseRepository
+        CatchphraseRepository $catchphraseRepository,
+        HistoryRepository $historyRepository
     ): Response {
         $catchphrase = $catchphraseRepository->findOneBy([]) ?? new Catchphrase();
         $catchphraseForm = $this->createForm(CatchphraseType::class, $catchphrase);
         $catchphraseForm->handleRequest($request);
+
+        $history = $historyRepository->findOneBy([]) ?? new History();
+        $historyForm = $this->createForm(HistoryType::class, $history);
+        $historyForm->handleRequest($request);
 
         if ($catchphraseForm->isSubmitted() && $catchphraseForm->isValid()) {
             if (!$catchphraseRepository->findOneBy([])) {
@@ -37,12 +45,23 @@ class ContentController extends AbstractController
             }
 
             $entityManager->flush();
-            $this->addFlash('success', 'Phrase d\'accroche modifiée');
+            $this->addFlash('success', 'Phrase d\'accroche modifiée!');
             return $this->redirectToRoute('admin_content_index');
+        }
+
+        if ($historyForm->isSubmitted() && $historyForm->isValid()) {
+            if (!$historyRepository->findOneBy([])) {
+                $entityManager->persist($history);
+            }
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Paragraphe "Notre histoire" modifié!');
+            return $this->redirectToRoute('admin_content-index');
         }
 
         return $this->render('admin/content/index.html.twig', [
             'catchphrase_form' => $catchphraseForm->createView(),
+            'history_form' => $historyForm->createView(),
         ]);
     }
 }
