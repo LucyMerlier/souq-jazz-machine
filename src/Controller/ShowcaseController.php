@@ -10,6 +10,7 @@ use App\Form\ApplyOfferType;
 use App\Form\ContactRequestType;
 use App\Repository\CatchphraseRepository;
 use App\Repository\ConcertRepository;
+use App\Repository\HistoryRepository;
 use App\Repository\InstrumentRepository;
 use App\Repository\NewsArticleRepository;
 use App\Repository\OfferRepository;
@@ -45,9 +46,12 @@ class ShowcaseController extends AbstractController
     /**
      * @Route("/le-big-band", name="about_us", methods={"GET"})
      */
-    public function aboutUs(InstrumentRepository $instrumentRepository): Response
-    {
+    public function aboutUs(
+        HistoryRepository $historyRepository,
+        InstrumentRepository $instrumentRepository
+    ): Response {
         return $this->render('showcase/views/about_us.html.twig', [
+            'our_history' => $historyRepository->findOneBy([]),
             'instruments' => $instrumentRepository->findAll(),
         ]);
     }
