@@ -5,7 +5,7 @@
 
     <p>Ooops! Il semblerait que vous n'êtes pas correctement authentifié pour accéder à cette page...</p>
     <p>
-        Si vous pensez qu'il s'agit d'une erreur de notre part, n'hésitez pas à nous envoyer un message en vous rendant sur <a class="link-secondary" href="{{ path('showcase_contact') }}">cette page</a>.
+        Si vous pensez qu'il s'agit d'une erreur de notre part, n'hésitez pas à nous envoyer un message en vous rendant sur <a class="link-secondary" href="{{ path('showcase_contact', {'bugReporting': 'true'}) }}">cette page</a>.
     </p>
     <a class="link-secondary" href="{{ path('showcase_home') }}">Revenir sur le site du Souq'</a>
 {% endblock %}
