@@ -19,7 +19,6 @@ class LegalNoticeType extends AbstractType
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Article',
-                'config_name' => 'custom_config',
             ])
         ;
     }

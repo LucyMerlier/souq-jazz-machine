@@ -15,7 +15,6 @@ class HistoryType extends AbstractType
         $builder
             ->add('content', CKEditorType::class, [
                 'label' => 'Notre histoire',
-                'config_name' => 'custom_config',
             ])
         ;
     }

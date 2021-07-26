@@ -19,7 +19,6 @@ class AlbumType extends AbstractType
             ])
             ->add('description', CKEditorType::class, [
                 'label' => 'Description (facultatif)',
-                'config_name' => 'custom_config',
                 'required' => false,
             ])
         ;
