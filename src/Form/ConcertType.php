@@ -25,7 +25,6 @@ class ConcertType extends AbstractType
             ])
             ->add('description', CKEditorType::class, [
                 'label' => 'Description',
-                'config_name' => 'custom_config',
             ])
         ;
     }
