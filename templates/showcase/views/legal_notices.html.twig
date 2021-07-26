@@ -1,0 +1,16 @@
+{% extends "showcase/layout.html.twig" %}
+
+{% block title %}Mentions légales - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">MENTIONS LÉGALES</h1>
+
+    {% for legal_notice in legal_notices %}
+        <section class="my-4">
+            <h2 class="h2 my-4">{{ legal_notice.title }}</h2>
+            <article>{{ legal_notice.content|raw }}</article>
+        </section>
+    {% else %}
+        <p class="mt-5">Aucune mention légale trouvée...</p>
+    {% endfor %}
+{% endblock %}

@@ -1,5 +1,5 @@
-body {
-    padding-bottom: 100px;
+main {
+    min-height: calc(100vh - 409.5px);
 }
 
 .carousel-inner {
@@ -30,6 +30,10 @@ textarea {
 }
 
 @media screen and (max-width: 768px) {
+    main {
+        min-height: calc(100vh - 558.367px);
+    }
+
     .carousel-inner {
         height: 300px;
     }
@@ -40,6 +44,10 @@ textarea {
 }
 
 @media screen and (max-width: 576px) {
+    main {
+        min-height: calc(100vh - 546.367px);
+    }
+
     .carousel-inner {
         height: 200px;
     }
