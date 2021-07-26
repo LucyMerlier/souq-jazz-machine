@@ -12,6 +12,7 @@ use App\Repository\CatchphraseRepository;
 use App\Repository\ConcertRepository;
 use App\Repository\HistoryRepository;
 use App\Repository\InstrumentRepository;
+use App\Repository\LegalNoticeRepository;
 use App\Repository\NewsArticleRepository;
 use App\Repository\OfferRepository;
 use App\Repository\PictureRepository;
@@ -163,6 +164,24 @@ class ShowcaseController extends AbstractController
             'form' => $form->createView(),
             'offer' => $offer,
         ]);
+    }
+
+    /**
+     * @Route("/mentions-legales", name="legal_notices")
+     */
+    public function legalNotices(LegalNoticeRepository $legalNoticeRepository): Response
+    {
+        return $this->render('showcase/views/legal_notices.html.twig', [
+            'legal_notices' => $legalNoticeRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/credits", name="credits")
+     */
+    public function credits(): Response
+    {
+        return $this->render('showcase/views/credits.html.twig');
     }
 
     public function toast(OfferRepository $offerRepository): Response

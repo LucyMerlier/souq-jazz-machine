@@ -9,3 +9,7 @@
 {% endblock %}
 
 {% block toast %}{{ render(controller('App\\Controller\\ShowcaseController::toast')) }}{% endblock %}
+
+{% block footer %}
+    {% include "showcase/_footer.html.twig" %}
+{% endblock %}

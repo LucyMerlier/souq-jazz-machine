@@ -6,6 +6,10 @@ body {
     font-size: $text-size;
 }
 
+main {
+    min-height: calc(100vh - 409.5px);
+}
+
 .black-lizard {
     width: 30px;
     height: 30px;
@@ -32,7 +36,17 @@ hr {
     border: 1px solid $secondary;
 }
 
+@media screen and (max-width: 768px) {
+    main {
+        min-height: calc(100vh - 558.367px);
+    }
+}
+
 @media screen and (max-width: 576px) {
+    main {
+        min-height: calc(100vh - 546.367px);
+    }
+
     .navbar-brand {
         font-size: 1.5rem !important;
     }
