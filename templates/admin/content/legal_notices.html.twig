@@ -5,7 +5,12 @@
 {% block content %}
     <h1 class="h1 my-4">Mentions légales :</h1>
 
-    <a class="btn btn-success" href="{{ path('admin_content_legal_notice_add') }}">Ajouter une mention légale</a>
+    <div class="my-1">
+        <a href="{{ path('admin_content_index') }}">&lt;- Revenir sur la gestion du contenu</a>
+    </div>
+    <div class="my-1">
+        <a class="btn btn-success" href="{{ path('admin_content_legal_notice_add') }}">Ajouter une mention légale</a>
+    </div>
 
     {% for legal_notice in legal_notices %}
         <section>
