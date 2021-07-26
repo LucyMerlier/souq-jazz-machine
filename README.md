@@ -24,7 +24,6 @@ This web application has been developped using some cool frameworks and tools li
 Please note that this is still a work in progress, and as such, some functionnalities are yet to be implemented, such as :
 
 * [GENERAL] : having a complete, clear, and clean README
-* [GENERAL] : having access to a footer linking to legal mentions, credits, and eventually other informative sections
 
 ## PREREQUISITES
 
