@@ -17,7 +17,7 @@ This project is a website created for the "Souq' Jazz Machine" big band. Its goa
 * on one hand to propose a beautiful showcase website presenting the band and displaying photographs as well as information regarding the next (and previous) concerts, 
 * and on the other hand to have a minimalistic but practical "administration" interface for the band members to collect information about possible concerts, sheet music, as well as current and potential partners.
 
-This web application has been developped using some cool frameworks and tools like [Symfony](https://symfony.com/) and [Bootstrap](https://getbootstrap.com/). You can find a more exhaustive list in the [credits section](#credits).
+This web application has been developped using some cool frameworks and tools like [Symfony](https://symfony.com/) and [Bootstrap](https://getbootstrap.com/). You can find a more exhaustive list in the [acknowledgements section](#acknowledgements).
 
 ## TODO
 
