@@ -10,6 +10,15 @@ main {
     min-height: calc(100vh - 409.5px);
 }
 
+a {
+    color: $secondary;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: $secondary-hover;
+}
+
 .black-lizard {
     width: 30px;
     height: 30px;

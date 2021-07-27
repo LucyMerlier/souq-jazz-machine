@@ -6,8 +6,8 @@ twig:
 
 fos_ck_editor:
     default_config: custom_config
-    base_path: "build/ckeditor"
-    js_path: "build/ckeditor/ckeditor.js"
+    base_path: 'build/ckeditor'
+    js_path: 'build/ckeditor/ckeditor.js'
     configs:
         custom_config:
             toolbar:
