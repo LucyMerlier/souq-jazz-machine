@@ -9,13 +9,13 @@
                 Le Souq' cherche à remplir les pupitres suivants :
                 <ul>
                     {% for offer in offers %}
-                        <li><a class="btn-dismiss" href="{{ path('showcase_apply_offer', {'id': offer.id}) }}">{{ offer.instrument.name|lower }}</a></li>
+                        <li><a class="btn-dismiss link-primary" href="{{ path('showcase_apply_offer', {'id': offer.id}) }}">{{ offer.instrument.name|lower }}</a></li>
                     {% endfor %}
                 </ul>
                 <p>Sélectionne l'instrument qui t'intéresse, ou <a type="button" class="btn-dismiss" data-bs-dismiss="toast" aria-label="Close">clique ici</a> ou sur la croix pour ne plus afficher ce message :)</p>
             {% else %}
-                <p>Le Souq' cherche à remplir son pupitre de <a class="btn-dismiss" href="{{ path('showcase_apply_offer', {'id': offers.0.id}) }}">{{ offers.0.instrument.name|lower }}</a>!</p>
-                <p>Si ça t'intéresse, clique sur le nom de l'instrument, sinon <a type="button" class="btn-dismiss" data-bs-dismiss="toast" aria-label="Close">clique ici</a> pour ne plus afficher ce message :)</p>
+                <p>Le Souq' cherche à remplir son pupitre de <a class="btn-dismiss link-primary" href="{{ path('showcase_apply_offer', {'id': offers.0.id}) }}">{{ offers.0.instrument.name|lower }}</a>!</p>
+                <p>Si ça t'intéresse, clique sur le nom de l'instrument, sinon <a type="button" class="btn-dismiss link-primary" data-bs-dismiss="toast" aria-label="Close">clique ici</a> pour ne plus afficher ce message :)</p>
             {% endif %}
         </div>
     </div>
