@@ -13,6 +13,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Instrument
 {
+    public const CATEGORIES = [
+        'Vent' => 'wind',
+        'Rythmique' => 'rhythm',
+        'Autre' => 'other',
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -26,6 +32,13 @@ class Instrument
      * @Assert\Length(max=255)
      */
     private ?string $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Choice(choices=self::CATEGORIES)
+     */
+    private ?string $category;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="instrument")
@@ -61,6 +74,18 @@ class Instrument
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?string $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

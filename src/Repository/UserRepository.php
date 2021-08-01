@@ -57,6 +57,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
 
+    public function findByInstrument(string $instrument): array
+    {
+        return $this->createQueryBuilder('user')
+            ->join('user.instrument', 'instrument')
+            ->where('instrument.name = :instrument')
+            ->setParameter('instrument', $instrument)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByCategory(string $category): array
+    {
+        return $this->createQueryBuilder('user')
+            ->join('user.instrument', 'instrument')
+            ->where('instrument.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */

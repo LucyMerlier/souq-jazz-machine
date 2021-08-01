@@ -210,6 +210,41 @@ class ConcertController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
+     * @Route("/invalider-le-concert/{id}", name="invalidate", methods={"POST"})
+     */
+    public function invalidate(
+        EntityManagerInterface $entityManager,
+        Concert $concert,
+        UserRepository $userRepository,
+        MailerInterface $mailer,
+        Request $request
+    ): Response {
+        if ($this->isCsrfTokenValid('invalidate' . $concert->getId(), (string)$request->request->get('_token'))) {
+            $concert->setIsValidated(false);
+            $entityManager->flush();
+
+            /** @var string */
+            $emailFrom = $this->getParameter('email_address');
+            $email = (new Email())
+                    ->from($emailFrom)
+                    ->subject('Date de concert invalidée!')
+                    ->html($this->renderView('email/views/invalidate_concert_email.html.twig', [
+                        'concert' => $concert,
+                    ]))
+                ;
+            foreach ($userRepository->findAll() as /** @var User */ $user) {
+                $emailAddress = (string)$user->getEmail();
+                $email->addTo($emailAddress);
+            }
+            $mailer->send($email);
+            $this->addFlash('success', 'Date de concert invalidée!');
+        }
+
+        return $this->redirectToRoute((string)$request->request->get('route'));
+    }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/supprimer-le-concert/{id}", name="delete", methods={"POST"})
      */
     public function delete(

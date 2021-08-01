@@ -1,0 +1,11 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}Envoyer un mail - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <h1 class="h1 my-4">Envoyer un mail :</h1>
+
+    <a href="{{ path('admin_home') }}">&lt;- Revenir à l'accueil</a>
+
+    {% include "admin/_form.html.twig" with {"button_label": "Envoyer"} %}
+{% endblock %}

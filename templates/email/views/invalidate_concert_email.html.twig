@@ -1,0 +1,15 @@
+{% extends "email/layout.html.twig" %}
+
+{% block content %}
+    <h1>Date de concert invalidée!</h1>
+
+    <p>
+        Le concert du {{ concert.date|date("d/m/Y") }} à {{ concert.city }} vient d'être invalidé!
+    </p>
+    <p>
+        Cela signifie que des modifications vont  potentiellement arriver sur ce concert (date, horaire...), et qu'il faudra peut être que tu renseignes à nouveau si tu pourras être présent·e à cette date.
+    </p>
+    <p>
+        Musicalement, le Souq'.
+    </p>
+{% endblock %}
