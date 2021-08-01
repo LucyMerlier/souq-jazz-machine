@@ -50,7 +50,7 @@ class MailController extends AbstractController
                 case 'all':
                     $recipients = $userRepository->findAll();
                     break;
-                case 'voice':
+                case 'Voix':
                     $recipients = $userRepository->findByInstrument((string)$adminMail->getRecipients());
                     break;
                 case 'wind':
