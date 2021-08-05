@@ -104,6 +104,7 @@ Here is a list of functionalities that authenticated band members have access to
 
 For administrators, an extra "Admin" dropdown menu appears in the navigation bar, that lets them access some more functionalities :
 
+* `/admin/envoyer-un-email` [ROLE_ADMIN] : a page from which administrators can send an email to all or some members of the band
 * `/admin/gestion-des-actus` [ROLE_ADMIN] : a page from which administrators can manage the news articles of the band
 * `/admin/gestion-du-contenu` [ROLE_ADMIN] : a page from which administrators can manage the some of the content of the public part of the website, such as the "Notre histoire" section of the `/le-big-band` page, or the legal notice of the website
 * `/admin/gestion-des-instruments` [ROLE_ADMIN] : a page from which administrators can manage the musical instruments played by the band members
