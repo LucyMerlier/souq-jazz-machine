@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Ajouter une actu :</h1>
 
-    <a href="{{ path('admin_news_index') }}">&lt;- Revenir sur la liste des actus</a>
+    <div class="my-4">
+        <a href="{{ path('admin_news_index') }}">&lt;- Revenir sur la liste des actus</a>
+    </div>
 
     {% include "admin/_form.html.twig" %}
 {% endblock %}

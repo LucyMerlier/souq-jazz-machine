@@ -6,16 +6,16 @@
     <h1 class="h1 my-4">Les contacts externes :</h1>
 
     <div class="d-flex justify-content-between">
-        <a class="btn btn-success" href="{{ path('admin_partner_add') }}">Ajouter un contact</a>
+        <a class="btn btn-success" href="{{ path('admin_partner_add') }}"><i class="fas fa-plus me-2"></i>Ajouter un contact</a>
         {{ form_start(filter_form) }}
             <div class="d-flex">
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.category) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">Filtrer</button>
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-filter mx-1"></i></button>
                 </div>
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
                 </div>
             </div>
         {{ form_end(filter_form) }}
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-3 px-4 text-end">
                                 <div class="my-1">
-                                    <a class="btn btn-warning" href="{{ path('admin_partner_edit', {'id': partner.id}) }}">Modifier</a>
+                                    <a class="btn btn-warning" href="{{ path('admin_partner_edit', {'id': partner.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a>
                                 </div>
                                 <div class="my-1">{% include "admin/partner/components/_delete_form.html.twig" %}</div>
                             </div>

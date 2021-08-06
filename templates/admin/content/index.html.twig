@@ -5,19 +5,19 @@
 {% block content %}
     <h1 class="h1 my-4">Gestion du contenu :</h1>
 
-    <a class="btn btn-success" href="{{ path('admin_content_legal_notices') }}">Voir les mentions légales</a>
+    <a class="btn btn-success" href="{{ path('admin_content_legal_notices') }}"><i class="fas fa-eye me-2"></i>Voir les mentions légales</a>
 
     <h2 class="h4 mt-5 mb-3 text-decoration-underline">Modification de la phrase d'accroche :</h2>
 
     {{ form_start(catchphrase_form) }}
         {{ form_widget(catchphrase_form) }}
-        <button class="btn btn-warning">Modifier</button>
+        <button class="btn btn-warning"><i class="fas fa-pen me-2"></i>Modifier</button>
     {{ form_end(catchphrase_form) }}
 
     <h2 class="h4 mt-5 mb-3 text-decoration-underline">Modification du paragraphe "Notre histoire" :</h2>
 
     {{ form_start(history_form) }}
         {{ form_widget(history_form) }}
-        <button class="btn btn-warning">Modifier</button>
+        <button class="btn btn-warning"><i class="fas fa-pen me-2"></i>Modifier</button>
     {{ form_end(history_form) }}
 {% endblock %}

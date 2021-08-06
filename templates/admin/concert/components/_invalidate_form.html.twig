@@ -1,5 +1,5 @@
 <form action="{{ path('admin_concert_invalidate', {'id': concert.id}) }}" method="POST" onsubmit="return confirm('Es-tu certain·e de vouloir invalider ce concert? Il disparaîtra alors du site public et retournera à l\'étape de vote');">
     <input type="hidden" name="_token" value="{{ csrf_token('invalidate' ~ concert.id) }}">
     <input type="hidden" name="route" value="{{ app.request.attributes.get('_route') }}">
-    <button class="btn btn-warning">Invalider</button>
+    <button class="btn btn-warning"><i class="fas fa-times me-2"></i>Invalider</button>
 </form>

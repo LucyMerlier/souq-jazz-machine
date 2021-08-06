@@ -9,10 +9,12 @@
 
     <h1 class="h1 my-4">Nouvel utilisateur</h1>
 
-    <a href="{{ path('admin_members') }}">Revenir sur la liste des membres</a>
+    <div class="my-4">
+        <a href="{{ path('admin_members') }}">&lt;- Revenir sur la liste des membres</a>
+    </div>
 
     {{ form_start(registration_form) }}
         {{ form_widget(registration_form) }}
-        <button class="btn btn-success">Enregistrer</button>
+        <button class="btn btn-success"><i class="fas fa-plus me-2"></i>Enregistrer</button>
     {{ form_end(registration_form) }}
 {% endblock %}

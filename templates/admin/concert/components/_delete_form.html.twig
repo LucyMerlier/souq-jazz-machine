@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('admin_concert_delete', {'id': concert.id}) }}" onsubmit="return confirm('Es-tu certain·e de vouloir annuler ce concert? Cette action est irréversible');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ concert.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+    <button class="btn btn-danger"><i class="fas fa-trash me-2"></i>Supprimer</button>
 </form>

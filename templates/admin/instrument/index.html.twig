@@ -6,7 +6,7 @@
     <h1 class="h1 my-4">Les instruments :</h1>
 
     <div class="d-flex">
-        <a class="btn btn-success" href="{{ path('admin_instrument_add') }}">Ajouter un instrument</a>
+        <a class="btn btn-success" href="{{ path('admin_instrument_add') }}"><i class="fas fa-plus me-2"></i>Ajouter un instrument</a>
     </div>
 
     {% if instruments is not empty %}
@@ -31,7 +31,7 @@
                                 Autres
                             {% endif %}
                         </td>
-                        <td><a class="btn btn-warning" href="{{ path('admin_instrument_edit', {'id': instrument.id}) }}">Modifier</a></td>
+                        <td><a class="btn btn-warning" href="{{ path('admin_instrument_edit', {'id': instrument.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a></td>
                         <td>{% include "admin/instrument/components/_delete_form.html.twig" %}</td>
                     </tr>
                 {% endfor %}

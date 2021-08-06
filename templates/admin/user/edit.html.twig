@@ -5,17 +5,19 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier mes informations :</h1>
 
-    <a href="{{ path('admin_user_show') }}">&lt;- Revenir sur mon profil</a>
+    <div class="my-4">
+        <a href="{{ path('admin_user_show') }}">&lt;- Revenir sur mon profil</a>
+    </div>
 
     {% include "admin/_form.html.twig" with {"button_label": "Modifier"} %}
 
     <div class="my-1">
-        <a class="btn btn-warning" href="{{ path('admin_change_password') }}">Modifier mon mot de passe</a>
+        <a class="btn btn-warning" href="{{ path('admin_change_password') }}"><i class="fas fa-key me-2"></i>Modifier mon mot de passe</a>
     </div>
     <div class="my-1">
         <form method="post" action="{{ path('admin_user_delete_account') }}" onsubmit="return confirm('Es-tu certain·e de vouloir supprimer ton compte? Cette action est irréversible');">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
-            <button class="btn btn-danger">Supprimer mon compte</button>
+            <button class="btn btn-danger"><i class="fas fa-sad-tear me-2"></i>Supprimer mon compte</button>
         </form>
     </div>
 {% endblock %}

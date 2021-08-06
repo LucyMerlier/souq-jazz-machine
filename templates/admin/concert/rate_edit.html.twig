@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier le tarif :</h1>
 
-    <a href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">&lt;- Revenir sur le concert</a>
+    <div class="my-4">
+        <a href="{{ path('admin_concert_edit', {'id': rate.concert.id}) }}">&lt;- Revenir sur le concert</a>
+    </div>
 
     <h2 class="h5 my-4 text-decoration-underline">Concert du {{ rate.concert.date|date('d/m/Y') }} à {{ rate.concert.city }} :</h2>
 

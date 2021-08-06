@@ -5,11 +5,11 @@
 {% block content %}
     <h1 class="h1 my-4">Mentions légales :</h1>
 
-    <div class="my-1">
+    <div class="my-4">
         <a href="{{ path('admin_content_index') }}">&lt;- Revenir sur la gestion du contenu</a>
     </div>
     <div class="my-1">
-        <a class="btn btn-success" href="{{ path('admin_content_legal_notice_add') }}">Ajouter une mention légale</a>
+        <a class="btn btn-success" href="{{ path('admin_content_legal_notice_add') }}"><i class="fas fa-plus me-2"></i>Ajouter une mention légale</a>
     </div>
 
     {% for legal_notice in legal_notices %}
@@ -19,7 +19,7 @@
             <ul class="border-0 list-unstyled d-flex justify-content-end">
                 <div class="btn-group">
                     <li class="mx-1">
-                        <a class="btn btn-warning" href="{{ path('admin_content_legal_notice_edit', {'id': legal_notice.id}) }}">Modifier</a>
+                        <a class="btn btn-warning" href="{{ path('admin_content_legal_notice_edit', {'id': legal_notice.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a>
                     </li>
                     <li class="mx-1">
                         {% include "admin/content/components/_legal_notice_delete_form.html.twig" %}

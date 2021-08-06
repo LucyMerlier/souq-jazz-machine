@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Proposer une date de concert :</h1>
 
-    <a href="{{ path('admin_concert_agenda') }}">&lt;- Revenir sur le calendrier</a>
+    <div class="my-4">
+        <a href="{{ path('admin_concert_agenda') }}">&lt;- Revenir sur le calendrier</a>
+    </div>
 
     {% include "admin/_form.html.twig" %}
 {% endblock %}

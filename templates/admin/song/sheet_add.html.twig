@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Ajouter une partition :</h1>
 
-    <a href="{{ path('admin_songs') }}">&lt;- Revenir sur la liste des partitions</a>
+    <div class="my-4">
+        <a href="{{ path('admin_songs') }}">&lt;- Revenir sur la liste des partitions</a>
+    </div>
 
     {% include "admin/song/components/_sheet_form.html.twig" %}
 {% endblock %}

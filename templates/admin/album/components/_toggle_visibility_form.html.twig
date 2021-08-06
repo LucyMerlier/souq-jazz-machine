@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('admin_album_picture_toggle_visibility', {'id': picture.id}) }}" onsubmit="return confirm('Es-tu certain·e de vouloir rendre cette photo {{ picture.isVisible ? 'invisible' : 'visible' }} sur le site public?');">
     <input type="hidden" name="_token" value="{{ csrf_token('visibility' ~ picture.id) }}">
-    <button class="btn btn-{{ picture.isVisible ? 'warning' : 'success' }}">{{ picture.isVisible ? 'Rendre invisible' : 'Rendre visible' }}</button>
+    <button class="btn btn-{{ picture.isVisible ? 'warning' : 'success' }}"><i class="fas fa-{{ picture.isVisible ? 'eye-slash' : 'eye' }} me-2"></i>{{ picture.isVisible ? 'Rendre invisible' : 'Rendre visible' }}</button>
 </form>
