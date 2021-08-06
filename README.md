@@ -144,6 +144,7 @@ This website has been developped using a vast array of amazing technological too
 * [CKEditor](https://github.com/FriendsOfSymfony/FOSCKEditorBundle)
 * [VichUploader](https://github.com/dustin10/VichUploaderBundle)
 * [Placekitten](https://placekitten.com/)
+* [Font Awesome](https://fontawesome.com/)
 * [VSCodium](https://vscodium.com/)
 * [Mailtrap](https://mailtrap.io/)
 
