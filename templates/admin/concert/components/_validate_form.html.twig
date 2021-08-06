@@ -1,5 +1,5 @@
 <form action="{{ path('admin_concert_validate', {'id': concert.id}) }}" method="POST" onsubmit="return confirm('Es-tu certain·e de vouloir valider ce concert? Les informations qui lui sont liées apparaîtront alors dans le site public');">
     <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ concert.id) }}">
     <input type="hidden" name="route" value="{{ app.request.attributes.get('_route') }}">
-    <button class="btn btn-success">Valider</button>
+    <button class="btn btn-success"><i class="fas fa-check me-2"></i>Valider</button>
 </form>

@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier l'album :</h1>
 
-    <a href="{{ path('admin_albums') }}">&lt;- Revenir sur la liste des albums</a>
+    <div class="my-4">
+        <a href="{{ path('admin_albums') }}">&lt;- Revenir sur la liste des albums</a>
+    </div>
 
     {% include "admin/_form.html.twig" with {"button_label": "Modifier"} %}
     <div class="my-1">
@@ -13,7 +15,7 @@
     </div>
 
     {% if album.pictures is not empty %}
-        <a href="{{ path('admin_album_show', {'id': album.id}) }}">Voir les {{ album.pictures|length }} photos de cet album</a>
+        <a href="{{ path('admin_album_show', {'id': album.id}) }}"><i class="fas fa-eye me-2"></i>Voir les {{ album.pictures|length }} photos de cet album</a>
     {% else %}
         <p>Aucune photo trouvée :(</p>
     {% endif %}

@@ -3,9 +3,9 @@
         <div class="d-flex justify-content-start">
             <div class="d-flex justify-content-center mx-1">
                 {% if app.user.votes|filter((vote) => vote in concert.votes) is not empty and app.user.votes|filter((vote) => vote in concert.votes|filter(vote => vote.vote)) is not empty %}
-                    <button class="btn btn-success disabled" type="submit" value="1" name="vote">A voté présent·e!</button>
+                    <button class="btn btn-success disabled" type="submit" value="1" name="vote"><i class="fas fa-thumbs-up me-2"></i>A voté présent·e!</button>
                 {% else %}
-                    <button class="btn btn-success" type="submit" value="1" name="vote">Je serai là!</button>
+                    <button class="btn btn-success" type="submit" value="1" name="vote"><i class="fas fa-thumbs-up me-2"></i>Je serai là!</button>
                 {% endif %}
 
                 <div class="dropdown">
@@ -25,9 +25,9 @@
 
             <div class="d-flex justify-content-center mx-1">
                 {% if app.user.votes|filter((vote) => vote in concert.votes) is not empty and app.user.votes|filter((vote) => vote in concert.votes|filter(vote => not vote.vote)) is not empty %}
-                    <button class="btn btn-danger disabled" type="submit" value="0" name="vote">A voté absent·e!</button>
+                    <button class="btn btn-danger disabled" type="submit" value="0" name="vote"><i class="fas fa-thumbs-down me-2"></i>A voté absent·e!</button>
                 {% else %}
-                    <button class="btn btn-danger" type="submit" value="0" name="vote">Pas dispo :(</button>
+                    <button class="btn btn-danger" type="submit" value="0" name="vote"><i class="fas fa-thumbs-down me-2"></i>Pas dispo :(</button>
                 {% endif %}
 
                 <div class="dropdown">

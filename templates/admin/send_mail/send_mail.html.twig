@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Envoyer un mail :</h1>
 
-    <a href="{{ path('admin_home') }}">&lt;- Revenir à l'accueil</a>
+    <div class="my-4">
+        <a href="{{ path('admin_home') }}">&lt;- Revenir à l'accueil</a>
+    </div>
 
     {% include "admin/_form.html.twig" with {"button_label": "Envoyer"} %}
 {% endblock %}

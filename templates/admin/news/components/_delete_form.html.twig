@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('admin_news_delete', {'id': news_article.id}) }}" onsubmit="return confirm('Es-tu certain·e de vouloir supprimer cette actu? Cette action est irréversible');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ news_article.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+    <button class="btn btn-danger"><i class="fas fa-trash me-2"></i>Supprimer</button>
 </form>

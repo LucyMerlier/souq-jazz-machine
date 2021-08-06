@@ -11,11 +11,11 @@
             <div class="d-flex">
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.sort) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">Trier</button>
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-sort mx-1"></i></button>
                 </div>
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
                 </div>
             </div>
         {{ form_end(filter_form) }}
@@ -46,10 +46,10 @@
                             </div>
                             <div class="col-6 px-4 text-end">
                                 <div class="my-1">
-                                    <a href="{{ path('admin_album_show', {'id': album.id}) }}">Voir les photos</a>
+                                    <a href="{{ path('admin_album_show', {'id': album.id}) }}"><i class="fas fa-eye me-2"></i>Voir les photos</a>
                                 </div>
                                 <div class="my-1">
-                                    <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}">Modifier l'album</a>
+                                    <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}"><i class="fas fa-pen me-2"></i>Modifier l'album</a>
                                 </div>
                                 <div class="my-1">
                                     {% include "admin/album/components/_delete_form.html.twig" %}

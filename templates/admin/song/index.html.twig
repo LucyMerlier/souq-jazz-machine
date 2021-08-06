@@ -6,16 +6,16 @@
     <h1 class="h1 my-4">Les partoches :</h1>
 
     <div class="d-flex justify-content-between">
-        <a class="btn btn-success" href="{{ path('admin_song_add') }}">Ajouter un nouveau morceau</a>
+        <a class="btn btn-success" href="{{ path('admin_song_add') }}"><i class="fas fa-plus me-2"></i>Ajouter un nouveau morceau</a>
         {{ form_start(filter_form) }}
             <div class="d-flex">
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.sort) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">Trier</button>
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-sort mx-1"></i></button>
                 </div>
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
                 </div>
             </div>
         {{ form_end(filter_form) }}
@@ -49,6 +49,7 @@
                                 {% for sheet in song.musicSheets %}
                                     <div class="col-12">
                                         <a target="_blank" href="/uploads/music-sheets/{{ sheet.url }}">
+                                            <i class="fas fa-eye me-2"></i>
                                             {% if sheet.instrument and sheet.specification %}
                                                 {{ sheet.instrument.name }} - {{ sheet.specification }}
                                             {% elseif sheet.instrument or sheet.specification %}
@@ -63,10 +64,10 @@
                                     <div>Aucune partition trouvée pour ce morceau :(</div>
                                 {% endfor %}
                                 <div class="my-1">
-                                    <a class="btn btn-success" href="{{ path('admin_song_sheet_add', {'id': song.id}) }}">Ajouter une partoch</a>
+                                    <a class="btn btn-success" href="{{ path('admin_song_sheet_add', {'id': song.id}) }}"><i class="fas fa-plus me-2"></i>Ajouter une partoch</a>
                                 </div>
                                 <div class="my-1">
-                                    <a class="btn btn-warning" href="{{ path('admin_song_edit', {'id': song.id}) }}">Modifier le morceau</a>
+                                    <a class="btn btn-warning" href="{{ path('admin_song_edit', {'id': song.id}) }}"><i class="fas fa-pen me-2"></i>Modifier le morceau</a>
                                 </div>
                             </div>
                         </div>

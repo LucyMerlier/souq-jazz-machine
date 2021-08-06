@@ -5,7 +5,9 @@
 {% block content %}
     <h1 class="h1 my-4">Modifier le concert :</h1>
 
-    <a href="{{ path('admin_concert_agenda') }}">&lt;- Revenir sur le calendrier</a>
+    <div class="my-4">
+        <a href="{{ path('admin_concert_agenda') }}">&lt;- Revenir sur le calendrier</a>
+    </div>
 
     {% include "admin/_form.html.twig" with {"button_label": "Modifier"} %}
     <div class="my-1">
@@ -14,7 +16,7 @@
 
     <h2 class="h2 my-4 text-decoration-underline">Les tarifs :</h2>
 
-    <a class="btn btn-success" href="{{ path('admin_concert_rate_add', {'id': concert.id}) }}">Ajouter un tarif</a>
+    <a class="btn btn-success" href="{{ path('admin_concert_rate_add', {'id': concert.id}) }}"><i class="fas fa-plus me-2"></i>Ajouter un tarif</a>
 
     {% if concert.rates is not empty %}
         <table class="table">
@@ -30,7 +32,7 @@
                     <tr>
                         <td>{{ rate.category == '' ? 'Entrée' : rate.category }}</td>
                         <td>{{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', '.') ~ '€' }}</td>
-                        <td><a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}">Modifier</a></td>
+                        <td><a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a></td>
                         <td>{% include "admin/concert/components/_rate_delete_form.html.twig" %}</td>
                     </tr>
                 {% endfor %}

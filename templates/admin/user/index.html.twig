@@ -7,18 +7,18 @@
 
     <div class="d-inline-block w-100">
         {% if is_granted("ROLE_ADMIN") %}
-            <a class="btn btn-success float-start" href="{{ path('app_register') }}">Ajouter un nouveau membre</a>
+            <a class="btn btn-success float-start" href="{{ path('app_register') }}"><i class="fas fa-plus me-2"></i>Ajouter un nouveau membre</a>
         {% endif %}
         <div class="float-end">
             {{ form_start(filter_form) }}
                 <div class="d-flex">
                     <div class="input-group ms-3">
                         {{ form_widget(filter_form.instrument) }}
-                        <button class="btn-outline btn-outline-secondary d-flex align-items-center">Filtrer</button>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-filter mx-1"></i></button>
                     </div>
                     <div class="input-group ms-3">
                         {{ form_widget(filter_form.query) }}
-                        <button class="btn-outline btn-outline-secondary d-flex align-items-center">🔍</button>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
                     </div>
                 </div>
             {{ form_end(filter_form) }}

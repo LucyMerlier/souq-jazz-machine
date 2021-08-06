@@ -5,6 +5,7 @@
 {% block content %}
 
     <h1 class="h1 my-4">Connexion au site admin</h1>
+
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -12,7 +13,7 @@
 
         {% if app.user %}
             <div class="mb-3">
-                Tu es connecté·e en tant que {{ app.user.username }}. <a class="link-secondary" href="{{ path('app_logout') }}">Déconnecte-toi en cliquant ici.</a>
+                Tu es connecté·e en tant que : <strong>{{ app.user.username }}</strong>. <a class="link-secondary" href="{{ path('app_logout') }}">Déconnecte-toi en cliquant ici.</a>
             </div>
         {% else %}
             <div class="mb-3">
@@ -31,7 +32,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <button class="btn btn-secondary" type="submit">
-            Connexion
+            <i class="fas fa-key me-2"></i>Connexion
         </button>
     </form>
 {% endblock %}

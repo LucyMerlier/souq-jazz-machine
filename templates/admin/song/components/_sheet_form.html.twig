@@ -12,5 +12,5 @@
         <option value="Voix 2"></option>
         <option value="Voix 3"></option>
     </datalist>
-    <button class="btn btn-{{ button_label is defined ? 'warning' : 'success' }}">{{ button_label|default('Enregistrer') }}</button>
+    <button class="btn btn-{{ button_label is defined ? 'warning' : 'success' }}"><i class="fas fa-{{ button_label is defined ? 'pen' : 'plus' }} me-2"></i>{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
