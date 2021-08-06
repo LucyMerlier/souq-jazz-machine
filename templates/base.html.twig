@@ -21,6 +21,11 @@
         </header>
         {% block banner %}{% endblock %}
         <main class="container">
+        <noscript>
+            <div class="alert alert-warning my-3">
+                Ce site a besoin que vous activiez JavaScript afin de fonctionner correctement.
+            </div>
+        </noscript>
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }} my-3">
