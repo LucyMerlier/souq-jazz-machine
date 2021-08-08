@@ -6,24 +6,28 @@
     <h1 class="h1 my-4">Salut {{ app.user.pseudonym ?? app.user.firstname }}!</h1>
 
     {% if unvoted_concerts %}
-        <h2 class="h4 mt-5 mb-3 text-decoration-underline">
-            {% if unvoted_concerts|length == 1 %}
-                Une nouvelle date a été proposée!
-            {% else %}
-                De nouvelles dates ont été proposées!
-            {% endif %}
-            Pense à indiquer si tu seras présent·e! ;)
-        </h2>
-        {% for concert in unvoted_concerts %}
-            {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
-        {% endfor %}
+        <section>
+            <h2 class="h4 mt-5 mb-3 text-decoration-underline">
+                {% if unvoted_concerts|length == 1 %}
+                    Une nouvelle date a été proposée!
+                {% else %}
+                    De nouvelles dates ont été proposées!
+                {% endif %}
+                Pense à indiquer si tu seras présent·e! ;)
+            </h2>
+            {% for concert in unvoted_concerts %}
+                {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
+            {% endfor %}
+        </section>
         <hr>
     {% endif %}
 
-    <h2 class="h4 mt-5 mb-3 text-decoration-underline">Prochain concert :</h2>
-    {% if concert %}
-        {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
-    {% else %}
-        <p>Aucun concert trouvé :(</p>
-    {% endif %}
+    <section>
+        <h2 class="h4 mt-5 mb-3 text-decoration-underline">Prochain concert :</h2>
+        {% if concert %}
+            {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
+        {% else %}
+            <p>Aucun concert trouvé :(</p>
+        {% endif %}
+    </section>
 {% endblock %}

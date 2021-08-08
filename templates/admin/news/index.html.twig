@@ -22,7 +22,7 @@
     </div>
 
     {% for news_article in news_articles %}
-        <div class="card mb-3 border-0 mt-5">
+        <article class="card mb-3 border-0 mt-5">
             <div class="row g-0">
                 <div class="card-title col-md-4">
                     <h2 class="h5">{{ news_article.title }}</h2>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
         <div class="d-flex justify-content-end">
             <div class="mx-1">
                 <a class="btn btn-warning" href="{{ path('admin_news_edit', {'id': news_article.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a>

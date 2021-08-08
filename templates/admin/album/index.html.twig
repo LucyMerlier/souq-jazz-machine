@@ -28,11 +28,11 @@
             <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
                 <h2 class="accordion-header" id="flush-title-{{ album.id }}">
                     <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ album.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ album.id }}">
-                        <div class="col-12 d-flex justify-content-around text-secondary">
-                            <div class="col-4 px-4">{{ album.title }}</div>
-                            <div class="col-4 px-4 text-center">Ajouté le : {{ album.createdAt|date('d/m/Y') }}</div>
-                            <div class="col-4 px-4 text-end">{{ album.pictures|length }} photo(s)</div>
-                        </div>
+                        <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
+                            <li class="col-4 px-4">{{ album.title }}</li>
+                            <li class="col-4 px-4 text-center">Ajouté le : {{ album.createdAt|date('d/m/Y') }}</li>
+                            <li class="col-4 px-4 text-end">{{ album.pictures|length }} photo(s)</li>
+                        </ul>
                     </button>
                 </h2>
                 <div id="flush-collapse-{{ album.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ album.id }}" data-bs-parent="#membersAccordion">

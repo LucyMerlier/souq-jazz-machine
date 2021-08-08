@@ -1,11 +1,18 @@
-<div data-aos="fade-right" class="card mb-3 border-0">
+<section data-aos="fade-right" class="card mb-3 border-0">
     <div class="row g-0">
         <div class="card-title col-md-4">
-            <p class="h5">{{ concert.city }}</p>
-            <p class="h5">{{ concert.date|date('d/m/Y, H:i') }}</p>
-            {% for rate in concert.rates %}
-                <p class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', '.') ~ '€' }}</p>
-            {% endfor %}
+            <h2 class="h5">
+                {{ concert.city }}
+                <br>
+                {{ concert.date|date('d/m/Y, H:i') }}
+            </h2>
+            {% if concert.rates %}
+                <ul class="list-unstyled">
+                    {% for rate in concert.rates %}
+                        <li class="h6">{{ rate.category == '' ? 'Entrée' : rate.category }} : {{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', '.') ~ '€' }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
         <div class="col-md-8">
             <div class="card-body p-0">
@@ -13,4 +20,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>
