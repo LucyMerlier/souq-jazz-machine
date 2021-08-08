@@ -32,11 +32,11 @@
             <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
                 <h2 class="accordion-header" id="flush-title-{{ user.id }}">
                     <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
-                        <div class="col-12 d-flex justify-content-around text-secondary">
-                            <div class="col-4 px-4">{{ user.firstname }}{{ user.pseudonym ? ' "' ~ user.pseudonym ~ '"' }} {{ user.lastname }}</div>
-                            <div class="col-4 px-4 text-center">{{ user.instrument.name }}</div>
-                            <div class="col-4 px-4 text-end">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</div>
-                        </div>
+                        <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
+                            <li class="col-4 px-4">{{ user.firstname }}{{ user.pseudonym ? ' "' ~ user.pseudonym ~ '"' }} {{ user.lastname }}</li>
+                            <li class="col-4 px-4 text-center">{{ user.instrument.name }}</li>
+                            <li class="col-4 px-4 text-end">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</li>
+                        </ul>
                     </button>
                 </h2>
                 <div id="flush-collapse-{{ user.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ user.id }}" data-bs-parent="#membersAccordion">

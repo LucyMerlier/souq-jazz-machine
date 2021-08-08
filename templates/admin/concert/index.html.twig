@@ -18,27 +18,32 @@
     </div>
 
     {% if concerts|filter((concert) => not concert.isValidated) %}
-        <h2 class="h4 mt-5 mb-3 text-decoration-underline">Date(s) proposée(s) :</h2>
-        {% for concert in concerts|filter((concert) => not concert.isValidated) %}
-            {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
-        {% endfor %}
-        <hr>
+        <section>
+            <h2 class="h4 mt-5 mb-3 text-decoration-underline">Date(s) proposée(s) :</h2>
+            {% for concert in concerts|filter((concert) => not concert.isValidated) %}
+                {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
+            {% endfor %}
+            <hr>
+        </section>
     {% endif %}
 
     {% if concerts|filter((concert) => concert.isValidated)|filter((concert) => concert.date >= date('now')) %}
-        <h2 class="h4 mt-5 mb-3 text-decoration-underline">Date(s) à venir :</h2>
-        {% for concert in concerts|filter((concert) => concert.isValidated)|filter((concert) => concert.date >= date('now')) %}
-            {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
-        {% endfor %}
-        <hr>
+        <section>
+            <h2 class="h4 mt-5 mb-3 text-decoration-underline">Date(s) à venir :</h2>
+            {% for concert in concerts|filter((concert) => concert.isValidated)|filter((concert) => concert.date >= date('now')) %}
+                {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
+            {% endfor %}
+            <hr>
+        </section>
     {% endif %}
 
     {% if concerts|filter((concert) => concert.date < date('now')) %}
-        <h2 class="h4 mt-5 mb-3 text-decoration-underline">Date(s) passée(s) :</h2>
-        {% for concert in concerts|filter((concert) => concert.date < date('now')) %}
-            {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
-        {% endfor %}
-        <hr>
+        <section>
+            <h2 class="h4 mt-5 mb-3 text-decoration-underline">Date(s) passée(s) :</h2>
+            {% for concert in concerts|filter((concert) => concert.date < date('now')) %}
+                {% include "admin/concert/components/_concert_card.html.twig" with {"concert": concert} %}
+            {% endfor %}
+        </section>
     {% endif %}
 
     {% if not concerts %}

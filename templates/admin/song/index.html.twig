@@ -28,10 +28,10 @@
             <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
                 <h2 class="accordion-header" id="flush-title-{{ song.id }}">
                     <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ song.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ song.id }}">
-                        <div class="col-12 d-flex justify-content-around text-secondary">
-                            <div class="col-6 px-4">{{ song.title }}</div>
-                            <div class="col-6 px-4 text-end">{{ song.musicSheets|length }} partition(s)</div>
-                        </div>
+                        <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
+                            <li class="col-6 px-4">{{ song.title }}</li>
+                            <li class="col-6 px-4 text-end">{{ song.musicSheets|length }} partition(s)</li>
+                        </ul>
                     </button>
                 </h2>
                 <div id="flush-collapse-{{ song.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ song.id }}" data-bs-parent="#membersAccordion">
