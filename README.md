@@ -145,6 +145,7 @@ This website has been developped using a vast array of amazing technological too
 * [VichUploader](https://github.com/dustin10/VichUploaderBundle)
 * [Placekitten](https://placekitten.com/)
 * [Font Awesome](https://fontawesome.com/)
+* [AOS](https://michalsnik.github.io/aos/)
 * [VSCodium](https://vscodium.com/)
 * [Mailtrap](https://mailtrap.io/)
 
