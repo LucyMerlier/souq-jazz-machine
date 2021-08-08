@@ -83,6 +83,7 @@ class ShowcaseController extends AbstractController
     public function contact(Request $request, MailerInterface $mailer): Response
     {
         $contact = new ContactRequest();
+
         if ($request->query->get('bugReporting') === 'true') {
             $contact->setSubject('J\'ai trouvé un bug sur votre site!');
             $contact->setMessage(
@@ -95,16 +96,18 @@ class ShowcaseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string */
-            $emailTo = $this->getParameter('email_address');
-            $email = (new Email())
-                ->from((string)$contact->getEmailAddress())
-                ->to($emailTo)
-                ->subject((string)$contact->getSubject())
-                ->html($this->renderView('email/views/contact_request_email.html.twig', ['contact' => $contact]))
-            ;
+            if (is_null($form['honeypot']->getData())) {
+                /** @var string */
+                $emailTo = $this->getParameter('email_address');
+                $email = (new Email())
+                    ->from((string)$contact->getEmailAddress())
+                    ->to($emailTo)
+                    ->subject((string)$contact->getSubject())
+                    ->html($this->renderView('email/views/contact_request_email.html.twig', ['contact' => $contact]))
+                ;
 
-            $mailer->send($email);
+                $mailer->send($email);
+            }
 
             $this->addFlash(
                 'success',
@@ -132,24 +135,26 @@ class ShowcaseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Instrument */
-            $instrument = $offer->getInstrument();
+            if (is_null($form['honeypot']->getData())) {
+                /** @var Instrument */
+                $instrument = $offer->getInstrument();
 
-            /** @var string */
-            $emailTo = $this->getParameter('email_address');
-            $email = (new Email())
-                ->from((string)$apply->getEmailAddress())
-                ->to($emailTo)
-                ->subject(
-                    'Quelqu\'un a répondu à l\'annonce pour le pupitre ' . $instrument->getName() . '!'
-                )
-                ->html($this->renderView('email/views/apply_email.html.twig', [
-                    'apply' => $apply,
-                    'offer' => $offer,
-                ]))
-            ;
+                /** @var string */
+                $emailTo = $this->getParameter('email_address');
+                $email = (new Email())
+                    ->from((string)$apply->getEmailAddress())
+                    ->to($emailTo)
+                    ->subject(
+                        'Quelqu\'un a répondu à l\'annonce pour le pupitre ' . $instrument->getName() . '!'
+                    )
+                    ->html($this->renderView('email/views/apply_email.html.twig', [
+                        'apply' => $apply,
+                        'offer' => $offer,
+                    ]))
+                ;
 
-            $mailer->send($email);
+                $mailer->send($email);
+            }
 
             $this->addFlash(
                 'success',

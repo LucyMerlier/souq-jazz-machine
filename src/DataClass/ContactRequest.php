@@ -28,7 +28,7 @@ class ContactRequest
     /**
      * @Assert\Length(max=50)
      */
-    private ?string $phoneNumber;
+    private ?string $phoneNumber = null;
 
     /**
      * @Assert\NotBlank()
