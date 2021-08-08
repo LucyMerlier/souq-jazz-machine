@@ -3,12 +3,17 @@
 {% block title %}Calendrier - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">CALENDRIER</h1>
+    <h1 data-aos="fade-right" class="h1 my-4">CALENDRIER</h1>
 
     {% for concert in concerts %}
         {% include "showcase/_concert_card.html.twig" with {"concert": concert} %}
+        {% if loop.index < concerts|length %}
+            <hr data-aos="fade-right">
+        {% endif %}
     {% else %}
-        <p>Aucun concert trouvé :( Mais ne partez pas trop loin, on revient bientôt! ;)</p>
+    <div class="mt-5" data-aos="fade-right">
+        <p>Aucun concert trouvé <i class="fas fa-frown me-2"></i> Mais ne partez pas trop loin, on revient bientôt! ;)</p>
+    </div>
     {% endfor %}
 
 {% endblock %}

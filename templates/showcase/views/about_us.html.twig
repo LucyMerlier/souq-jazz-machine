@@ -3,22 +3,24 @@
 {% block title %}Le big band - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">LE BIG BAND</h1>
+    <h1 data-aos="fade-right" class="h1 my-4">LE BIG BAND</h1>
 
-    <h2 class="h2 my-4">Notre histoire</h2>
+    <h2 data-aos="fade-right" class="h2 my-4">Notre histoire</h2>
 
-    <p>
-        {{ our_history ? our_history.content|raw : "<p>Le <strong>Souq' Jazz Machine</strong> est né en 2001 sous l’impulsion d’une dizaine de saxophonistes, rapidement rejoints par une rythmique (batterie, basse, piano, guitare) et une section de cuivres afin de satisfaire aux besoins de la scène.</p><p>Après avoir assuré de nombreuses prestations dans les bars, soirées privées et animations diverses, dans un style avant tout jazz, cette bande d’amis a évolué vers la formation big band que nous connaissons aujourd’hui. Accompagnant maintenant un crooner et deux chanteuses de choc, l’ambiance est latine, jazz et funky, dans un répertoire allant de Duke Ellington à James Brown, en passant par John Coltrane, Ray Charles ou Stevie Wonder.</p>" }}
-    </p>
+    <div data-aos="fade-right">
+        <p>
+            {{ our_history ? our_history.content|raw : "<p>Le <strong>Souq' Jazz Machine</strong> est né en 2001 sous l’impulsion d’une dizaine de saxophonistes, rapidement rejoints par une rythmique (batterie, basse, piano, guitare) et une section de cuivres afin de satisfaire aux besoins de la scène.</p><p>Après avoir assuré de nombreuses prestations dans les bars, soirées privées et animations diverses, dans un style avant tout jazz, cette bande d’amis a évolué vers la formation big band que nous connaissons aujourd’hui. Accompagnant maintenant un crooner et deux chanteuses de choc, l’ambiance est latine, jazz et funky, dans un répertoire allant de Duke Ellington à James Brown, en passant par John Coltrane, Ray Charles ou Stevie Wonder.</p>" }}
+        </p>
+    </div>
 
-    <h2 class="h2 my-4">L'équipe</h2>
+    <h2 data-aos="fade-right" class="h2 my-4">L'équipe</h2>
 
     <div class="row justify-content-center">
         {% for instrument in instruments %}
             {% if instrument.players is not empty %}
-                <h3 class="h3 my-4 text-center text-decoration-underline">{{ instrument.name }}</h3>
+                <h3 data-aos="fade-up" class="h3 my-4 text-center text-decoration-underline">{{ instrument.name }}</h3>
                 {% for player in instrument.players %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 p-4">
+                    <div data-aos="fade-up" class="col-lg-3 col-md-4 col-sm-6 p-4">
                         <div class="card border-0">
                             <img src="{{ player.imageUrl ? '/uploads/profile-pictures/' ~ player.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" class="card-img-top" alt="Une photo de {{ player.firstname ~ ' ' ~ player.lastname }}">
                             <div class="card-body text-center">
@@ -30,8 +32,14 @@
                         </div>
                     </div>
                 {% endfor %}
-                <hr>
+                {% if loop.index < instruments|length %}
+                    <hr data-aos="fade-right">
+                {% endif %}
             {% endif %}
-        {% endfor %}
+        {% else %}
+            <div class="mt-5">
+                <p>Aucun musicien trouvé <i class="fas fa-frown"></i></p>
+            </div>
+        {% endfor %}            
     </div>
 {% endblock %}

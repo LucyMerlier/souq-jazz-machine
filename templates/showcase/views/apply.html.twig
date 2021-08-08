@@ -3,12 +3,15 @@
 {% block title %}Répondre à l'annonce - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">REJOIGNEZ-NOUS!</h1>
+    <h1 data-aos="fade-right" class="h1 my-4">REJOIGNEZ-NOUS!</h1>
 
-    <h2 class="h3 my-4">{{ offer.description }}</h2>
+    <h2 data-aos="fade-right" class="h3 my-4">{{ offer.description }}</h2>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-secondary">Envoyer!</button>
-    {{ form_end(form) }}
+
+    <div data-aos="fade-up">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-secondary"><i class="fas fa-paper-plane me-2"></div>Envoyer!</button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

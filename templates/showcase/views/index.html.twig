@@ -4,7 +4,7 @@
     <div class="card">
         <img src="{{ asset('build/images/banner.jpg') }}" class="card-img" alt="A picture of saxophones">
         <div class="card-img-overlay text-center d-flex flex-column justify-content-center align-items-center">
-            <div class="w-lg-50 w-sm-100 bg-dark p-3 rounded">
+            <div data-aos="zoom-in-up" class="w-lg-50 w-sm-100 bg-dark p-3 rounded">
                 <h1 class="card-title h1">{{ catchphrase ? catchphrase.title : "Bienvenue au Souq' Jazz Machine!" }}</h1>
                 <p class="card-text">{{ catchphrase ? catchphrase.phrase : "Le Big Band qui fait voyager!" }}</p>
             </div>
@@ -13,10 +13,10 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="h1 my-4">ACTUALITÉS</h2>
+    <h2 data-aos="fade-right" class="h1 my-4">ACTUALITÉS</h2>
 
     {% for news_article in news_articles %}
-        <div class="card mb-3 border-0 mt-5">
+        <div data-aos="fade-right" class="card mb-3 border-0 mt-5">
             <div class="row g-0">
                 <div class="card-title col-md-4">
                     <h2 class="h5">{{ news_article.title }}</h2>
@@ -30,13 +30,14 @@
             </div>
         </div>
     {% else %}
-        <p>Aucun article trouvé :(</p>
+        <div class="mt-5" data-aos="fade-right">
+            <p>Aucun article trouvé <i class="fas fa-frown"></i></p>
+        </div>
     {% endfor %}
 
-    <hr>
-
     {% if concert %}
-        <h2 class="h1 my-4">PROCHAIN CONCERT</h2>
+        <hr data-aos="fade-right">
+        <h2 data-aos="fade-right" class="h1 my-4">PROCHAIN CONCERT</h2>
 
         {% include "showcase/_concert_card.html.twig" %}
     {% endif %}

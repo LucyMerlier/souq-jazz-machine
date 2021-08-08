@@ -3,10 +3,10 @@
 {% block title %}Galerie - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">GALERIE DE PHOTOS</h1>
+    <h1 data-aos="fade-right" class="h1 my-4">GALERIE DE PHOTOS</h1>
 
     {% if pictures is not empty %}
-        <div class="mt-3 ms-4">
+        <div data-aos="fade-up" class="mt-3 ms-4">
             <div class="row col-12">
                 <div class="col-lg-8 col-sm-12 pe-lg-2 p-0">
                     <div id="picturesCarousel" class="carousel slide carousel-fade my-3" data-bs-ride="carousel" data-bs-interval="false">
@@ -41,6 +41,8 @@
             </div>
         </div>
     {% else %}
-        <p>Aucune photo trouvée :(</p>
+        <div class="mt-5" data-aos="fade-right">
+            <p>Aucune photo trouvée <i class="fas fa-frown"></i></p>
+        </div>
     {% endif %}
 {% endblock %}
