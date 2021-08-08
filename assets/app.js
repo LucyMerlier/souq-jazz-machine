@@ -11,6 +11,9 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all');
 
@@ -31,3 +34,5 @@ dismissButtons.forEach((dismiss) => {
         sessionStorage.setItem('noToast', true);
     });
 });
+
+AOS.init();

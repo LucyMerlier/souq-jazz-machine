@@ -3,14 +3,16 @@
 {% block title %}Mentions légales - {{ parent() }}{% endblock %}
 
 {% block content %}
-    <h1 class="h1 my-4">MENTIONS LÉGALES</h1>
+    <h1 data-aos="fade-right" class="h1 my-4">MENTIONS LÉGALES</h1>
 
     {% for legal_notice in legal_notices %}
-        <section class="my-4">
+        <section data-aos="fade-right" class="my-4">
             <h2 class="h2 my-4">{{ legal_notice.title }}</h2>
             <article>{{ legal_notice.content|raw }}</article>
         </section>
     {% else %}
-        <p class="mt-5">Aucune mention légale trouvée...</p>
+        <div class="mt-5" data-aos="fade-right">
+            <p>Aucune mention légale trouvée <i class="fas fa-frown"></i></p>
+        </div>
     {% endfor %}
 {% endblock %}
