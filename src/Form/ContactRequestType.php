@@ -44,6 +44,14 @@ class ContactRequestType extends AbstractType
                 'label' => 'Votre message',
                 'attr' => ['placeholder' => 'Vous auriez pas un paypal, que je puisse vous filer un pourboire?'],
             ])
+            ->add('honeypot', TextType::class, [
+                'mapped' => false,
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'honeypot',
+                ]
+            ])
         ;
     }
 

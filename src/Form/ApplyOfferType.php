@@ -37,6 +37,14 @@ class ApplyOfferType extends AbstractType
                 'label' => 'Votre message',
                 'attr' => ['placeholder' => 'J\'aimerais faire partie de la bande!'],
             ])
+            ->add('honeypot', TextType::class, [
+                'mapped' => false,
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'honeypot',
+                ]
+            ])
         ;
     }
 
