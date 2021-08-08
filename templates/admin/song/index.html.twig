@@ -61,7 +61,7 @@
                                         </a>
                                     </div>
                                 {% else %}
-                                    <div>Aucune partition trouvée pour ce morceau :(</div>
+                                    <div>Aucune partition trouvée pour ce morceau...</div>
                                 {% endfor %}
                                 <div class="my-1">
                                     <a class="btn btn-success" href="{{ path('admin_song_sheet_add', {'id': song.id}) }}"><i class="fas fa-plus me-2"></i>Ajouter une partoch</a>
@@ -75,7 +75,7 @@
                 </div>
             </div>
         {% else %}
-            <div class="accordion-item">Aucun morceau trouvé :(</div>
+            <div class="accordion-item">Aucun morceau trouvé...</div>
         {% endfor %}
     </div>
 {% endblock %}
