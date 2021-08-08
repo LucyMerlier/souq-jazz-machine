@@ -10,7 +10,7 @@
 
         <div data-aos="fade-right">
             {% if our_history %}
-                {{ our_history.content }}
+                {{ our_history.content|raw }}
             {% else %}
                 <p>
                     Le <strong>Souq' Jazz Machine</strong> est né en 2001 sous l’impulsion d’une dizaine de saxophonistes, rapidement rejoints par une rythmique (batterie, basse, piano, guitare) et une section de cuivres afin de satisfaire aux besoins de la scène.
