@@ -31,8 +31,8 @@
                                 <div class="carousel-item d-flex justify-content-center align-items-center  {{ loop.index == 1 ? 'active' }}">
                                     <img class="m-0" src="{{ '/uploads/albums-pictures/' ~ picture.imageUrl }}" alt="Une photo du Souq' Jazz Machine">
                                     {% if is_granted('ROLE_ADMIN') %}
-                                        <div class="carousel-caption d-flex justify-content-center">
-                                            <div class="mx-1">
+                                        <div class="carousel-caption d-flex flex-md-row flex-column justify-content-center">
+                                            <div class="mx-1 mb-md-0 mb-1">
                                                 {% include "admin/album/components/_toggle_visibility_form.html.twig" %}
                                             </div>
                                             <div class="mx-1">

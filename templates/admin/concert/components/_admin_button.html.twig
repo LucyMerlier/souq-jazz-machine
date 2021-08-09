@@ -1,18 +1,18 @@
 <ul class="border-0 list-unstyled">
-    <div class="btn-group">
+    <div class="btn-group d-flex flex-sm-row flex-column justify-content-sm-start align-items-start">
         {% if not concert.isValidated %}
-            <li class="mx-1">
+            <li class="mx-1 mb-sm-0 mb-1">
                 {% include "admin/concert/components/_validate_form.html.twig" %}
             </li>
         {% elseif concert.isValidated and concert.date > date('now') %}
-            <li class="mx-1">
+            <li class="mx-1 mb-sm-0 mb-1">
                 {% include "admin/concert/components/_invalidate_form.html.twig" %}
             </li>
         {% endif %}
-        <li class="mx-1">
+        <li class="mx-1 mb-sm-0 mb-1">
             <a class="btn btn-warning" href="{{ path('admin_concert_edit', {'id': concert.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a>
         </li>
-        <li class="mx-1">
+        <li class="mx-1 mb-sm-0 mb-1">
             {% include "admin/concert/components/_delete_form.html.twig" %}
         </li>
     </div>

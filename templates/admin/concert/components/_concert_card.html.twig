@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body p-0">
-                    <div class="card-text">{{ concert.description|raw }}</div>
+                    <div class="card-text ps-md-5 p-0">{{ concert.description|raw }}</div>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
     {% if not concert.isValidated %}
         {% include "admin/concert/components/_vote.html.twig" %}
     {% elseif is_granted("ROLE_ADMIN") %}
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-xl-end justify-content-start">
             {% include "admin/concert/components/_admin_button.html.twig" %}
         </div>
     {% endif %}

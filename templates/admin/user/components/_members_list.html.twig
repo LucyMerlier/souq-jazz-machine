@@ -6,35 +6,37 @@
             <h2 class="accordion-header" id="flush-title-{{ user.id }}">
                 <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ user.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ user.id }}">
                     <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
-                        <li class="col-4 px-4">{{ user.firstname }}{{ user.pseudonym ? ' "' ~ user.pseudonym ~ '"' }} {{ user.lastname }}</li>
-                        <li class="col-4 px-4 text-center">{{ user.instrument.name }}</li>
-                        <li class="col-4 px-4 text-end">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</li>
+                        <li class="col-lg-4 col-12 px-4">{{ user.firstname }}{{ user.pseudonym ? ' "' ~ user.pseudonym ~ '"' }} {{ user.lastname }}</li>
+                        <li class="col-lg-4 d-lg-inline d-none px-4 text-center">{{ user.instrument.name }}</li>
+                        <li class="col-lg-4 d-lg-inline d-none px-4 text-end">{{ user.phone ?? 'Numéro de téléphone non renseigné' }}</li>
                     </ul>
                 </button>
             </h2>
             <div id="flush-collapse-{{ user.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ user.id }}" data-bs-parent="#membersAccordion">
                 <div class="accordion-body">
-                    <div class="d-flex">
-                        <div class="col-3">
-                            <img class="col-12" src="{{ user.imageUrl ? '/uploads/profile-pictures/' ~ user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" alt="Une photo de {{ user.firstname ~ ' ' ~ user.lastname }}">
-                        </div>
-                        <div class="col-6 px-4">
-                            <ul>
-                                <li>Adresse email : {{ user.email }}</li>
-                                <li>Numéro de téléphone : {{ user.phone ?? 'Non renseigné' }}</li>
-                                {% if user.catchphrase %}
-                                    <li>Quelques mots : "{{ user.catchphrase }}"</li>
-                                {% endif %}
-                                <li>
-                                    {% if "ROLE_SUPERADMIN" in user.roles %}
-                                        SUPERADMIN
-                                    {% else %}
-                                        Droits admin : {% if "ROLE_ADMIN" in user.roles %}Oui{% else %}Non{% endif %}
+                    <div class="d-flex flex-xl-row flex-column">
+                        <div class="d-flex flex-md-row flex-column col-xl-9 col-12">
+                            <div class="col-xl-3 col-md-4 col-12 mb-mb-0 mb-3">
+                                <img class="col-12" src="{{ user.imageUrl ? '/uploads/profile-pictures/' ~ user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" alt="Une photo de {{ user.firstname ~ ' ' ~ user.lastname }}">
+                            </div>
+                            <div class="col-xl-6 col-md-9 col-12 px-4">
+                                <ul>
+                                    <li>Adresse email : {{ user.email }}</li>
+                                    <li>Numéro de téléphone : {{ user.phone ?? 'Non renseigné' }}</li>
+                                    {% if user.catchphrase %}
+                                        <li>Quelques mots : "{{ user.catchphrase }}"</li>
                                     {% endif %}
-                                </li>
-                            </ul>
+                                    <li>
+                                        {% if "ROLE_SUPERADMIN" in user.roles %}
+                                            SUPERADMIN
+                                        {% else %}
+                                            Droits admin : {% if "ROLE_ADMIN" in user.roles %}Oui{% else %}Non{% endif %}
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="col-3 px-4 text-end">
+                        <div class="col-xl-3 col-12 px-4 text-xl-end text-center">
                             {% if is_granted("ROLE_SUPERADMIN") %}
                                 {% if "ROLE_ADMIN" in user.roles %}
                                     <div class="my-1">{% include "admin/user/components/_revoke_admin_form.html.twig" %}</div>

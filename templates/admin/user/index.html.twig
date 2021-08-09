@@ -9,28 +9,28 @@
 {% block content %}
     <h1 class="h1 my-4">Les membres du groupe :</h1>
 
-    <div class="d-inline-block w-100">
-        {% if is_granted("ROLE_ADMIN") %}
-            <a class="btn btn-success float-start" href="{{ path('app_register') }}"><i class="fas fa-plus me-2"></i>Ajouter un nouveau membre</a>
-        {% endif %}
-        <div class="float-end">
-            {{ form_start(filter_form) }}
-                <div class="d-flex">
-                    <div class="input-group ms-3">
-                        {{ form_widget(filter_form.instrument) }}
-                        <noscript>
-                            <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-filter mx-1"></i></button>
-                        </noscript>
-                    </div>
-                    <div class="input-group ms-3">
-                        {{ form_widget(filter_form.query) }}
-                        <noscript>
-                            <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
-                        </noscript>
-                    </div>
-                </div>
-            {{ form_end(filter_form) }}
+    <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between">
+        <div class="mb-lg-0 mb-3">
+            {% if is_granted("ROLE_ADMIN") %}
+                <a class="btn btn-success" href="{{ path('app_register') }}"><i class="fas fa-plus me-2"></i>Ajouter un nouveau membre</a>
+            {% endif %}
         </div>
+        {{ form_start(filter_form) }}
+            <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between">
+                <div class="input-group ms-lg-3 ms-0 mb-lg-0 mb-3">
+                    {{ form_widget(filter_form.instrument) }}
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-filter mx-1"></i></button>
+                    </noscript>
+                </div>
+                <div class="input-group ms-lg-3 ms-0 mb-lg-0 mb-3">
+                    {{ form_widget(filter_form.query) }}
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    </noscript>
+                </div>
+            </div>
+        {{ form_end(filter_form) }}
     </div>
 
     <section id="membersList">

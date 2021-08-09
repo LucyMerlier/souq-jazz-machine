@@ -7,11 +7,11 @@
 
     <h2 class="h4 my-4 text-decoration-underline">C'est ici que tu peux retrouver et modifier tes informations personnelles :)</h2>
 
-    <div class="d-flex py-4">
-        <div class="col-3">
+    <div class="d-flex flex-md-row flex-column py-4">
+        <div class="col-md-3 col-12">
             <img class="col-12" src="{{ app.user.imageUrl ? '/uploads/profile-pictures/' ~ app.user.imageUrl : 'https://placekitten.com/g/400/400?image=' ~ random(0, 16) }}" alt="Une photo de {{ app.user.firstname ~ ' ' ~ app.user.lastname }}">
         </div>
-        <div class="col-7 px-4">
+        <div class="col-md-7 col-12 px-4">
             <table class="table">
                 <tbody>
                     <tr>

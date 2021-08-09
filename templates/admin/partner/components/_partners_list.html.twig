@@ -6,8 +6,8 @@
             <h2 class="accordion-header" id="flush-title-{{ partner.id }}">
                 <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ partner.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ partner.id }}">
                     <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
-                        <li class="col-6 px-4">{{ partner.name }}</li>
-                        <li class="col-6 px-4 text-end">
+                        <li class="col-lg-6 col-12 px-4">{{ partner.name }}</li>
+                        <li class="col-6 d-lg-inline d-none px-4 text-end">
                             {% if partner.category == 'friend' %}
                                 Copain / Copine
                             {% elseif partner.category == 'formerMember' %}
@@ -23,8 +23,8 @@
             </h2>
             <div id="flush-collapse-{{ partner.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ partner.id }}" data-bs-parent="#partnersAccordion">
                 <div class="accordion-body">
-                    <div class="d-flex">
-                        <div class="col-9 px-4">
+                    <div class="d-flex flex-lg-row flex-column">
+                        <div class="col-lg-9 col-12 px-4">
                             <ul>
                                 <li>Nom : {{ partner.name }}</li>
                                 <li>
@@ -45,7 +45,7 @@
                                 <li>Description : {{ partner.description ? partner.description|raw : 'Aucune description' }}</li>
                             </ul>
                         </div>
-                        <div class="col-3 px-4 text-end">
+                        <div class="col-lg-3 col-12 px-4 text-lg-end text-center">
                             <div class="my-1">
                                 <a class="btn btn-warning" href="{{ path('admin_partner_edit', {'id': partner.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a>
                             </div>
