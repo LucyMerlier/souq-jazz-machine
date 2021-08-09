@@ -11,7 +11,9 @@
             <div class="d-flex">
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.sort) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-filter mx-1"></i></button>
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-filter mx-1"></i></button>
+                    </noscript>
                 </div>
             </div>
         {{ form_end(filter_form) }}
