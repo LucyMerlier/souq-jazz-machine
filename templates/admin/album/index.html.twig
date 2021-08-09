@@ -2,6 +2,10 @@
 
 {% block title %}Les albums photo - {{ parent() }}{% endblock %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('album') }}
+{% endblock %}
+
 {% block content %}
     <h1 class="h1 my-4">Les albums photos :</h1>
 
@@ -17,52 +21,15 @@
                 </div>
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    </noscript>
                 </div>
             </div>
         {{ form_end(filter_form) }}
     </div>
 
-    <div class="accordion accordion-flush mt-5" id="membersAccordion">
-        {% set count = 0 %}
-        {% for album in albums %}
-            {% set count = count + 1 %}
-            <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
-                <h2 class="accordion-header" id="flush-title-{{ album.id }}">
-                    <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ album.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ album.id }}">
-                        <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
-                            <li class="col-4 px-4">{{ album.title }}</li>
-                            <li class="col-4 px-4 text-center">Ajouté le : {{ album.createdAt|date('d/m/Y') }}</li>
-                            <li class="col-4 px-4 text-end">{{ album.pictures|length }} photo(s)</li>
-                        </ul>
-                    </button>
-                </h2>
-                <div id="flush-collapse-{{ album.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ album.id }}" data-bs-parent="#membersAccordion">
-                    <div class="accordion-body">
-                        <div class="d-flex">
-                            <div class="col-6 px-4">
-                                <ul>
-                                    <li>Ajouté le : {{ album.createdAt|date('d/m/Y') }}</li>
-                                    <li>Description : {{ album.description ? album.description|raw : 'Aucune description' }}</li>
-                                </ul>
-                            </div>
-                            <div class="col-6 px-4 text-end">
-                                <div class="my-1">
-                                    <a href="{{ path('admin_album_show', {'id': album.id}) }}"><i class="fas fa-eye me-2"></i>Voir les photos</a>
-                                </div>
-                                <div class="my-1">
-                                    <a class="btn btn-warning" href="{{ path('admin_album_edit', {'id': album.id}) }}"><i class="fas fa-pen me-2"></i>Modifier l'album</a>
-                                </div>
-                                <div class="my-1">
-                                    {% include "admin/album/components/_delete_form.html.twig" %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="accordion-item">Aucun album photo trouvé...</div>
-        {% endfor %}
-    </div>
+    <section id="albumsList">
+        {% include "admin/album/components/_albums_list.html.twig" %}
+    </section>
 {% endblock %}

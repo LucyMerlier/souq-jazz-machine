@@ -6,6 +6,7 @@ use App\Entity\Album;
 use App\Entity\Picture;
 use App\Form\AlbumType;
 use App\Form\PictureType;
+use App\Repository\AlbumRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -187,6 +188,38 @@ class AlbumController extends AbstractController
         $album = $picture->getAlbum();
         return $this->redirectToRoute('admin_album_show', [
             'id' => $album->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/ajax-albums/{sort}/{query}", name="ajax")
+     */
+    public function getAlbums(
+        AlbumRepository $albumRepository,
+        string $sort = '',
+        string $query = ''
+    ): Response {
+        $orderBy = [];
+        switch ($sort) {
+            case 'dateDescending':
+                $orderBy = ['createdAt' => 'DESC'];
+                break;
+            case 'dateAscending':
+                $orderBy = ['createdAt' => 'ASC'];
+                break;
+            case 'titleAscending':
+                $orderBy = ['title' => 'ASC'];
+                break;
+            case 'titleDescending':
+                $orderBy = ['title' => 'DESC'];
+                break;
+            default:
+                $orderBy = ['createdAt' => 'DESC'];
+                break;
+        }
+
+        return $this->render('admin/album/components/_albums_list.html.twig', [
+            'albums' => $albumRepository->findByQuery($orderBy, $query),
         ]);
     }
 }

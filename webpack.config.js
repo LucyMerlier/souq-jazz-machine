@@ -54,6 +54,8 @@ Encore
 
     .addEntry('song', './assets/scripts/song.js')
 
+    .addEntry('album', './assets/scripts/album.js')
+
     .addStyleEntry('admin', './assets/styles/admin.scss')
 
     .addStyleEntry('showcase', './assets/styles/showcase.scss')
