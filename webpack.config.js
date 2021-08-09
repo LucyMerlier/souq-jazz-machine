@@ -46,6 +46,18 @@ Encore
      */
     .addEntry('app', './assets/app.js')
 
+    .addEntry('concert', './assets/scripts/concert.js')
+
+    .addEntry('user', './assets/scripts/user.js')
+
+    .addEntry('partner', './assets/scripts/partner.js')
+
+    .addEntry('song', './assets/scripts/song.js')
+
+    .addEntry('album', './assets/scripts/album.js')
+
+    .addEntry('news', './assets/scripts/news.js')
+
     .addStyleEntry('admin', './assets/styles/admin.scss')
 
     .addStyleEntry('showcase', './assets/styles/showcase.scss')

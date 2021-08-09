@@ -119,4 +119,36 @@ class NewsArticleController extends AbstractController
 
         return $this->redirectToRoute('admin_news_index');
     }
+
+    /**
+     * @Route("/ajax-news/{sort}/{query}", name="ajax")
+     */
+    public function getNews(
+        NewsArticleRepository $newsRepository,
+        string $sort = '',
+        string $query = ''
+    ): Response {
+        $orderBy = [];
+        switch ($sort) {
+            case 'dateDescending':
+                $orderBy = ['createdAt' => 'DESC'];
+                break;
+            case 'dateAscending':
+                $orderBy = ['createdAt' => 'ASC'];
+                break;
+            case 'titleAscending':
+                $orderBy = ['title' => 'ASC'];
+                break;
+            case 'titleDescending':
+                $orderBy = ['title' => 'DESC'];
+                break;
+            default:
+                $orderBy = ['createdAt' => 'DESC'];
+                break;
+        }
+
+        return $this->render('admin/news/components/_news_list.html.twig', [
+            'news_articles' => $newsRepository->findByQuery($orderBy, $query),
+        ]);
+    }
 }

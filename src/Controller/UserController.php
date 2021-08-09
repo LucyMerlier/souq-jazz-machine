@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\InstrumentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -220,5 +222,22 @@ class UserController extends AbstractController
         $tokenStorage->setToken(null);
 
         return $this->redirectToRoute('showcase_home');
+    }
+
+    /**
+     * @Route("/ajax-users/{instrument}/{query}", name="ajax")
+     */
+    public function getUsers(
+        InstrumentRepository $instrumentRepository,
+        UserRepository $userRepository,
+        int $instrument = 0,
+        string $query = ''
+    ): Response {
+        return $this->render('admin/user/components/_members_list.html.twig', [
+            'users' => $userRepository->findByQuery(
+                $query,
+                $instrumentRepository->find($instrument) ?? null
+            ),
+        ]);
     }
 }

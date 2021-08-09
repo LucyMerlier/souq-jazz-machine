@@ -2,6 +2,10 @@
 
 {% block title %}Les partoches - {{ parent() }}{% endblock %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('song') }}
+{% endblock %}
+
 {% block content %}
     <h1 class="h1 my-4">Les partoches :</h1>
 
@@ -11,71 +15,21 @@
             <div class="d-flex">
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.sort) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-sort mx-1"></i></button>
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-sort mx-1"></i></button>
+                    </noscript>
                 </div>
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    </noscript>
                 </div>
             </div>
         {{ form_end(filter_form) }}
     </div>
 
-    <div class="accordion accordion-flush mt-5" id="membersAccordion">
-        {% set count = 0 %}
-        {% for song in songs %}
-            {% set count = count + 1 %}
-            <div class="accordion-item border-0 {{ count is odd ? 'bg-light' }}">
-                <h2 class="accordion-header" id="flush-title-{{ song.id }}">
-                    <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ song.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ song.id }}">
-                        <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
-                            <li class="col-6 px-4">{{ song.title }}</li>
-                            <li class="col-6 px-4 text-end">{{ song.musicSheets|length }} partition(s)</li>
-                        </ul>
-                    </button>
-                </h2>
-                <div id="flush-collapse-{{ song.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ song.id }}" data-bs-parent="#membersAccordion">
-                    <div class="accordion-body">
-                        <div class="d-flex">
-                            <div class="col-6 px-4">
-                                <ul>
-                                    <li>Compositeur : {{ song.composer ?? 'Non renseigné' }}</li>
-                                    <li>Arrangeur : {{ song.arranger ?? 'Non renseigné' }}</li>
-                                    <li>Ajouté par : {{ song.owner }}</li>
-                                    <li>Ajouté le : {{ song.createdAt|date('d/m/Y') }}</li>
-                                </ul>
-                            </div>
-                            <div class="col-6 px-4 text-end">
-                                {% for sheet in song.musicSheets %}
-                                    <div class="col-12">
-                                        <a target="_blank" href="/uploads/music-sheets/{{ sheet.url }}">
-                                            <i class="fas fa-eye me-2"></i>
-                                            {% if sheet.instrument and sheet.specification %}
-                                                {{ sheet.instrument.name }} - {{ sheet.specification }}
-                                            {% elseif sheet.instrument or sheet.specification %}
-                                                {{ sheet.specification ?? '' }}{{ sheet.instrument.name ?? '' }}
-                                            {% else %}
-                                                Non renseigné
-                                            {% endif %}
-                                             : Visualiser
-                                        </a>
-                                    </div>
-                                {% else %}
-                                    <div>Aucune partition trouvée pour ce morceau...</div>
-                                {% endfor %}
-                                <div class="my-1">
-                                    <a class="btn btn-success" href="{{ path('admin_song_sheet_add', {'id': song.id}) }}"><i class="fas fa-plus me-2"></i>Ajouter une partoch</a>
-                                </div>
-                                <div class="my-1">
-                                    <a class="btn btn-warning" href="{{ path('admin_song_edit', {'id': song.id}) }}"><i class="fas fa-pen me-2"></i>Modifier le morceau</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="accordion-item">Aucun morceau trouvé...</div>
-        {% endfor %}
-    </div>
+    <section id="songsList">
+        {% include "admin/song/components/_songs_list.html.twig" %}
+    </section>
 {% endblock %}

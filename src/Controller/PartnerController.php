@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Repository\PartnerRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -75,5 +76,21 @@ class PartnerController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_partners');
+    }
+
+    /**
+     * @Route("/ajax-partners/{category}/{query}", name="ajax")
+     */
+    public function getPartners(
+        PartnerRepository $partnerRepository,
+        string $category = '',
+        string $query = ''
+    ): Response {
+        return $this->render('admin/partner/components/_partners_list.html.twig', [
+            'partners' => $partnerRepository->findByQuery(
+                $query,
+                $category ?? null
+            ),
+        ]);
     }
 }
