@@ -2,6 +2,10 @@
 
 {% block title %}Les actus - {{ parent() }}{% endblock %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('news') }}
+{% endblock %}
+
 {% block content %}
     <h1 class="h1 my-4">Les actus :</h1>
 
@@ -17,35 +21,15 @@
                 </div>
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    </noscript>
                 </div>
             </div>
         {{ form_end(filter_form) }}
     </div>
 
-    {% for news_article in news_articles %}
-        <article class="card mb-3 border-0 mt-5">
-            <div class="row g-0">
-                <div class="card-title col-md-4">
-                    <h2 class="h5">{{ news_article.title }}</h2>
-                    <p class="h5">Posté le {{ news_article.createdAt|date('d/m/Y') }}</p>
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body p-0">
-                        <div class="card-text">{{ news_article.content|raw }}</div>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <div class="d-flex justify-content-end">
-            <div class="mx-1">
-                <a class="btn btn-warning" href="{{ path('admin_news_edit', {'id': news_article.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a>
-            </div>
-            <div class="mx-1">
-                {% include "admin/news/components/_delete_form.html.twig" %}
-            </div>
-        </div>
-    {% else %}
-        <p class="mt-5">Aucune actu trouvée...</p>
-    {% endfor %}
+    <section id="newsList">
+        {% include "admin/news/components/_news_list.html.twig" %}
+    </section>
 {% endblock %}
