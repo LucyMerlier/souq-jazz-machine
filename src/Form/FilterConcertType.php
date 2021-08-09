@@ -20,7 +20,6 @@ class FilterConcertType extends AbstractType
                 'placeholder' => 'Toutes les dates',
                 'attr' => [
                     'aria-label' => 'trier par',
-                    'onchange' => 'this.form.submit()',
                 ]
             ])
         ;

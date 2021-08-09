@@ -46,6 +46,8 @@ Encore
      */
     .addEntry('app', './assets/app.js')
 
+    .addEntry('concert', './assets/scripts/concert.js')
+
     .addEntry('user', './assets/scripts/user.js')
 
     .addEntry('partner', './assets/scripts/partner.js')

@@ -8,6 +8,7 @@ use App\Entity\ConcertRate;
 use App\Entity\User;
 use App\Form\ConcertRateType;
 use App\Form\ConcertType;
+use App\Repository\ConcertRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -284,5 +285,34 @@ class ConcertController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_concert_agenda');
+    }
+
+    /**
+     * @Route("/ajax-concerts/{filter}", name="ajax")
+     */
+    public function getConcerts(
+        ConcertRepository $concertRepository,
+        string $filter = ''
+    ): Response {
+        $concerts = [];
+
+        switch ($filter) {
+            case 'proposed':
+                $concerts = $concertRepository->findByIsValidated(false, ['date' => 'ASC']);
+                break;
+            case 'future':
+                $concerts = $concertRepository->findByFutureDate();
+                break;
+            case 'past':
+                $concerts = $concertRepository->findByPastDate();
+                break;
+            default:
+                $concerts = $concertRepository->findBy([], ['date' => 'ASC']);
+                break;
+        }
+
+        return $this->render('admin/concert/components/_concerts_list.html.twig', [
+            'concerts' => $concerts,
+        ]);
     }
 }
