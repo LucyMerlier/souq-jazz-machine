@@ -9,11 +9,11 @@
 {% block content %}
     <h1 class="h1 my-4">Les concerts :</h1>
 
-    <div class="d-flex justify-content-between">
-        <a class="btn btn-success" href="{{ path('admin_concert_add') }}"><i class="fas fa-plus me-2"></i>Proposer une date</a>
+    <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
+        <a class="btn btn-success mb-md-0 mb-3" href="{{ path('admin_concert_add') }}"><i class="fas fa-plus me-2"></i>Proposer une date</a>
         {{ form_start(filter_form) }}
             <div class="d-flex">
-                <div class="input-group ms-3">
+                <div class="input-group ms-md-3 ms-0">
                     {{ form_widget(filter_form.sort) }}
                     <noscript>
                         <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-filter mx-1"></i></button>

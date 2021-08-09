@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex flex-xl-row flex-column justify-content-between">
     <form action="{{ path('admin_vote', {'id': concert.id}) }}" method="POST">
-        <div class="d-flex justify-content-start">
-            <div class="d-flex justify-content-center mx-1">
+        <div class="d-flex flex-sm-row flex-column justify-content-sm-start align-items-start mb-3">
+            <div class="d-flex justify-content-center mx-1 my-1">
                 {% if app.user.votes|filter((vote) => vote in concert.votes) is not empty and app.user.votes|filter((vote) => vote in concert.votes|filter(vote => vote.vote)) is not empty %}
                     <button class="btn btn-success disabled" type="submit" value="1" name="vote"><i class="fas fa-thumbs-up me-2"></i>A voté présent·e!</button>
                 {% else %}
@@ -50,7 +50,7 @@
     </form>
 
     {% if is_granted("ROLE_ADMIN") %}
-        <div class="float-right">
+        <div class="d-flex">
             {% include "admin/concert/components/_admin_button.html.twig" %}
         </div>
     {% endif %}

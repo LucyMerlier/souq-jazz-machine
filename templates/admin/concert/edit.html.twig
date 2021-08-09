@@ -19,12 +19,12 @@
     <a class="btn btn-success" href="{{ path('admin_concert_rate_add', {'id': concert.id}) }}"><i class="fas fa-plus me-2"></i>Ajouter un tarif</a>
 
     {% if concert.rates is not empty %}
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Catégorie</th>
                     <th>Entrée</th>
-                    <th colspan="2">Actions</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,8 +32,10 @@
                     <tr>
                         <td>{{ rate.category == '' ? 'Entrée' : rate.category }}</td>
                         <td>{{ rate.price == 0 ? 'gratuite' : rate.price|number_format(2, ',', '.') ~ '€' }}</td>
-                        <td><a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a></td>
-                        <td>{% include "admin/concert/components/_rate_delete_form.html.twig" %}</td>
+                        <td class="d-flex flex-lg-row flex-column">
+                            <div class="mb-lg-0 mb-1 me-lg-1 me-0"><a class="btn btn-warning" href="{{ path('admin_concert_rate_edit', {'id': rate.id}) }}"><i class="fas fa-pen me-2"></i>Modifier</a></div>
+                            <div>{% include "admin/concert/components/_rate_delete_form.html.twig" %}</div>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

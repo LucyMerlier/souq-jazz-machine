@@ -6,15 +6,15 @@
             <h2 class="accordion-header" id="flush-title-{{ song.id }}">
                 <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ song.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ song.id }}">
                     <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
-                        <li class="col-6 px-4">{{ song.title }}</li>
-                        <li class="col-6 px-4 text-end">{{ song.musicSheets|length }} partition(s)</li>
+                        <li class="col-lg-6 col-12 px-4">{{ song.title }}</li>
+                        <li class="col-lg-6 d-lg-inline d-none px-4 text-end">{{ song.musicSheets|length }} partition(s)</li>
                     </ul>
                 </button>
             </h2>
             <div id="flush-collapse-{{ song.id }}" class="accordion-collapse collapse" aria-labelledby="flush-title-{{ song.id }}" data-bs-parent="#membersAccordion">
                 <div class="accordion-body">
-                    <div class="d-flex">
-                        <div class="col-6 px-4">
+                    <div class="d-flex flex-lg-row flex-column">
+                        <div class="col-lg-6 col-12 px-4">
                             <ul>
                                 <li>Compositeur : {{ song.composer ?? 'Non renseigné' }}</li>
                                 <li>Arrangeur : {{ song.arranger ?? 'Non renseigné' }}</li>
@@ -22,7 +22,7 @@
                                 <li>Ajouté le : {{ song.createdAt|date('d/m/Y') }}</li>
                             </ul>
                         </div>
-                        <div class="col-6 px-4 text-end">
+                        <div class="col-lg-6 col-12 px-4 text-lg-end">
                             {% for sheet in song.musicSheets %}
                                 <div class="col-12">
                                     <a target="_blank" href="/uploads/music-sheets/{{ sheet.url }}">

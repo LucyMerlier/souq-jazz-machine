@@ -9,17 +9,17 @@
 {% block content %}
     <h1 class="h1 my-4">Les actus :</h1>
 
-    <div class="d-flex justify-content-between">
-        <a class="btn btn-success" href="{{ path('admin_news_add') }}"><i class="fas fa-plus me-2"></i>Ajouter une actu</a>
+    <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between">
+        <a class="btn btn-success mb-lg-0 mb-3" href="{{ path('admin_news_add') }}"><i class="fas fa-plus me-2"></i>Ajouter une actu</a>
         {{ form_start(filter_form) }}
-            <div class="d-flex">
-                <div class="input-group ms-3">
+            <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between">
+                <div class="input-group ms-lg-3 ms-0 mb-lg-0 mb-3">
                     {{ form_widget(filter_form.sort) }}
                     <noscript>
                         <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-sort mx-1"></i></button>
                     </noscript>
                 </div>
-                <div class="input-group ms-3">
+                <div class="input-group ms-lg-3 ms-0 mb-lg-0 mb-3">
                     {{ form_widget(filter_form.query) }}
                     <noscript>
                         <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
