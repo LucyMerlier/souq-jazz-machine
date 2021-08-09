@@ -49,6 +49,12 @@ hr {
     display: none;
 }
 
+@media screen and (min-width: 1200px) {
+    .noscripts-small-screen {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 768px) {
     main {
         min-height: calc(100vh - 558.367px);

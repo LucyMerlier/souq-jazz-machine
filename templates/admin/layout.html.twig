@@ -7,3 +7,11 @@
 {% block navbar %}
     {% include "admin/_navbar.html.twig" %}
 {% endblock %}
+
+{% block noscripts %}
+    <noscript class="noscripts-small-screen">
+        <div class="alert alert-warning my-3">
+            Ce site a besoin que tu actives JavaScript afin de fonctionner correctement.
+        </div>
+    </noscript>
+{% endblock %}
