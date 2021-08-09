@@ -14,6 +14,21 @@
 
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
+
+        <noscript>
+            <style type="text/css">
+                {# this lets elements effected by AOS be displayed when scripts are disabled #}
+                [data-aos] {
+                    opacity: 1 !important;
+                    transform: translate(0) scale(1) !important;
+                }
+
+                {# this lets people not be bugged by an unclosable toast when scripts are disabled #}
+                .toast {
+                    display: none;
+                }
+            </style>
+        </noscript>
     </head>
     <body class="bg-primary text-secondary">
         <header class="sticky-top">
@@ -21,11 +36,7 @@
         </header>
         {% block banner %}{% endblock %}
         <main class="container">
-        <noscript>
-            <div class="alert alert-warning my-3">
-                Ce site a besoin que vous activiez JavaScript afin de fonctionner correctement.
-            </div>
-        </noscript>
+        {% block noscripts %}{% endblock %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }} my-3">

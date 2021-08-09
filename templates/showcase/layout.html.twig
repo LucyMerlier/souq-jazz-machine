@@ -8,6 +8,22 @@
     {% include "showcase/_navbar.html.twig" %}
 {% endblock %}
 
+{% block noscripts %}
+    {% if app.user %}
+        <noscript>
+            <div class="alert alert-warning my-3">
+                Ce site a besoin que tu actives JavaScript afin de fonctionner correctement.
+            </div>
+        </noscript>
+    {% else %}
+        <noscript class="noscripts-small-screen">
+            <div class="alert alert-warning my-3">
+                Ce site a besoin que vous activiez JavaScript afin de fonctionner correctement sur votre type d'écran.
+            </div>
+        </noscript>
+    {% endif %}
+{% endblock %}
+
 {% block toast %}{{ render(controller('App\\Controller\\ShowcaseController::toast')) }}{% endblock %}
 
 {% block footer %}
