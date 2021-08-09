@@ -22,7 +22,6 @@ class FilterPartnerType extends AbstractType
                 'placeholder' => 'Tous types',
                 'attr' => [
                     'aria-label' => 'trier par catégories',
-                    'onchange' => 'this.form.submit()',
                 ]
             ])
             ->add('query', SearchType::class, [

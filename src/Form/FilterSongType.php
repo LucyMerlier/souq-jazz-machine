@@ -21,7 +21,6 @@ class FilterSongType extends AbstractType
                 'placeholder' => 'Trier par',
                 'attr' => [
                     'aria-label' => 'trier par',
-                    'onchange' => 'this.form.submit()',
                 ]
             ])
             ->add('query', SearchType::class, [

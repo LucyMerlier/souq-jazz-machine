@@ -23,7 +23,6 @@ class FilterUserType extends AbstractType
                 'placeholder' => 'Tous pupitres',
                 'attr' => [
                     'aria-label' => 'trier par instrument',
-                    'onchange' => 'this.form.submit()',
                 ]
             ])
             ->add('query', SearchType::class, [

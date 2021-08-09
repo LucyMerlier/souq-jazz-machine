@@ -143,7 +143,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/tous-les-membres", name="members", methods={"GET"})
+     * @Route("/membres-du-groupe", name="members", methods={"GET"})
      */
     public function bandMembers(
         Request $request,
@@ -166,7 +166,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/tous-les-partenaires", name="partners", methods={"GET"})
+     * @Route("/partenaires", name="partners", methods={"GET"})
      */
     public function partners(
         Request $request,
