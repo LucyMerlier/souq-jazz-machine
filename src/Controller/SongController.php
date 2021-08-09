@@ -7,6 +7,7 @@ use App\Entity\Song;
 use App\Entity\User;
 use App\Form\MusicSheetType;
 use App\Form\SongType;
+use App\Repository\SongRepository;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -165,5 +166,37 @@ class SongController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_songs');
+    }
+
+    /**
+     * @Route("/ajax-songs/{sort}/{query}", name="ajax")
+     */
+    public function getSongs(
+        SongRepository $songRepository,
+        string $sort = '0',
+        string $query = ''
+    ): Response {
+        $orderBy = [];
+        switch ($sort) {
+            case 'dateDescending':
+                $orderBy = ['createdAt' => 'DESC'];
+                break;
+            case 'dateAscending':
+                $orderBy = ['createdAt' => 'ASC'];
+                break;
+            case 'titleAscending':
+                $orderBy = ['title' => 'ASC'];
+                break;
+            case 'titleDescending':
+                $orderBy = ['title' => 'DESC'];
+                break;
+            default:
+                $orderBy = ['title' => 'ASC'];
+                break;
+        }
+
+        return $this->render('admin/song/components/_songs_list.html.twig', [
+            'songs' => $songRepository->findByQuery($orderBy, $query),
+        ]);
     }
 }

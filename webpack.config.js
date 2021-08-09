@@ -48,6 +48,8 @@ Encore
 
     .addEntry('user', './assets/scripts/user.js')
 
+    .addEntry('song', './assets/scripts/song.js')
+
     .addStyleEntry('admin', './assets/styles/admin.scss')
 
     .addStyleEntry('showcase', './assets/styles/showcase.scss')
