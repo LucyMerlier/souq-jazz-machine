@@ -42,6 +42,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 $instrument ? [$instrument->getId()] : $this->instrumentRepository->findAllIds()
             )
             ->orderBy('instrument.id', 'ASC')
+            ->addOrderBy('user.firstname', 'ASC')
             ->getQuery()
             ->getResult()
         ;
@@ -52,6 +53,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('user')
             ->join('user.instrument', 'instrument')
             ->orderBy('instrument.id', 'ASC')
+            ->addOrderBy('user.firstname', 'ASC')
             ->getQuery()
             ->getResult()
         ;

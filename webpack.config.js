@@ -46,6 +46,8 @@ Encore
      */
     .addEntry('app', './assets/app.js')
 
+    .addEntry('user', './assets/scripts/user.js')
+
     .addStyleEntry('admin', './assets/styles/admin.scss')
 
     .addStyleEntry('showcase', './assets/styles/showcase.scss')
