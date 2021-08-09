@@ -21,7 +21,9 @@
                 </div>
                 <div class="input-group ms-3">
                     {{ form_widget(filter_form.query) }}
-                    <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    <noscript>
+                        <button class="btn-outline btn-outline-secondary d-flex align-items-center"><i class="fas fa-search mx-1"></i></button>
+                    </noscript>
                 </div>
             </div>
         {{ form_end(filter_form) }}
