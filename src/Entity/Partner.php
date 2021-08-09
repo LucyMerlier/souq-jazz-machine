@@ -13,9 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Partner
 {
     public const CATEGORIES = [
-        'Ancien membre' => 'former-member',
+        'Ancien membre' => 'formerMember',
         'Copain / Copine' => 'friend',
-        'Salle de concert' => 'concert-place',
+        'Salle de concert' => 'concertPlace',
         'Autre' => 'other',
     ];
 
