@@ -6,6 +6,12 @@ function getConcerts() {
         .then((response) => response.text())
         .then((list) => {
             concertsList.innerHTML = list;
+            const state = { sort: sortInput.value };
+            window.history.replaceState(
+                { state },
+                '',
+                `/admin/calendrier?sort=${sortInput.value}`,
+            );
         });
 }
 
