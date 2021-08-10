@@ -7,6 +7,12 @@ function getPartners() {
         .then((response) => response.text())
         .then((list) => {
             partnersList.innerHTML = list;
+            const state = { filter: filterInput.value, search: searchInput.value };
+            window.history.replaceState(
+                { state },
+                '',
+                `/admin/partenaires?category=${filterInput.value}&query=${searchInput.value}`,
+            );
         });
 }
 

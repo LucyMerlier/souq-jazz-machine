@@ -7,6 +7,12 @@ function getNews() {
         .then((response) => response.text())
         .then((list) => {
             newsList.innerHTML = list;
+            const state = { sort: sortInput.value, search: searchInput.value };
+            window.history.replaceState(
+                { state },
+                '',
+                `/admin/gestion-des-actus?sort=${sortInput.value}&query=${searchInput.value}`,
+            );
         });
 }
 

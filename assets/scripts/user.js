@@ -7,6 +7,12 @@ function getUsers() {
         .then((response) => response.text())
         .then((list) => {
             membersList.innerHTML = list;
+            const state = { filter: filterInput.value, search: searchInput.value };
+            window.history.replaceState(
+                { state },
+                '',
+                `/admin/membres-du-groupe?instrument=${filterInput.value}&query=${searchInput.value}`,
+            );
         });
 }
 

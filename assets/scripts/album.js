@@ -7,6 +7,12 @@ function getAlbums() {
         .then((response) => response.text())
         .then((list) => {
             albumsList.innerHTML = list;
+            const state = { sort: sortInput.value, search: searchInput.value };
+            window.history.replaceState(
+                { state },
+                '',
+                `/admin/albums-photos?sort=${sortInput.value}&query=${searchInput.value}`,
+            );
         });
 }
 

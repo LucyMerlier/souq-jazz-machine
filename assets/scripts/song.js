@@ -7,6 +7,12 @@ function getSongs() {
         .then((response) => response.text())
         .then((list) => {
             songsList.innerHTML = list;
+            const state = { sort: sortInput.value, search: searchInput.value };
+            window.history.replaceState(
+                { state },
+                '',
+                `/admin/partitions?sort=${sortInput.value}&query=${searchInput.value}`,
+            );
         });
 }
 
