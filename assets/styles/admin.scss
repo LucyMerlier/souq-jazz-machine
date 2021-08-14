@@ -7,8 +7,8 @@ body {
 }
 
 .btn {
-    height: 30px;
-    border-radius: 15px;
+    height: $button-height;
+    border-radius: $button-height / 2;
     display: inline-flex;
     align-items: center;
     justify-content: center;
