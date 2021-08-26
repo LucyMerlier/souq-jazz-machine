@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\ChangePasswordType;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use App\Service\PasswordManager;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
@@ -60,6 +61,7 @@ class SecurityController extends AbstractController
     public function createUser(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,
+        PasswordManager $passwordManager,
         EntityManagerInterface $entityManager
     ): Response {
         $user = new User();
@@ -67,14 +69,15 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $plainPassword = $passwordManager->generateRandomPassword(8);
+
             $user
                 ->setUpdatedAt(new DateTime('now'))
                 ->setRoles(['ROLE_USER'])
-            // encode the plain password
                 ->setPassword(
                     $passwordHasher->hashPassword(
                         $user,
-                        'machine'
+                        $plainPassword
                     )
                 )
             ;
@@ -93,6 +96,9 @@ class SecurityController extends AbstractController
                     ->to((string)$user->getEmail())
                     ->subject('Confirmation de votre adresse email')
                     ->htmlTemplate('email/views/confirmation_email.html.twig')
+                    ->context([
+                        'plain_password' => $plainPassword,
+                    ])
             );
 
             $this->addFlash('success', 'Un email de confirmation a été envoyé au nouveau / à la nouvelle venu·e! :D');
@@ -130,7 +136,7 @@ class SecurityController extends AbstractController
 
         $this->addFlash(
             'danger',
-            'Modifie ton mot de passe au plus vite!'
+            'Modifie ton mot de passe au plus vite! Dans l\'idéal, utilise un mot de passe unique, long et aléatoire!'
         );
 
         return $this->redirectToRoute('admin_change_password');

@@ -175,7 +175,7 @@ class UserController extends AbstractController
         Security $security,
         User $user
     ): Response {
-        if ($security->isGranted('ROLE_SUPERADMIN')) {
+        if ($security->isGranted('ROLE_SUPERADMIN') && $user === $this->getUser()) {
             $this->addFlash(
                 'danger',
                 'Tu dois d\'abord transmettre tes droits super-admin avant de supprimer ton compte!'
