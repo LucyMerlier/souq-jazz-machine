@@ -10,7 +10,7 @@ function getConcerts() {
             window.history.replaceState(
                 { state },
                 '',
-                `/admin/calendrier?sort=${sortInput.value}`,
+                `/admin/concerts?sort=${sortInput.value}`,
             );
         });
 }
