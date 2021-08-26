@@ -11,7 +11,7 @@ function getUsers() {
             window.history.replaceState(
                 { state },
                 '',
-                `/admin/membres-du-groupe?instrument=${filterInput.value}&query=${searchInput.value}`,
+                `/admin/membres?instrument=${filterInput.value}&query=${searchInput.value}`,
             );
         });
 }

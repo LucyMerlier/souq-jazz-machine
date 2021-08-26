@@ -11,7 +11,7 @@ function getPartners() {
             window.history.replaceState(
                 { state },
                 '',
-                `/admin/partenaires?category=${filterInput.value}&query=${searchInput.value}`,
+                `/admin/contacts?category=${filterInput.value}&query=${searchInput.value}`,
             );
         });
 }
