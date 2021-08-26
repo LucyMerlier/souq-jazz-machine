@@ -70,7 +70,7 @@ class ConcertController extends AbstractController
 
             $this->addFlash('success', 'Date de concert proposée, plus qu\'à attendre que tout le monde ait voté!');
 
-            return $this->redirectToRoute('admin_concert_edit', ['id' => $concert->getId()]);
+            return $this->redirectToRoute('admin_concert_agenda', ['sort' => 'proposed']);
         }
 
         return $this->render('admin/concert/add.html.twig', [
