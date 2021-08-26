@@ -8,17 +8,17 @@
     </p>
 
     <p>
-        Afin de finaliser votre inscription sur le site du Souq' Jazz Machine, veuillez confirmer votre adresse email en cliquant sur le lien suivant :<br><br>
-        <a href="{{ signedUrl }}">Confirmer mon adresse email</a>.
+        Afin de finaliser votre inscription sur le site du Souq' Jazz Machine, veuillez confirmer votre adresse email en cliquant sur le lien suivant :        <a href="{{ signedUrl }}">Confirmer mon adresse email</a>.<br>
         Ce lien va expirer dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
     </p>
 
     <p>
-        Note : Après vérification, veuillez modifier votre mot de passe au plus vite.
+        Votre mot de passe provisoire est : <strong>{{ plain_password }}</strong><br>
+        Après avoir confirmé votre adresse e-mail, vous devrez remplacer ce mot de passe par celui de votre choix. Nous vous recommandons d'utiliser un mot de passe complexe et unique à ce site.
     </p>
 
     <p>
-        Note : Si vous pensez que cet email vous a été envoyé par erreur, merci de l'ignorer.
+        Si vous pensez que cet email vous a été envoyé par erreur, merci de l'ignorer.
     </p>
 
     <p>
