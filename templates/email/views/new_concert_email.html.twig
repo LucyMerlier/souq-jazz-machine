@@ -4,7 +4,7 @@
     <h1>Nouvelle proposition de date de concert!</h1>
 
     <p>
-        {{ concert.owner.pseudonym ?? concert.owner.firstname }} vient d'ajouter une nouvelle proposition de date de concert, pour le {{ concert.date|date("d/m/Y") }} à {{ concert.city }}.
+        {{ concert.owner ?? concert.owner }} vient d'ajouter une nouvelle proposition de date de concert, pour le {{ concert.date|date("d/m/Y") }} à {{ concert.city }}.
     </p>
     <p>
         Rends-toi vite sur le site du Souq' pour indiquer si tu penses être libre pour cette date!
