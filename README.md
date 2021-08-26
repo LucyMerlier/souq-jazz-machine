@@ -87,7 +87,7 @@ Here is a list of functionalities that authenticated band members have access to
 * `/admin` : a home page displaying information concerning the next concert, as well as the proposed concerts if they have not indicated yet if they are gonna be available
 * `/admin/concerts` :
   * [ROLE_USER] : a page that displays information concerning proposed, future, and past concerts, and lets them indicate if they will be available for one of the proposed concerts by clicking the "Je serai là!" or "Pas dispo :(" buttons; users can also propose a concert date by clicking the "Proposer une date" button
-  * [ROLE_ADMIN] : administrators can also validate, edit, and delete a concert by clicking one of the appropriate buttons that are only visible to them
+  * [ROLE_ADMIN] : administrators can also validate, invalidate, edit, and delete a concert by clicking one of the appropriate buttons that are only visible to them
 * `/admin/partitions` : a page from which athenticated users can manage the band's sheet music
 * `/admin/membres` :
   * [ROLE_USER] : a page that displays the band member's useful information
