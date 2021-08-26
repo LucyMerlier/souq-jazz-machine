@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PartnerController extends AbstractController
 {
     /**
-     * @Route("/ajouter-un-partenaire", name="add", methods={"GET","POST"})
+     * @Route("/ajouter-un-contact", name="add", methods={"GET","POST"})
      */
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -44,7 +44,7 @@ class PartnerController extends AbstractController
     }
 
     /**
-     * @Route("/modifier-un-partenaire/{id}", name="edit", methods={"GET","POST"})
+     * @Route("/modifier-un-contact/{id}", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
     {
@@ -65,7 +65,7 @@ class PartnerController extends AbstractController
     }
 
     /**
-     * @Route("/supprimer-un-partenaire/{id}", name="delete", methods={"POST"})
+     * @Route("/supprimer-un-contact/{id}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
     {
