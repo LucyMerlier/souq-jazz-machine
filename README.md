@@ -62,13 +62,13 @@ This part of the application lets visitors access various pages, mainly by using
 * `/le-big-band` : a page displaying a couple of paragraphs presenting the band's history, and a section presenting the band members sorted by instrument, with their profile picture (or by default, a random picture of a cat from [placekitten](https://placekitten.com/)), their name, and optionally their pseudonym and / or associated catchphrase
 * `/galerie` : a page displaying a selection of photographs of the band
 * `/calendrier` : a page displaying all the band's concerts to come, with a description and prices
-* `/contact` : a page displaying a contact form that sends an email to the configured address (`MAIL_ADDRESS` environment variable) when properly submitted
+* `/contactez-nous` : a page displaying a contact form that sends an email to the configured address (`MAIL_ADDRESS` environment variable) when properly submitted
 
 On each of those pages, we can also find common a footer at the bottom of the document, containing the same links as in the navigation bar in the "Plan du site" section, but also a "Liens utiles" section that contains links to some useful pages :
 
 * `/mentions-legales` : a page displaying the legal notice of the website
 * `/credits` : a page displaying the project's credits
-* `/contact?bugReporting=true` : this directs to the contact page, except the "Sujet" and "Votre message" fields are pre-filled to make it easier to report bugs
+* `/contactez-nous?bugReporting=true` : this directs to the contact page, except the "Sujet" and "Votre message" fields are pre-filled to make it easier to report bugs
 
 Also, if the band is looking for new members, visitors may be prompted to join the band with a small message box at the bottom of the screen. Visitors can then either dismiss the message, or click on the offer that they are interested in, after which they will be directed to the `/repondre-a-une-annonce/{id}` route, where `{id}` is the offer's id. They can then send an application to the band via the form displayed on this page to explain why they want to be part of the band.
 
@@ -85,21 +85,21 @@ Also, some of those functionalities are only accessible to users with a certain 
 Here is a list of functionalities that authenticated band members have access to, mainly by using the navigation bar at the top of the viewport :
 
 * `/admin` : a home page displaying information concerning the next concert, as well as the proposed concerts if they have not indicated yet if they are gonna be available
-* `/admin/calendrier` :
+* `/admin/concerts` :
   * [ROLE_USER] : a page that displays information concerning proposed, future, and past concerts, and lets them indicate if they will be available for one of the proposed concerts by clicking the "Je serai là!" or "Pas dispo :(" buttons; users can also propose a concert date by clicking the "Proposer une date" button
   * [ROLE_ADMIN] : administrators can also validate, edit, and delete a concert by clicking one of the appropriate buttons that are only visible to them
 * `/admin/partitions` : a page from which athenticated users can manage the band's sheet music
-* `/admin/tous-les-membres` :
+* `/admin/membres` :
   * [ROLE_USER] : a page that displays the band member's useful information
   * [ROLE_ADMIN] : administrators can also have access to the `/admin/nouvel-utilisateur` route by clicking the "Ajouter un nouveau membre" button that is only visible to them : on this page, they can create a new account, and an email will be sent to the email address that was specified in the form for the person that owns the address to confirm their registration
   * [ROLE_SUPERADMIN] : the superadministrator is the only user that has sufficient credentials to delete users, as well as grant or revoke administration rights
-* `/admin/tous-les-partenaires` : a page from which athenticated users can manage the band's partners' informations (friends of the band, former members, *etc...*)
+* `/admin/contacts` : a page from which athenticated users can manage the band's partners' informations (friends of the band, former members, *etc...*)
 * `/admin/alums-photos` :
   * [ROLE_USER] : a page from which athenticated users can manage the band's photographs
   * [ROLE_ADMIN] : administrators can also manage the photographs' visibility on the public part of the application (via the `/galerie` route), by going to a specific photo album's page at `/admin/voir-les-photos/{id}`; where `{id}` is the id of a photo album
 * `/admin/mes-informations` :
   * [ROLE_USER] : a page from which authenticated users can manage their personnal information, as well as delete their account
-  * [ROLE_SUPERADMIN] : as the role of the superadministrator is supposed to be unique, the superadministrator can not delete their account right away, and needs to give away their superadministrator rights to another user beforehand, by clicking the "Céder superadmin" button that is visible to them on the `/admin/tous-les-membres` route
+  * [ROLE_SUPERADMIN] : as the role of the superadministrator is supposed to be unique, the superadministrator can not delete their account right away, and needs to give away their superadministrator rights to another user beforehand, by clicking the "Céder superadmin" button that is visible to them on the `/admin/membres` route
 * `/deconnexion` : this route allows authenticated users to log out, and redirects them to the public home page at the `/` route
 
 For administrators, an extra "Admin" dropdown menu appears in the navigation bar, that lets them access some more functionalities :
