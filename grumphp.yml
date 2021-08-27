@@ -26,3 +26,5 @@ grumphp:
                 - 'phpmd.xml'
         twigcs:
             path: 'templates'
+        phpunit:
+            config_file: phpunit.xml.dist
