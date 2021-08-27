@@ -4,9 +4,9 @@ namespace App\Tests\Service;
 
 use App\Service\PasswordManager;
 use Generator;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use PHPUnit\Framework\TestCase;
 
-class PasswordManagerTest extends KernelTestCase
+class PasswordManagerTest extends TestCase
 {
     public function testClassExists(): void
     {
