@@ -2,7 +2,7 @@ const membersList = document.getElementById('membersList');
 const searchInput = document.getElementById('query');
 const filterInput = document.getElementById('instrument');
 
-function getUsers() {
+function getUsersList() {
     fetch(`/admin/ajax-users/${filterInput.value === '' ? '0' : filterInput.value}/${searchInput.value}`)
         .then((response) => response.text())
         .then((list) => {
@@ -17,8 +17,8 @@ function getUsers() {
 }
 
 searchInput.addEventListener('input', () => {
-    getUsers();
+    getUsersList();
 });
 filterInput.addEventListener('change', () => {
-    getUsers();
+    getUsersList();
 });

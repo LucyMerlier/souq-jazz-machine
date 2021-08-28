@@ -1,7 +1,7 @@
 const concertsList = document.getElementById('concertsList');
 const sortInput = document.getElementById('sort');
 
-function getConcerts() {
+function getConcertsList() {
     fetch(`/admin/ajax-concerts/${sortInput.value === '' ? '0' : sortInput.value}`)
         .then((response) => response.text())
         .then((list) => {
@@ -16,5 +16,5 @@ function getConcerts() {
 }
 
 sortInput.addEventListener('change', () => {
-    getConcerts();
+    getConcertsList();
 });

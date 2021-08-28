@@ -2,7 +2,7 @@ const albumsList = document.getElementById('albumsList');
 const searchInput = document.getElementById('query');
 const sortInput = document.getElementById('sort');
 
-function getAlbums() {
+function getAlbumsList() {
     fetch(`/admin/ajax-albums/${sortInput.value === '' ? '0' : sortInput.value}/${searchInput.value}`)
         .then((response) => response.text())
         .then((list) => {
@@ -17,8 +17,8 @@ function getAlbums() {
 }
 
 searchInput.addEventListener('input', () => {
-    getAlbums();
+    getAlbumsList();
 });
 sortInput.addEventListener('change', () => {
-    getAlbums();
+    getAlbumsList();
 });

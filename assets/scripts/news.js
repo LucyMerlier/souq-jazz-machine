@@ -2,7 +2,7 @@ const newsList = document.getElementById('newsList');
 const searchInput = document.getElementById('query');
 const sortInput = document.getElementById('sort');
 
-function getNews() {
+function getNewsList() {
     fetch(`/admin/ajax-news/${sortInput.value === '' ? '0' : sortInput.value}/${searchInput.value}`)
         .then((response) => response.text())
         .then((list) => {
@@ -17,8 +17,8 @@ function getNews() {
 }
 
 searchInput.addEventListener('input', () => {
-    getNews();
+    getNewsList();
 });
 sortInput.addEventListener('change', () => {
-    getNews();
+    getNewsList();
 });
