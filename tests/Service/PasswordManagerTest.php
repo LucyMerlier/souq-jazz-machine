@@ -74,7 +74,7 @@ class PasswordManagerTest extends TestCase
      * @depends testGeneratePasswordMethodExists
      * @dataProvider positiveIntegersProvider
      */
-    public function testValidInputPasswordLength(int $length): void
+    public function testValidInput(int $length): void
     {
         $this->assertEquals(
             $length,
@@ -82,14 +82,7 @@ class PasswordManagerTest extends TestCase
             'The length of the returned value of App\Service\PasswordManager::generateRandomPassword()
             must match the value provided in argument 1'
         );
-    }
 
-    /**
-     * @depends testGeneratePasswordMethodExists
-     * @dataProvider positiveIntegersProvider
-     */
-    public function testValidInputPasswordCharacters(int $length): void
-    {
         $this->assertMatchesRegularExpression(
             '/^[a-zA-Z0-9]+$/',
             (new PasswordManager())->generateRandomPassword($length),
