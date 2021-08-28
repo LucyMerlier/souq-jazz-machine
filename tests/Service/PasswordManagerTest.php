@@ -105,7 +105,7 @@ class PasswordManagerTest extends TestCase
         }
     }
 
-    public function testNullInputReturnsDefaultValue(): void
+    public function testNullInputReturnsDefaultLength(): void
     {
         $this->assertEquals(
             6,
