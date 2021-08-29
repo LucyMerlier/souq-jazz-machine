@@ -19,13 +19,9 @@ require('@fortawesome/fontawesome-free/js/all');
 
 const bootstrap = require('bootstrap');
 
-const toastList = [].slice.call(document.querySelectorAll('.toast'));
+const toastList = document.getElementsByClassName('toast');
 if (!sessionStorage.noToast) {
-    toastList.map((toast) => (new bootstrap.Toast(toast)).show());
-} else {
-    toastList.forEach((toast) => {
-        toast.style.display = 'none';
-    });
+    toastList.forEach((toast) => (new bootstrap.Toast(toast)).show());
 }
 
 const dismissButtons = document.getElementsByClassName('btn-dismiss');
