@@ -84,7 +84,7 @@ class ShowcaseController extends AbstractController
     {
         $contact = new ContactRequest();
 
-        if ($request->query->get('bugReporting')) {
+        if ($request->query->get('bugReporting') === 'true') {
             $contact->setSubject('J\'ai trouvé un bug sur votre site!');
             $contact->setMessage(
                 'Après avoir fait <telle·s action·s> sur <telle·s page·s>, j\'ai reçu le message d\'erreur suivant :
