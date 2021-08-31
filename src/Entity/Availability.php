@@ -36,11 +36,6 @@ class Availability
      */
     private ?bool $vote;
 
-    public function __serialize(): array
-    {
-        return [];
-    }
-
     public function getId(): ?int
     {
         return $this->id;
