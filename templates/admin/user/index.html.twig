@@ -12,7 +12,7 @@
     <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between">
         <div class="mb-lg-0 mb-3">
             {% if is_granted("ROLE_ADMIN") %}
-                <a class="btn btn-success" href="{{ path('app_register') }}"><i class="fas fa-plus me-2"></i>Ajouter un nouveau membre</a>
+                <a class="btn btn-success" href="{{ path('app_register') }}"><i class="fas fa-plus me-2"></i>Ajouter un·e membre</a>
             {% endif %}
         </div>
         {{ form_start(filter_form) }}
