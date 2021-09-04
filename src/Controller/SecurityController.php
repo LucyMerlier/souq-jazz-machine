@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN")
-     * @Route("/admin/nouvel-utilisateur", name="app_register")
+     * @Route("/admin/nouvel-utilisateurice", name="app_register")
      */
     public function createUser(
         Request $request,

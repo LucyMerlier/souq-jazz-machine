@@ -1,13 +1,13 @@
 {% extends "admin/layout.html.twig" %}
 
-{% block title %}Nouvel utilisateur - {{ parent() }}{% endblock %}
+{% block title %}Nouvel·le utilisateur·ice - {{ parent() }}{% endblock %}
 
 {% block content %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1 class="h1 my-4">Nouvel utilisateur</h1>
+    <h1 class="h1 my-4">Nouvel·le utilisateur·ice</h1>
 
     <div class="my-4">
         <a href="{{ path('admin_members') }}">&lt;- Revenir sur la liste des membres</a>
