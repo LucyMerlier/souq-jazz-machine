@@ -88,7 +88,7 @@ class PartnerController extends AbstractController
     ): Response {
         return $this->render('admin/partner/components/_partners_list.html.twig', [
             'partners' => $partnerRepository->findByQuery(
-                $query,
+                urldecode($query),
                 $category ?? null
             ),
         ]);

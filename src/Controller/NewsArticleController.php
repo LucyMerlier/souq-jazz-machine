@@ -148,7 +148,7 @@ class NewsArticleController extends AbstractController
         }
 
         return $this->render('admin/news/components/_news_list.html.twig', [
-            'news_articles' => $newsRepository->findByQuery($orderBy, $query),
+            'news_articles' => $newsRepository->findByQuery($orderBy, urldecode($query)),
         ]);
     }
 }

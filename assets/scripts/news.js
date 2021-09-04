@@ -3,7 +3,15 @@ const searchInput = document.getElementById('query');
 const sortInput = document.getElementById('sort');
 
 function getNewsList() {
-    fetch(`/admin/ajax-news/${sortInput.value === '' ? '0' : sortInput.value}/${searchInput.value}`)
+    let requestRoute = `/admin/ajax-news/${sortInput.value === '' ? '0' : sortInput.value}/${searchInput.value}`;
+    requestRoute = requestRoute.replaceAll(' ', '+');
+    requestRoute = encodeURI(requestRoute);
+
+    let newRoute = `/admin/gestion-des-actus?sort=${sortInput.value}&query=${searchInput.value}`;
+    newRoute = newRoute.replaceAll(' ', '+');
+    newRoute = encodeURI(newRoute);
+
+    fetch(requestRoute)
         .then((response) => response.text())
         .then((list) => {
             newsList.innerHTML = list;
@@ -11,7 +19,7 @@ function getNewsList() {
             window.history.replaceState(
                 { state },
                 '',
-                `/admin/gestion-des-actus?sort=${sortInput.value}&query=${searchInput.value}`,
+                newRoute,
             );
         });
 }

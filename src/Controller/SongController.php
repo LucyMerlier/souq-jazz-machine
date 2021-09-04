@@ -196,7 +196,7 @@ class SongController extends AbstractController
         }
 
         return $this->render('admin/song/components/_songs_list.html.twig', [
-            'songs' => $songRepository->findByQuery($orderBy, $query),
+            'songs' => $songRepository->findByQuery($orderBy, urldecode($query)),
         ]);
     }
 }

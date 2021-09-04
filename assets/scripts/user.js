@@ -3,7 +3,15 @@ const searchInput = document.getElementById('query');
 const filterInput = document.getElementById('instrument');
 
 function getUsersList() {
-    fetch(`/admin/ajax-users/${filterInput.value === '' ? '0' : filterInput.value}/${searchInput.value}`)
+    let requestRoute = `/admin/ajax-users/${filterInput.value === '' ? '0' : filterInput.value}/${searchInput.value}`;
+    requestRoute = requestRoute.replaceAll(' ', '+');
+    requestRoute = encodeURI(requestRoute);
+
+    let newRoute = `/admin/membres?instrument=${filterInput.value}&query=${searchInput.value}`;
+    newRoute = newRoute.replaceAll(' ', '+');
+    newRoute = encodeURI(newRoute);
+
+    fetch(requestRoute)
         .then((response) => response.text())
         .then((list) => {
             membersList.innerHTML = list;
@@ -11,7 +19,7 @@ function getUsersList() {
             window.history.replaceState(
                 { state },
                 '',
-                `/admin/membres?instrument=${filterInput.value}&query=${searchInput.value}`,
+                newRoute,
             );
         });
 }
