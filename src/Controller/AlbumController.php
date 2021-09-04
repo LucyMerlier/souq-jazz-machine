@@ -219,7 +219,7 @@ class AlbumController extends AbstractController
         }
 
         return $this->render('admin/album/components/_albums_list.html.twig', [
-            'albums' => $albumRepository->findByQuery($orderBy, $query),
+            'albums' => $albumRepository->findByQuery($orderBy, urldecode($query)),
         ]);
     }
 }

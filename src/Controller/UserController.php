@@ -235,7 +235,7 @@ class UserController extends AbstractController
     ): Response {
         return $this->render('admin/user/components/_members_list.html.twig', [
             'users' => $userRepository->findByQuery(
-                $query,
+                urldecode($query),
                 $instrumentRepository->find($instrument) ?? null
             ),
         ]);
