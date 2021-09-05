@@ -6,7 +6,7 @@
             <h2 class="accordion-header" id="flush-title-{{ song.id }}">
                 <button class="accordion-button collapsed {{ count is odd ? 'bg-light' }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ song.id }}" aria-expanded="false" aria-controls="flush-collapse-{{ song.id }}">
                     <ul class="col-12 d-flex justify-content-around text-secondary list-unstyled m-0">
-                        <li class="col-lg-6 col-12 px-4">{{ song.title }}</li>
+                        <li class="col-lg-6 col-12 px-4">{{ song.title|title }}</li>
                         <li class="col-lg-6 d-lg-inline d-none px-4 text-end">{{ song.musicSheets|length }} partition(s)</li>
                     </ul>
                 </button>
