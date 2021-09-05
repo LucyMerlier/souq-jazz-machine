@@ -25,7 +25,7 @@ class PartnerType extends AbstractType
                 'required' => false,
             ])
             ->add('phone', TelType::class, [
-                'label' => 'Numéro de téléphone profesisonnel (facultatif)',
+                'label' => 'Numéro de téléphone professionnel (facultatif)',
                 'required' => false,
             ])
             ->add('category', ChoiceType::class, [

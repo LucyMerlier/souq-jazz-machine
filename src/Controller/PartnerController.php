@@ -32,7 +32,7 @@ class PartnerController extends AbstractController
             $partner->setCreatedAt(new DateTimeImmutable('now'));
             $entityManager->persist($partner);
             $entityManager->flush();
-            $this->addFlash('success', 'Le partenaire a bien été ajouté!');
+            $this->addFlash('success', 'Le contact a bien été ajouté!');
 
             return $this->redirectToRoute('admin_partners');
         }
@@ -53,7 +53,7 @@ class PartnerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', 'Le partenaire a bien été modifié!');
+            $this->addFlash('success', 'Le contact a bien été modifié!');
 
             return $this->redirectToRoute('admin_partners');
         }
@@ -72,7 +72,7 @@ class PartnerController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $partner->getId(), (string)$request->request->get('_token'))) {
             $entityManager->remove($partner);
             $entityManager->flush();
-            $this->addFlash('warning', 'Le partenaire a bien été supprimé!');
+            $this->addFlash('warning', 'Le contact a bien été supprimé!');
         }
 
         return $this->redirectToRoute('admin_partners');
