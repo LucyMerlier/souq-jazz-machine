@@ -19,12 +19,15 @@ require('@fortawesome/fontawesome-free/js/all');
 
 const bootstrap = require('bootstrap');
 
-const toastList = document.getElementsByClassName('toast');
-if (!sessionStorage.noToast) {
+const toastList = Array.from(document.getElementsByClassName('toast'));
+if (!sessionStorage.noToast && toastList.length) {
     toastList.forEach((toast) => (new bootstrap.Toast(toast)).show());
+} else if (toastList.length) {
+    // eslint-disable-next-line no-return-assign
+    toastList.forEach((toast) => (toast.style.display = 'none'));
 }
 
-const dismissButtons = document.getElementsByClassName('btn-dismiss');
+const dismissButtons = Array.from(document.getElementsByClassName('btn-dismiss'));
 dismissButtons.forEach((dismiss) => {
     dismiss.addEventListener('click', () => {
         sessionStorage.setItem('noToast', true);
