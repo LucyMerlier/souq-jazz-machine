@@ -41,6 +41,10 @@ h1, h2, h3, h4, h5, h6, nav {
     font-size: $text-size;
 }
 
+.card-img-overlay div {
+    background-color: $dark;
+}
+
 hr {
     border: 1px solid $secondary;
 }
